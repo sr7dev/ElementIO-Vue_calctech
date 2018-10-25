@@ -44,15 +44,93 @@
       </div>
     </div>
     <div class="b3">
-      <swiper :options="swiperOption" style="width: 100%; height: 200px;">
+      <swiper :options="swiperOption" class="w-80 h-100">
         <!-- slides -->
-        <swiper-slide>I'm Slide 1</swiper-slide>
-        <swiper-slide>I'm Slide 2</swiper-slide>
-        <swiper-slide>I'm Slide 3</swiper-slide>
-        <swiper-slide>I'm Slide 4</swiper-slide>
-        <swiper-slide>I'm Slide 5</swiper-slide>
-        <swiper-slide>I'm Slide 6</swiper-slide>
-        <swiper-slide>I'm Slide 7</swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Сіздерге тек табыс, ұжым мүшелеріне зор денсаулық,
+                болашақта үлкен оқу орталығы ашылсын!!!
+                Әр оқушы грантқа түссін!!!
+              </div>
+              <div class="name">
+                Мирай Бекаxметова
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Добрый день! Мы ходим на математику. Пробовали в многие места,
+                но здесь нас во-первых встретили очень хорошо, объяснили и
+                пошли некоторые уступки. Репетитором довольны, дети ходят
+                с удовольствием. Хочу написать огромное спасибо.
+              </div>
+              <div class="name">
+                Чахкиев Абдула и Абдул-Малик
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Приятная атмосфера. Индивидуальный подход к каждому.
+                Рады что обратились к вам. Процветания вам и успехов.
+              </div>
+              <div class="name">
+                Болатбек Инкар
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Хочу выразить огромную благодарность всему коллективу образовательного центра CALCTECH за подготовку
+                моего ребенка к тестированию в НИШ. Преподаватели центра смогли за короткое время качественно
+                подготовить ребенка к тестированию, "подтянуть" знания по предметам, психологически подготовить ребенка,
+                что очень важно при прохождении тестов. Здесь все настроены на результат, главное для центра, чтобы дети
+                все успешно сдали тестирование.
+              </div>
+              <div class="name">
+                Алима Толеген
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Выражаю огромную признательность и благодарность вам и преподавателям репетиторского центра @calctech за
+                качественную подготовку Асанали для поступления в НИШ в 7 класс - результат 3-й по списку - 910 баллов!
+                Это за короткий срок-всего 3 месяца. Большой вам рахмет за ваш труд!
+              </div>
+              <div class="name">
+                Асанали Шамғұн
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <swiper-slide>
+          <div class="feedback">
+            <div class="cont">
+              <div class="msg">
+                Я очень довольна вашей работой, к тому же учителя очень хорошо все объясняют, и цена приемлемая. Желаю
+                вам процветания в работе, и всего самого наилучшего
+              </div>
+              <div class="name">
+                Маржан Рамазанова
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -64,7 +142,7 @@
 <script>
   import constants from "../constants";
   import utils from "../utils";
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
   export default {
     components: {swiper, swiperSlide},
@@ -72,9 +150,11 @@
       return {
         utils, constants,
         swiperOption: {
-          // centeredSlides: true,
-          // slidesOffsetBefore: 40,
-          slidesOffsetAfter: 40,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          loop: true,
         },
       };
     },
@@ -157,13 +237,35 @@
     line-height: 1.6rem;
   }
 
-  .swiper-slide {
-    text-align: center;
-    font-size: 38px;
-    font-weight: 700;
-    background-color: #eee;
+  .b3 {
+    display: block;
+    width: 100%;
+    min-height: 280px;
+    padding: 7rem 3rem;
+  }
+
+  .b3 .feedback {
     display: flex;
-    justify-content: center;
+    flex-flow: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .b3 .cont {
+    width: 60%;
+    height: 100%;
+  }
+
+  .b3 .msg {
+    font-size: 1.28571rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .b3 .name {
+    font-size: 1.1rem;
+    margin-top: 4.2rem;
+    font-weight: 700;
   }
 </style>
