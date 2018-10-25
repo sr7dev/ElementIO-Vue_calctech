@@ -1,0 +1,149 @@
+@import "../../../node_modules/swiper/dist/css/swiper.css";
+@import "templates.css";
+
+@font-face {
+  font-family: "education-48";
+  src: url("../fonts/education-48/education-48.eot"),
+  url("../fonts/education-48/education-48.woff") format("woff"),
+  url("../fonts/education-48/education-48.ttf") format("truetype"),
+  url("../fonts/education-48/education-48.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-education-48 {
+  font-family: 'education-48';
+}
+
+@font-face {
+  font-family: "finance";
+  src: url("../fonts/finance/finance.eot"),
+  url("../fonts/finance/finance.woff") format("woff"),
+  url("../fonts/finance/finance.ttf") format("truetype"),
+  url("../fonts/finance/finance.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-finance {
+  font-family: 'finance';
+}
+
+.app-bg {
+  background-color: #ffffff;
+}
+
+.spnr {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: #121212;
+
+  border-radius: 100%;
+  -webkit-animation: spnr 1.0s infinite ease-in-out;
+  animation: spnr 1.0s infinite ease-in-out;
+}
+
+.spnr.big {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@-webkit-keyframes spnr {
+  0% {
+    -webkit-transform: scale(0)
+  }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes spnr {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+table {
+  font-size: 1rem;
+}
+
+input, select, textarea, button, a {
+  font-size: 1rem;
+  -moz-appearance: none;
+  outline: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+#scene, #app {
+  display: block;
+}
+
+.app-fs-8 {
+  font-size: 8px !important;
+}
+
+.app-fs-10 {
+  font-size: 10px !important;
+}
+
+.app-fs-12 {
+  font-size: 12px !important;
+}
+
+.app-fs-14 {
+  font-size: 14px !important;
+}
+
+.app-fs-16 {
+  font-size: 16px !important;
+}
+
+.app-fs-18 {
+  font-size: 18px !important;
+}
+
+.app-fs-20 {
+  font-size: 20px !important;
+}
+
+.app-fs-22 {
+  font-size: 22px !important;
+}
+
+.app-fs-24 {
+  font-size: 24px !important;
+}
+
+.fade-in-enter-active, .fade-in-leave-active {
+  transition: opacity .3s;
+}
+
+.fade-in-enter, .fade-in-leave-to {
+  opacity: 0;
+}
+
+.fade-in-enter-to, .fade-in-leave {
+  opacity: 1;
+}
