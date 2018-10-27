@@ -1,12 +1,8 @@
 steps:
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', '-R', 'gs://artifacts.endless-elysium-219317.appspot.com/bcaches/calctech/site/node_modules', 'node_modules']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', '-R', 'node_modules', 'gs://artifacts.endless-elysium-219317.appspot.com/bcaches/calctech/site/node_modules']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'gcr.io/endless-elysium-219317/calctech_site', '.']
 images: ['gcr.io/endless-elysium-219317/calctech_site']
