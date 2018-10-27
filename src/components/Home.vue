@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center fs0_9 font-weight-500 ws-nowrap px-3 py-1">
       <div class="p-h"><img src="../static/img/logo.png"/></div>
       <div class="flex">&nbsp;</div>
-      <div class="p-1 c-pointer">ГЛАВНАЯ СТРАНИЦА</div>
+      <div class="p-1 c-pointer color-red">ГЛАВНАЯ СТРАНИЦА</div>
       <div class="p-1 c-pointer">О НАС</div>
       <div class="p-1 c-pointer">КУРСЫ</div>
       <div class="p-1 c-pointer">ЛЕТНЯЯ ШКОЛА</div>
