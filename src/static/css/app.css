@@ -29,6 +29,48 @@
   font-family: 'finance';
 }
 
+@font-face {
+  font-family: "music";
+  src: url("../fonts/music/music.eot"),
+  url("../fonts/music/music.woff") format("woff"),
+  url("../fonts/music/music.ttf") format("truetype"),
+  url("../fonts/music/music.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-music {
+  font-family: 'music';
+}
+
+@font-face {
+  font-family: "real-estate";
+  src: url("../fonts/real-estate/real-estate.eot"),
+  url("../fonts/real-estate/real-estate.woff") format("woff"),
+  url("../fonts/real-estate/real-estate.ttf") format("truetype"),
+  url("../fonts/real-estate/real-estate.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-real-estate {
+  font-family: 'real-estate';
+}
+
+@font-face {
+  font-family: "communication";
+  src: url("../fonts/communication/communication-48-x-48.eot"),
+  url("../fonts/communication/communication-48-x-48.woff") format("woff"),
+  url("../fonts/communication/communication-48-x-48.ttf") format("truetype"),
+  url("../fonts/communication/communication-48-x-48.svg") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-communication {
+  font-family: 'communication';
+}
+
 .app-bg {
   background-color: #ffffff;
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex align-items-center fs0_9 font-weight-500 ws-nowrap px-3 py-1">
+    <div class="d-flex align-items-center fs0_9 font-weight-600 ws-nowrap px-3 py-1">
       <div class="p-h"><img src="../static/img/logo.png"/></div>
       <div class="flex">&nbsp;</div>
       <div class="p-1 c-pointer">ГЛАВНАЯ СТРАНИЦА</div>
@@ -131,10 +131,137 @@
             </div>
           </div>
         </swiper-slide>
-        <!-- Optional controls -->
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
       </swiper>
+    </div>
+    <div class="b4">
+      <div>
+        <div class="d-flex flex-nowrap justify-content-sb align-items-center">
+          <div class="img-cont">
+            <img src="../static/img/gallery/wall.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/english.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/ent.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/nislastday.jpg"/>
+          </div>
+        </div>
+        <div class="d-flex flex-nowrap justify-content-sb align-items-center mt-2">
+          <div class="img-cont">
+            <img src="../static/img/gallery/nisstudents.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/englishexam2.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/englishexam.jpg"/>
+          </div>
+          <div class="img-cont">
+            <img src="../static/img/gallery/nisstudy.jpg"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="b5">
+      <div>
+        <div class="fs1_7 font-weight-500 color-black">Курсы</div>
+        <div class="d-flex flex-nowrap align-items-start mt-2_5">
+          <div>
+            <div class="d-flex flex-nowrap align-items-start">
+              <div class="icon icon-education-48" style="background-color: #72c02c">%</div>
+              <div>
+                <div class="hdr">
+                  Подготовка к ЕНТ (Единое Национальное Тестирование)
+                </div>
+                <div class="dsc">
+                  Наши учителя имеют многолетний стаж подготовки к ЕНТ и заслуженно считаются лучшими преподавателями
+                  города. Быстро подтянем по предметам и вы увидите увеличение баллов уже через месяц. Подробнее...
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-start mt-1_5">
+              <div class="icon icon-education-48" style="background-color: #9c8061">A</div>
+              <div>
+                <div class="hdr">
+                  Подготовка к вступительным в НИШ (Назарбаев Интеллектуальная Школа)
+                </div>
+                <div class="dsc">
+                  В 2018 году мы подняли средний балл наших учеников на 212 баллов за полтора месяца (максимальный балл
+                  - 1000). Самый быстрый результат: за 70 часов увеличили балл ученика с 600 до 910. Подробнее...
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-start mt-1_5">
+              <div class="icon icon-education-48" style="background-color: #00bed6">a</div>
+              <div>
+                <div class="hdr">
+                  Подготовка к вступительным в НУ (Назарбаев Университет) и зарубежные вузы
+                </div>
+                <div class="dsc">
+                  85% наших учеников с прошлого года набрали необходимые проходные баллы по тестам в НУ. Подготовка к
+                  любым англоязычным экзаменам по математике, физике (SAT, SAT Math/Physics, BMAT итд.) Подробнее...
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ml-2_5">
+            <div class="d-flex flex-nowrap align-items-start">
+              <div class="icon icon-music" style="background-color: #585f69">U</div>
+              <div>
+                <div class="hdr">
+                  Английский язык
+                </div>
+                <div class="dsc">
+                  Прокачаем разговорный английский как школьникам, так и взрослым. Готовим к тестам по английскому
+                  языку: IELTS, (в среднем 0.5 баллов улучшения за один месяц занятий), TOEFL, APTIS. Подробнее...
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-start mt-1_5">
+              <div class="icon icon-finance" style="background-color: #e64b3b">k</div>
+              <div>
+                <div class="hdr">
+                  Отдельные предметы
+                </div>
+                <div class="dsc">
+                  Подтянем математику, физику, химию, биологию, английский по школьной и университетской программ.
+                  Подробнее...
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-start mt-1_5">
+              <div class="icon icon-real-estate" style="background-color: #e81c62">f</div>
+              <div>
+                <div class="hdr">
+                  Книжный клуб
+                </div>
+                <div class="dsc">
+                  Мы знаем, как порой тяжело приобщить детей, да и самому привыкнуть к чтению, и надеемся, что наш клуб
+                  сможет привить любовь к запаху книг. В книжном клубе мы читаем интересные книги и обсуждаем их за чаем
+                  с печеньками. Подробнее...
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-nowrap align-items-start mt-1_5">
+              <div class="icon icon-communication" style="background-color: #e81c62">&#xe003;</div>
+              <div>
+                <div class="hdr">
+                  Робототехника
+                </div>
+                <div class="dsc">
+                  На курсах робототехники для учащихся 5-8 классов дети учатся мыслить креативно и "создавать", что
+                  будет очень важным навыком в их будущем. Подробнее...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -240,8 +367,8 @@
   .b3 {
     display: block;
     width: 100%;
-    min-height: 280px;
-    padding: 7rem 3rem;
+    /*min-height: 450px;*/
+    padding: 7rem 3rem 3rem;
   }
 
   .b3 .feedback {
@@ -253,7 +380,7 @@
   }
 
   .b3 .cont {
-    width: 60%;
+    width: 70%;
     height: 100%;
   }
 
@@ -267,5 +394,73 @@
     font-size: 1.1rem;
     margin-top: 4.2rem;
     font-weight: 700;
+  }
+
+  .b4 {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .b4 > div {
+    display: inline-block;
+    width: 930px;
+    text-align: left;
+  }
+
+  .b4 .img-cont {
+    width: 210px;
+    height: 150px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .b4 .img-cont > img {
+    width: 270px;
+    margin-left: -60px;
+    transition: margin-left .3s;
+  }
+
+  .b4 .img-cont > img:hover {
+    margin-left: 0;
+  }
+
+  .b5 {
+    padding: 3rem 0;
+    text-align: center;
+  }
+
+  .b5 > div {
+    display: inline-block;
+    width: 930px;
+    text-align: left;
+  }
+
+  .b5 .icon {
+    margin-right: 1.5rem;
+    padding: .8rem;
+    border-radius: 50px;
+    font-size: 1.14rem;
+    color: white;
+  }
+
+  .b5 .hdr {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #72c02c;
+    margin-bottom: .5rem;
+    cursor: pointer;
+    transition: all .3s;
+  }
+
+  .b5 .hdr:hover {
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  .b5 .dsc {
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #777;
+    margin-bottom: .5rem;
   }
 </style>
