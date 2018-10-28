@@ -263,6 +263,60 @@
         </div>
       </div>
     </div>
+    <div class="b6">
+      <div>
+        <div class="fs2_0 font-weight-600 color-black t-align-center">
+          Наша команда
+        </div>
+        <div class="fs1_25 lh1_6 font-weight-300 t-align-center mt-2">
+          Мы молодая квалифицированная команда, ориентирующаяся на преподавании точных,<br/>
+          естественных наук и английского языка. Подробнее...
+        </div>
+        <div class="d-flex flex-nowrap justify-content-sb align-items-start mt-3">
+          <div class="card">
+            <img class="ava" src="../static/img/team/yerlan.jpg"/>
+            <div class="info">
+              <div class="name">Иран Ерлан</div>
+              <div class="position">СО-ОСНОВАТЕЛЬ</div>
+              <div class="quote">
+                Верю, что наш центр приносит пользу нашему родному городу.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img class="ava" src="../static/img/team/aziza.png"/>
+            <div class="info">
+              <div class="name">Азиза Сатхожина</div>
+              <div class="position">СО-ОСНАВАТЕЛЬ, ПРЕПОДАВАТЕЛЬ МАТЕМАТИКИ И ФИЗИКИ</div>
+              <div class="quote">
+                Путь к знаниям - это самое интересное приключение в нашей жизни.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img class="ava" src="../static/img/team/ruslan.jpg"/>
+            <div class="info">
+              <div class="name">Руслан Козыбаев</div>
+              <div class="position">ПРЕПОДАВАТЕЛЬ АНГЛИЙСКОГО</div>
+              <div class="quote">
+                To understand the Sun we have to understand the atom because of the oneness of the universe.
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <img class="ava" src="../static/img/team/anast.png"/>
+            <div class="info">
+              <div class="name">Анастасия Гилязутдинова</div>
+              <div class="position">ПРЕПОДАВАТЕЛЬ АНГЛИЙСКОГО</div>
+              <div class="quote">
+                My childhood dream was to be a psychologist,
+                so I’m eager to not only teach but make students want to learn.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -403,19 +457,19 @@
 
   .b4 > div {
     display: inline-block;
-    width: 930px;
+    width: 1110px;
     text-align: left;
   }
 
   .b4 .img-cont {
-    width: 210px;
-    height: 150px;
+    width: 255px;
+    height: 177px;
     overflow: hidden;
     cursor: pointer;
   }
 
   .b4 .img-cont > img {
-    width: 270px;
+    width: 315px;
     margin-left: -60px;
     transition: margin-left .3s;
   }
@@ -425,13 +479,13 @@
   }
 
   .b5 {
-    padding: 3rem 0;
+    padding: 5rem 0;
     text-align: center;
   }
 
   .b5 > div {
     display: inline-block;
-    width: 930px;
+    width: 1110px;
     text-align: left;
   }
 
@@ -462,5 +516,50 @@
     line-height: 1.6;
     color: #777;
     margin-bottom: .5rem;
+  }
+
+  .b6 {
+    padding: 5rem 0;
+    text-align: center;
+  }
+
+  .b6 > div {
+    display: inline-block;
+    width: 1110px;
+    text-align: left;
+  }
+
+  .b6 .card {
+    width: 255px;
+  }
+
+  .b6 .ava {
+    width: 100%;
+    height: 340px;
+  }
+
+  .b6 .info {
+    margin-top: 1.5rem;
+  }
+
+  .b6 .info > .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: black;
+  }
+
+  .b6 .info > .position {
+    margin-top: .5rem;
+    padding-bottom: .6rem;
+    border-bottom: 1px solid rgba(114, 192, 44, .3);
+    font-size: .785rem;
+    line-height: 1.6;
+    color: #72c02c;
+  }
+
+  .b6 .info > .quote {
+    margin-top: 1rem;
+    line-height: 1.6;
+    /*color: #72c02c;*/
   }
 </style>

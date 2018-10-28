@@ -95,6 +95,10 @@
   font-size: 1.2rem;
 }
 
+.fs1_25 {
+  font-size: 1.25rem;
+}
+
 .fs1_15 {
   font-size: 1.15rem;
 }
@@ -361,6 +365,18 @@
 
 .font-weight-300 {
   font-weight: 300;
+}
+
+.lh1_2 {
+  line-height: 1.2;
+}
+
+.lh1_4 {
+  line-height: 1.4;
+}
+
+.lh1_6 {
+  line-height: 1.6;
 }
 
 .italic {
