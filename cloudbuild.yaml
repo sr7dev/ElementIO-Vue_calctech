@@ -4,5 +4,5 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/endless-elysium-219317/calctech_site', '.']
-images: ['gcr.io/endless-elysium-219317/calctech_site']
+  args: ['build', '-t', 'gcr.io/dauren-pr/calctech_site', '.']
+images: ['gcr.io/dauren-pr/calctech_site']
