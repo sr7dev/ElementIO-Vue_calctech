@@ -26,15 +26,15 @@ module.exports = {
         test: /\.(png|jpg|gif|svg|ico)$/,
         loader: 'url-loader',
         options: {
-          limit: 15360,
+          limit: 10000,
           outputPath: 'static/',
         },
       },
       {
-        test: /\.(eot|woff|ttf)$/,
+        test: /\.(eot|woff|woff2|ttf)$/,
         loader: 'url-loader',
         options: {
-          limit: 15360,
+          limit: 10000,
           outputPath: 'static/',
         },
       },
