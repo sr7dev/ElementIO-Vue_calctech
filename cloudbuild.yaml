@@ -4,7 +4,9 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/dauren-pr/calctech_site', '.']
+  args: ['build', '-t', 'gcr.io/dauren-pr/calctech_site:latest', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/dauren-pr/calctech_site:latest']
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
   - kms
@@ -20,8 +22,4 @@ steps:
   - '-c'
   - |
     chmod 0700 ct_user
-    ssh -o StrictHostKeyChecking=no -i ct_user user@35.224.168.117 "mkdir -p /home/user/calctech/router"
-    scp -o StrictHostKeyChecking=no -i ct_user docker-compose.yml user@35.224.168.117:/home/user/calctech/
-    scp -o StrictHostKeyChecking=no -i ct_user -r router/conf.d user@35.224.168.117:/home/user/calctech/router/
     ssh -o StrictHostKeyChecking=no -i ct_user user@35.224.168.117 "/home/user/refresh.sh"
-images: ['gcr.io/dauren-pr/calctech_site']
