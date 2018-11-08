@@ -1,12 +1,16 @@
+substitutions:
+  _REPO_NAME: gcr.io/dauren-pr/calctech_api:latest
+  _SERVER_URI: user@35.224.168.117
+
 steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/dauren-pr/calctech_site:latest', '.']
+  args: ['build', '-t', '$_REPO_NAME', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/dauren-pr/calctech_site:latest']
+  args: ['push', '$_REPO_NAME']
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
   - kms
@@ -22,4 +26,4 @@ steps:
   - '-c'
   - |
     chmod 0700 ct_user
-    ssh -o StrictHostKeyChecking=no -i ct_user user@35.224.168.117 "/home/user/refresh.sh"
+    ssh -o StrictHostKeyChecking=no -i ct_user $_SERVER_URI "/home/user/refresh.sh"
