@@ -1,5 +1,5 @@
 substitutions:
-  _REPO_NAME: gcr.io/dauren-pr/calctech_api:latest
+  _REPO_NAME: gcr.io/dauren-pr/calctech_site:latest
   _SERVER_URI: user@35.224.168.117
 
 steps:
