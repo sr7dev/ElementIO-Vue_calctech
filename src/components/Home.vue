@@ -19,7 +19,7 @@
     </div>
     <div class="b2">
       <div class="col">
-        <div class="icon icon-education-48">&#xe036;</div>
+        <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
         <div class="fs1_5 mt-1_5">Качественное образование</div>
         <div class="desc mt-1">
           Мы очень тщательно подходим к выбору преподавателей.
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="icon icon-finance">9</div>
+        <div class="icon"><i class="fas fa-users"></i></div>
         <div class="fs1_5 mt-1_5">Индивидуальный подход</div>
         <div class="desc mt-1">
           Несмотря на то, что у нас больше 200 учеников, мы
@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="icon icon-finance">&#xe02a;</div>
+        <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
         <div class="fs1_5 mt-1_5">Доступные цены</div>
         <div class="desc mt-1">
           У нас очень большие расходы, но по возможности, мы
@@ -44,19 +44,17 @@
       </div>
     </div>
     <div class="b3">
-      <swiper :options="swiperOption" class="w-80 h-100">
+      <swiper :options="swiperOption">
         <!-- slides -->
         <swiper-slide>
           <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Сіздерге тек табыс, ұжым мүшелеріне зор денсаулық,
-                болашақта үлкен оқу орталығы ашылсын!!!
-                Әр оқушы грантқа түссін!!!
-              </div>
-              <div class="name">
-                Мирай Бекаxметова
-              </div>
+            <div class="msg">
+              Сіздерге тек табыс, ұжым мүшелеріне зор денсаулық,
+              болашақта үлкен оқу орталығы ашылсын!!!
+              Әр оқушы грантқа түссін!!!
+            </div>
+            <div class="name">
+              Мирай Бекаxметова
             </div>
           </div>
         </swiper-slide>
@@ -173,7 +171,7 @@
         <div class="d-flex flex-nowrap align-items-start mt-2_5">
           <div>
             <div class="d-flex flex-nowrap align-items-start">
-              <div class="icon icon-education-48" style="background-color: #72c02c">%</div>
+              <div class="icon" style="background-color: #72c02c"><i class="far fa-folder-open"></i></div>
               <div>
                 <div class="hdr">
                   Подготовка к ЕНТ (Единое Национальное Тестирование)
@@ -185,7 +183,7 @@
               </div>
             </div>
             <div class="d-flex flex-nowrap align-items-start mt-1_5">
-              <div class="icon icon-education-48" style="background-color: #9c8061">A</div>
+              <div class="icon" style="background-color: #9c8061"><i class="far fa-lightbulb"></i></div>
               <div>
                 <div class="hdr">
                   Подготовка к вступительным в НИШ (Назарбаев Интеллектуальная Школа)
@@ -197,7 +195,7 @@
               </div>
             </div>
             <div class="d-flex flex-nowrap align-items-start mt-1_5">
-              <div class="icon icon-education-48" style="background-color: #00bed6">a</div>
+              <div class="icon" style="background-color: #00bed6"><i class="fas fa-graduation-cap"></i></div>
               <div>
                 <div class="hdr">
                   Подготовка к вступительным в НУ (Назарбаев Университет) и зарубежные вузы
@@ -211,7 +209,7 @@
           </div>
           <div class="ml-2_5">
             <div class="d-flex flex-nowrap align-items-start">
-              <div class="icon icon-music" style="background-color: #585f69">U</div>
+              <div class="icon" style="background-color: #585f69"><i class="fas fa-sort-alpha-up"></i></div>
               <div>
                 <div class="hdr">
                   Английский язык
@@ -223,7 +221,7 @@
               </div>
             </div>
             <div class="d-flex flex-nowrap align-items-start mt-1_5">
-              <div class="icon icon-finance" style="background-color: #e64b3b">k</div>
+              <div class="icon" style="background-color: #e64b3b"><i class="fas fa-code-branch"></i></div>
               <div>
                 <div class="hdr">
                   Отдельные предметы
@@ -235,7 +233,7 @@
               </div>
             </div>
             <div class="d-flex flex-nowrap align-items-start mt-1_5">
-              <div class="icon icon-real-estate" style="background-color: #e81c62">f</div>
+              <div class="icon" style="background-color: #e81c62"><i class="fas fa-book-open"></i></div>
               <div>
                 <div class="hdr">
                   Книжный клуб
@@ -248,7 +246,7 @@
               </div>
             </div>
             <div class="d-flex flex-nowrap align-items-start mt-1_5">
-              <div class="icon icon-communication" style="background-color: #e81c62">&#xe003;</div>
+              <div class="icon" style="background-color: #18ba9b"><i class="fas fa-robot"></i></div>
               <div>
                 <div class="hdr">
                   Робототехника
@@ -284,7 +282,7 @@
             </div>
           </div>
           <div class="card">
-            <img class="ava" src="../static/img/team/aziza.png"/>
+            <img class="ava" src="../static/img/team/aziza.jpg"/>
             <div class="info">
               <div class="name">Азиза Сатхожина</div>
               <div class="position">СО-ОСНАВАТЕЛЬ, ПРЕПОДАВАТЕЛЬ МАТЕМАТИКИ И ФИЗИКИ</div>
@@ -304,7 +302,7 @@
             </div>
           </div>
           <div class="card">
-            <img class="ava" src="../static/img/team/anast.png"/>
+            <img class="ava" src="../static/img/team/anast.jpg"/>
             <div class="info">
               <div class="name">Анастасия Гилязутдинова</div>
               <div class="position">ПРЕПОДАВАТЕЛЬ АНГЛИЙСКОГО</div>
@@ -401,17 +399,17 @@
     justify-content: center;
     width: 100%;
     height: 100vh;
-    background: url(../static/img/wall_bw.jpg) center/cover no-repeat;
+    background: url(../static/img/wall_bw.jpg) center top/cover no-repeat;
   }
 
-  .b1::before {
-    content: '';
-    position: absolute;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, .4);
-    width: 100%;
-    height: 100%;
-  }
+  /*.b1::before {*/
+  /*content: '';*/
+  /*position: absolute;*/
+  /*z-index: 1;*/
+  /*background-color: rgba(0, 0, 0, .4);*/
+  /*width: 100%;*/
+  /*height: 100%;*/
+  /*}*/
 
   .b1 > .cont {
     position: relative;
@@ -440,11 +438,13 @@
   }
 
   .b2 .icon {
-    display: inline-block;
-    padding: 23px 25px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
     border-radius: 10rem;
-    font-style: normal !important;
-    font-size: 38px;
+    font-size: 26px;
     color: white;
     background-color: #72c02c;
   }
@@ -454,10 +454,13 @@
   }
 
   .b3 {
-    display: block;
-    width: 100%;
-    /*min-height: 450px;*/
-    padding: 7rem 3rem 3rem;
+    padding: 7rem 0;
+    text-align: center;
+  }
+
+  .b3 > * {
+    display: inline-block;
+    width: 1000px;
   }
 
   .b3 .feedback {
@@ -465,12 +468,8 @@
     flex-flow: column;
     align-items: center;
     justify-content: center;
+    padding: 0 10rem;
     text-align: center;
-  }
-
-  .b3 .cont {
-    width: 70%;
-    height: 100%;
   }
 
   .b3 .msg {
@@ -525,10 +524,14 @@
   }
 
   .b5 .icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
     margin-right: 1.5rem;
-    padding: .8rem;
     border-radius: 50px;
-    font-size: 1.14rem;
     color: white;
   }
 
@@ -608,7 +611,7 @@
     color: rgba(255, 255, 255, .8);
   }
 
-  .footer > div.row2{
+  .footer > div.row2 {
     padding: 1.5rem 0;
     background-color: rgba(0, 0, 0, 1);
     color: rgba(255, 255, 255, .8);
