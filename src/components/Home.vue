@@ -1,140 +1,140 @@
 <template>
   <div>
-    <div class="d-flex align-items-center fs0_9 font-weight-600 ws-nowrap px-3 py-1">
-      <div class="p-h"><img src="../static/img/logo.png"/></div>
-      <div class="flex">&nbsp;</div>
-      <div class="p-1 c-pointer">ГЛАВНАЯ СТРАНИЦА</div>
-      <div class="p-1 c-pointer">О НАС</div>
-      <div class="p-1 c-pointer">КУРСЫ</div>
-      <div class="p-1 c-pointer">ЛЕТНЯЯ ШКОЛА</div>
-      <div class="p-1 c-pointer">КОНТАКТЫ</div>
-      <div class="p-1 c-pointer">ВАКАНСИИ</div>
-    </div>
-    <div class="b1">
-      <div class="cont">
-        <div class="fs5_0 bold">СЛОЖНЫЕ ТЕМЫ ЛЕГКО</div>
-        <div class="app-fs-24 mt-2_5">Мы работаем на результат</div>
-        <div class="btn1 mt-2_5">ЗАПИСАТЬСЯ</div>
-      </div>
-    </div>
-    <div class="b2">
-      <div class="col">
-        <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
-        <div class="fs1_5 mt-1_5">Качественное образование</div>
-        <div class="desc mt-1">
-          Мы очень тщательно подходим к выбору преподавателей.
-          В CalcTech вы можете рассчитывать на первоклассный уровень преподавания.
-        </div>
-      </div>
-      <div class="col">
-        <div class="icon"><i class="fas fa-users"></i></div>
-        <div class="fs1_5 mt-1_5">Индивидуальный подход</div>
-        <div class="desc mt-1">
-          Несмотря на то, что у нас больше 200 учеников, мы
-          за индивидуальный подход к каждому. Мы гордимся тем, что знаем имя каждого!
-        </div>
-      </div>
-      <div class="col">
-        <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
-        <div class="fs1_5 mt-1_5">Доступные цены</div>
-        <div class="desc mt-1">
-          У нас очень большие расходы, но по возможности, мы
-          стараемся делать цены доступными для всех.
+    <div class="app-section b1">
+      <div class="app-section-cont">
+        <div class="cont">
+          <div class="fs5_0 bold">СЛОЖНЫЕ ТЕМЫ ЛЕГКО</div>
+          <div class="app-fs-24 mt-2_5">Мы работаем на результат</div>
+          <div class="btn1 mt-2_5">ЗАПИСАТЬСЯ</div>
         </div>
       </div>
     </div>
-    <div class="b3">
-      <swiper :options="swiperOption">
-        <!-- slides -->
-        <swiper-slide>
-          <div class="feedback">
-            <div class="msg">
-              Сіздерге тек табыс, ұжым мүшелеріне зор денсаулық,
-              болашақта үлкен оқу орталығы ашылсын!!!
-              Әр оқушы грантқа түссін!!!
-            </div>
-            <div class="name">
-              Мирай Бекаxметова
-            </div>
+    <div class="app-section">
+      <div class="b2">
+        <div class="col">
+          <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+          <div class="fs1_5 mt-1_5">Качественное образование</div>
+          <div class="desc mt-1">
+            Мы очень тщательно подходим к выбору преподавателей.
+            В CalcTech вы можете рассчитывать на первоклассный уровень преподавания.
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Добрый день! Мы ходим на математику. Пробовали в многие места,
-                но здесь нас во-первых встретили очень хорошо, объяснили и
-                пошли некоторые уступки. Репетитором довольны, дети ходят
-                с удовольствием. Хочу написать огромное спасибо.
-              </div>
-              <div class="name">
-                Чахкиев Абдула и Абдул-Малик
-              </div>
-            </div>
+        </div>
+        <div class="col">
+          <div class="icon"><i class="fas fa-users"></i></div>
+          <div class="fs1_5 mt-1_5">Индивидуальный подход</div>
+          <div class="desc mt-1">
+            Несмотря на то, что у нас больше 200 учеников, мы
+            за индивидуальный подход к каждому. Мы гордимся тем, что знаем имя каждого!
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Приятная атмосфера. Индивидуальный подход к каждому.
-                Рады что обратились к вам. Процветания вам и успехов.
-              </div>
-              <div class="name">
-                Болатбек Инкар
-              </div>
-            </div>
+        </div>
+        <div class="col">
+          <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="fs1_5 mt-1_5">Доступные цены</div>
+          <div class="desc mt-1">
+            У нас очень большие расходы, но по возможности, мы
+            стараемся делать цены доступными для всех.
           </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Хочу выразить огромную благодарность всему коллективу образовательного центра CALCTECH за подготовку
-                моего ребенка к тестированию в НИШ. Преподаватели центра смогли за короткое время качественно
-                подготовить ребенка к тестированию, "подтянуть" знания по предметам, психологически подготовить ребенка,
-                что очень важно при прохождении тестов. Здесь все настроены на результат, главное для центра, чтобы дети
-                все успешно сдали тестирование.
-              </div>
-              <div class="name">
-                Алима Толеген
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Выражаю огромную признательность и благодарность вам и преподавателям репетиторского центра @calctech за
-                качественную подготовку Асанали для поступления в НИШ в 7 класс - результат 3-й по списку - 910 баллов!
-                Это за короткий срок-всего 3 месяца. Большой вам рахмет за ваш труд!
-              </div>
-              <div class="name">
-                Асанали Шамғұн
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <swiper-slide>
-          <div class="feedback">
-            <div class="cont">
-              <div class="msg">
-                Я очень довольна вашей работой, к тому же учителя очень хорошо все объясняют, и цена приемлемая. Желаю
-                вам процветания в работе, и всего самого наилучшего
-              </div>
-              <div class="name">
-                Маржан Рамазанова
-              </div>
-            </div>
-          </div>
-        </swiper-slide>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
+        </div>
+      </div>
     </div>
-    <div class="b4">
-      <div>
+    <div class="app-section">
+      <div class="app-section-cont b3">
+        <swiper :options="swiperOption">
+          <!-- slides -->
+          <swiper-slide>
+            <div class="feedback">
+              <div class="msg">
+                Сіздерге тек табыс, ұжым мүшелеріне зор денсаулық,
+                болашақта үлкен оқу орталығы ашылсын!!!
+                Әр оқушы грантқа түссін!!!
+              </div>
+              <div class="name">
+                Мирай Бекаxметова
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="feedback">
+              <div class="cont">
+                <div class="msg">
+                  Добрый день! Мы ходим на математику. Пробовали в многие места,
+                  но здесь нас во-первых встретили очень хорошо, объяснили и
+                  пошли некоторые уступки. Репетитором довольны, дети ходят
+                  с удовольствием. Хочу написать огромное спасибо.
+                </div>
+                <div class="name">
+                  Чахкиев Абдула и Абдул-Малик
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="feedback">
+              <div class="cont">
+                <div class="msg">
+                  Приятная атмосфера. Индивидуальный подход к каждому.
+                  Рады что обратились к вам. Процветания вам и успехов.
+                </div>
+                <div class="name">
+                  Болатбек Инкар
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="feedback">
+              <div class="cont">
+                <div class="msg">
+                  Хочу выразить огромную благодарность всему коллективу образовательного центра CALCTECH за подготовку
+                  моего ребенка к тестированию в НИШ. Преподаватели центра смогли за короткое время качественно
+                  подготовить ребенка к тестированию, "подтянуть" знания по предметам, психологически подготовить
+                  ребенка,
+                  что очень важно при прохождении тестов. Здесь все настроены на результат, главное для центра, чтобы
+                  дети
+                  все успешно сдали тестирование.
+                </div>
+                <div class="name">
+                  Алима Толеген
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="feedback">
+              <div class="cont">
+                <div class="msg">
+                  Выражаю огромную признательность и благодарность вам и преподавателям репетиторского центра @calctech
+                  за
+                  качественную подготовку Асанали для поступления в НИШ в 7 класс - результат 3-й по списку - 910
+                  баллов!
+                  Это за короткий срок-всего 3 месяца. Большой вам рахмет за ваш труд!
+                </div>
+                <div class="name">
+                  Асанали Шамғұн
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <swiper-slide>
+            <div class="feedback">
+              <div class="cont">
+                <div class="msg">
+                  Я очень довольна вашей работой, к тому же учителя очень хорошо все объясняют, и цена приемлемая. Желаю
+                  вам процветания в работе, и всего самого наилучшего
+                </div>
+                <div class="name">
+                  Маржан Рамазанова
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
+        </swiper>
+      </div>
+    </div>
+    <div class="app-section">
+      <div class="app-section-cont b4">
         <div class="d-flex flex-nowrap justify-content-sb align-items-center">
           <div class="img-cont">
             <img src="../static/img/gallery/wall.jpg"/>
@@ -165,8 +165,8 @@
         </div>
       </div>
     </div>
-    <div class="b5">
-      <div>
+    <div class="app-section">
+      <div class="app-section-cont b5">
         <div class="fs1_7 font-weight-500 color-black">Курсы</div>
         <div class="d-flex flex-nowrap align-items-start mt-2_5">
           <div>
@@ -189,7 +189,8 @@
                   Подготовка к вступительным в НИШ (Назарбаев Интеллектуальная Школа)
                 </div>
                 <div class="dsc">
-                  В 2018 году мы подняли средний балл наших учеников на 212 баллов за полтора месяца (максимальный балл
+                  В 2018 году мы подняли средний балл наших учеников на 212 баллов за полтора месяца (максимальный
+                  балл
                   - 1000). Самый быстрый результат: за 70 часов увеличили балл ученика с 600 до 910. Подробнее...
                 </div>
               </div>
@@ -239,8 +240,10 @@
                   Книжный клуб
                 </div>
                 <div class="dsc">
-                  Мы знаем, как порой тяжело приобщить детей, да и самому привыкнуть к чтению, и надеемся, что наш клуб
-                  сможет привить любовь к запаху книг. В книжном клубе мы читаем интересные книги и обсуждаем их за чаем
+                  Мы знаем, как порой тяжело приобщить детей, да и самому привыкнуть к чтению, и надеемся, что наш
+                  клуб
+                  сможет привить любовь к запаху книг. В книжном клубе мы читаем интересные книги и обсуждаем их за
+                  чаем
                   с печеньками. Подробнее...
                 </div>
               </div>
@@ -261,8 +264,8 @@
         </div>
       </div>
     </div>
-    <div class="b6">
-      <div>
+    <div class="app-section">
+      <div class="app-section-cont b6">
         <div class="fs2_0 font-weight-600 color-black t-align-center">
           Наша команда
         </div>
@@ -315,54 +318,16 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="row1">
-        <div>
-          <div class="col col1">
-            <div class="logo-cont"><img src="../static/img/logo.png"/></div>
-            <div class="quote">
-              Наша цель - дать детям возможность получения качественного и доступного образования.
-            </div>
-          </div>
-          <div class="flex"></div>
-          <div class="col col2">
-            <div class="hdr">ПОЛЕЗНЫЕ ССЫЛКИ</div>
-            <ul class="menu">
-              <li><span>О нас</span> <i class="fas fa-angle-right" style="text-decoration: none"></i></li>
-              <li><span>Курсы</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Летняя Школа</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Вакансии</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Наши контакты</span> <i class="fas fa-angle-right"></i></li>
-            </ul>
-          </div>
-          <div class="col col3">
-            <div class="hdr">НАШИ КОНТАКТЫ</div>
-            <div class="address">
-              Кокшетау, Акмолинская область<br/>
-              Ауельбекова 90<br/>
-              Телефон: <a href="tel:+77478552148">+7 747 855 2148</a><br/>
-              Email: <a href="mailto:calctech.kokshe@gmail.com">calctech.kokshe@gmail.com</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row2">
-        <div>2018 © Все права защищены.</div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-  import constants from "../constants";
-  import utils from "../utils";
   import {swiper, swiperSlide} from 'vue-awesome-swiper'
 
   export default {
     components: {swiper, swiperSlide},
     data() {
       return {
-        utils, constants,
         swiperOption: {
           navigation: {
             nextEl: '.swiper-button-next',
@@ -376,52 +341,26 @@
 </script>
 
 <style scoped>
-  .btn1 {
-    display: inline-block;
-    padding: 1.1rem 2rem;
-    border-radius: 50px;
-    border: 1px solid white;
-    color: white;
-    background-color: rgba(255, 255, 255, .1);
-    cursor: pointer;
-    transition: background-color .2s ease, color .2s ease;
-  }
-
-  .btn1:hover {
-    color: black;
-    background-color: rgba(255, 255, 255, 1);
-  }
-
   .b1 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
     background: url(../static/img/wall_bw.jpg) center top/cover no-repeat;
   }
 
-  /*.b1::before {*/
-  /*content: '';*/
-  /*position: absolute;*/
-  /*z-index: 1;*/
-  /*background-color: rgba(0, 0, 0, .4);*/
-  /*width: 100%;*/
-  /*height: 100%;*/
-  /*}*/
-
-  .b1 > .cont {
-    position: relative;
-    z-index: 1;
-    color: white;
+  .b1 .cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
     text-align: center;
+    color: white;
   }
 
   .b2 {
     display: flex;
     align-items: stretch;
     flex-wrap: nowrap;
+    width: 100%;
     border-bottom: 1px solid #eee;
   }
 
@@ -454,13 +393,7 @@
   }
 
   .b3 {
-    padding: 7rem 0;
-    text-align: center;
-  }
-
-  .b3 > * {
-    display: inline-block;
-    width: 1000px;
+    padding: 7rem 2rem;
   }
 
   .b3 .feedback {
@@ -486,13 +419,6 @@
 
   .b4 {
     padding: 3rem 0;
-    text-align: center;
-  }
-
-  .b4 > div {
-    display: inline-block;
-    width: 1110px;
-    text-align: left;
   }
 
   .b4 .img-cont {
@@ -514,13 +440,6 @@
 
   .b5 {
     padding: 5rem 0;
-    text-align: center;
-  }
-
-  .b5 > div {
-    display: inline-block;
-    width: 1110px;
-    text-align: left;
   }
 
   .b5 .icon {
@@ -539,13 +458,12 @@
     font-size: 1.2rem;
     line-height: 1.4;
     color: #72c02c;
-    margin-bottom: .5rem;
+    padding-bottom: .5rem;
     cursor: pointer;
-    transition: all .3s;
   }
 
   .b5 .hdr:hover {
-    transform: scale3d(1.05, 1.05, 1.05);
+    color: #5c9924;
   }
 
   .b5 .dsc {
@@ -553,18 +471,10 @@
     font-weight: 400;
     line-height: 1.6;
     color: #777;
-    margin-bottom: .5rem;
   }
 
   .b6 {
     padding: 5rem 0;
-    text-align: center;
-  }
-
-  .b6 > div {
-    display: inline-block;
-    width: 1110px;
-    text-align: left;
   }
 
   .b6 .card {
@@ -599,90 +509,5 @@
     margin-top: 1rem;
     line-height: 1.6;
     /*color: #72c02c;*/
-  }
-
-  .footer > div {
-    text-align: center;
-  }
-
-  .footer > div.row1 {
-    padding: 5rem 0 4rem;
-    background-color: rgba(0, 0, 0, .9);
-    color: rgba(255, 255, 255, .8);
-  }
-
-  .footer > div.row2 {
-    padding: 1.5rem 0;
-    background-color: rgba(0, 0, 0, 1);
-    color: rgba(255, 255, 255, .8);
-  }
-
-  .footer > div > div {
-    display: inline-flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    width: 1110px;
-    text-align: left;
-  }
-
-  .footer .col {
-    flex-shrink: 0;
-    width: 255px;
-    margin-right: 2rem;
-  }
-
-  .footer .col:last-child {
-    margin-right: 0;
-  }
-
-  .footer .quote {
-    margin-top: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .footer .hdr {
-    padding-bottom: .5rem;
-    border-bottom: 1px solid rgba(114, 192, 44, .6);
-  }
-
-  .footer .menu {
-    display: block;
-    margin-top: .85rem;
-  }
-
-  .footer .menu > li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .7rem 0;
-    line-height: 1.4;
-    border-bottom: 1px solid rgba(255, 255, 255, .1);
-    cursor: pointer;
-  }
-
-  /*.footer .menu > li::after {*/
-  /*content: '>';*/
-  /*}*/
-
-  .footer .menu > li:last-child {
-    border-bottom: none;
-  }
-
-  .footer .menu > li:hover > span {
-    text-decoration: underline;
-  }
-
-  .footer .address {
-    line-height: 2;
-    margin-top: 1.4rem;
-  }
-
-  .footer .address a {
-    color: #72c02c;
-    text-decoration: none;
-  }
-
-  .footer .address a:hover {
-    text-decoration: underline;
   }
 </style>

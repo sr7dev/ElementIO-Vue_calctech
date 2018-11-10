@@ -69,10 +69,6 @@ ul > li {
   padding: 0;
 }
 
-#scene, #app {
-  display: block;
-}
-
 .app-fs-8 {
   font-size: 8px !important;
 }
@@ -107,6 +103,46 @@ ul > li {
 
 .app-fs-24 {
   font-size: 24px !important;
+}
+
+.app-color1 {
+  color: #111111;
+}
+
+.app-color2 {
+  color: #555555;
+}
+
+.app-section {
+  display: block;
+  min-width: 1110px;
+  text-align: center;
+}
+
+.app-section > * {
+  text-align: left;
+}
+
+.app-section-cont {
+  display: inline-block;
+  width: 1110px;
+  text-align: left;
+}
+
+.btn1 {
+  display: inline-block;
+  padding: 1.1rem 2rem;
+  border-radius: 50px;
+  border: 1px solid white;
+  color: white;
+  background-color: rgba(255, 255, 255, .1);
+  cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.btn1:hover {
+  color: black;
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .fade-in-enter-active, .fade-in-leave-active {

@@ -4,6 +4,7 @@ import Router from "vue-router";
 import Scene from "./Scene.vue";
 import App from "./components/App.vue";
 import Home from "./components/Home.vue";
+import Vacancies from "./components/Vacancies.vue";
 
 Vue.use(Router);
 
@@ -27,6 +28,12 @@ let router = new Router({
               name: 'home',
               component: Home,
               props: {routeName: 'home'},
+            },
+            {
+              path: 'vacancies',
+              name: 'vacancies',
+              component: Vacancies,
+              props: {routeName: 'vacancies'},
             },
           ],
         },

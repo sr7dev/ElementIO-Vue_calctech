@@ -12,7 +12,7 @@
     </template>
     <div v-else-if="error" class="d-wide-flex-center p-1">
       <div class="t-align-center color-red app-fs-18">
-        Извините, сервер временно не доступен, попробуйте зайти позже
+        Извините, сайт временно не доступен, попробуйте зайти позже
       </div>
     </div>
     <div v-else="" class="d-wide-flex-center">
