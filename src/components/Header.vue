@@ -27,9 +27,9 @@
         <div class="menu-item">
           <span>ЛЕТНЯЯ ШКОЛА</span>
         </div>
-        <div class="menu-item">
+        <router-link tag="div" :to="{ name: 'contacts' }" class="menu-item">
           <span>КОНТАКТЫ</span>
-        </div>
+        </router-link>
         <router-link tag="div" :to="{ name: 'vacancies' }" class="menu-item">
           <span>ВАКАНСИИ</span>
         </router-link>

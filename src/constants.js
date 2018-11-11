@@ -1,4 +1,4 @@
 export default {
-  AppName: 'Calctech',
+  AppName: 'CalcTech',
   SystemErrMsg: 'Извините, произошла системная ошибка',
 };

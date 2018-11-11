@@ -2,10 +2,10 @@
   <div class="app-section">
     <div class="app-section-cont">
       <div class="cont">
-        <div class="hdr1 app-color1">
+        <div class="fs2_5 lh1_4 app-color1">
           Открытые вакансии
         </div>
-        <div class="hdr2 app-color2 mt-h">
+        <div class="fs1_25 lh1_6 app-color2 mt-h">
           Мы ищем талантливых сотрудников, которые любят свое дело.<br/>
           Резюме отправляйте на calctech.kokshe@gmail.com
         </div>
@@ -66,29 +66,11 @@
   </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {};
-    },
-  }
-</script>
-
 <style scoped>
   .cont {
-    padding: 7rem 0;
+    padding: 7rem 0 6rem;
     text-align: center;
     font-weight: 300;
-  }
-
-  .hdr1 {
-    font-size: 2.5rem;
-    line-height: 1.4;
-  }
-
-  .hdr2 {
-    font-size: 1.25rem;
-    line-height: 1.6;
   }
 
   .block {

@@ -1,6 +1,6 @@
-# calctech
+# CalcTech
 
-> calctech.com
+> mycalctech.com
 
 ## Build Setup
 
