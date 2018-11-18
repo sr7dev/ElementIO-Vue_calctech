@@ -11,13 +11,13 @@
           <div class="form">
             <div class="d-flex flex-nowrap align-items-center">
               <div class="sw1 mr-2">
-                <div class="app-form-block">
+                <div class="app-form-block1">
                   <label>Имя:</label>
                   <input type="text"/>
                 </div>
               </div>
               <div class="sw1">
-                <div class="app-form-block">
+                <div class="app-form-block1">
                   <label>Электронная почта:</label>
                   <input type="email"/>
                 </div>
@@ -25,20 +25,20 @@
             </div>
             <div class="d-flex flex-nowrap align-items-center mt-1_5">
               <div class="sw1 mr-2">
-                <div class="app-form-block">
+                <div class="app-form-block1">
                   <label>Предмет:</label>
                   <input type="text"/>
                 </div>
               </div>
               <div class="sw1">
-                <div class="app-form-block">
+                <div class="app-form-block1">
                   <label>Телефон:</label>
                   <input type="text"/>
                 </div>
               </div>
             </div>
             <div class="mt-1_5">
-              <div class="app-form-block">
+              <div class="app-form-block1">
                 <label>Сообщение:</label>
                 <textarea rows="7"></textarea>
               </div>

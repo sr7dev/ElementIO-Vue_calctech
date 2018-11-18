@@ -1,8 +1,7 @@
 import utils from './utils'
 import stg from './stg'
-import store from "./store";
 
-let API_PREFIX = 'api/', HOST = 'https://calctech.kz/';
+let API_PREFIX = 'api/', HOST = 'http://ct/';
 // if (process.env.NODE_ENV !== 'production') {
 //   HOST = 'http://localhost:9090/';
 // }

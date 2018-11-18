@@ -6,6 +6,7 @@ import App from "./components/App.vue";
 import Home from "./components/Home.vue";
 import Contacts from "./components/Contacts.vue";
 import Vacancies from "./components/Vacancies.vue";
+import Auth from "./components/Auth.vue";
 
 Vue.use(Router);
 
@@ -41,6 +42,12 @@ let router = new Router({
               name: 'vacancies',
               component: Vacancies,
               props: {routeName: 'vacancies'},
+            },
+            {
+              path: 'auth',
+              name: 'auth',
+              component: Auth,
+              props: {routeName: 'auth'},
             },
           ],
         },

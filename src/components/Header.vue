@@ -4,35 +4,40 @@
       <div class="app-header">
         <div class="logo-cont"><img src="../static/img/logo.png"/></div>
         <div class="flex">&nbsp;</div>
-        <router-link tag="div" :to="{ name: 'home' }" class="menu-item">
-          <span>ГЛАВНАЯ СТРАНИЦА</span>
-        </router-link>
-        <div class="menu-item">
-          <span>О НАС</span>
-        </div>
-        <div class="menu-item dd" @mouseover="mOpened.courses = true" @mouseout="mOpened.courses = false">
-          <span>КУРСЫ</span><i class="fas fa-chevron-down fs0_7 ml-h"></i>
-          <transition name="fade-in">
-            <ul v-if="mOpened.courses">
-              <li>ПОДГОТОВКА К ЕНТ</li>
-              <li>ПОДГОТОВКА В НИШ</li>
-              <li>ПОДГОТОВКА В НУ И ЗАРУБЕЖ</li>
-              <li>АНГЛИЙСКИЙ ЯЗЫК</li>
-              <li>ОТДЕЛЬНЫЕ ПРЕДМЕТЫ</li>
-              <li>КНИЖНЫЙ КЛУБ</li>
-              <li>РОБОТОТЕХНИКА</li>
-            </ul>
-          </transition>
-        </div>
-        <div class="menu-item">
-          <span>ЛЕТНЯЯ ШКОЛА</span>
-        </div>
-        <router-link tag="div" :to="{ name: 'contacts' }" class="menu-item">
-          <span>КОНТАКТЫ</span>
-        </router-link>
-        <router-link tag="div" :to="{ name: 'vacancies' }" class="menu-item">
-          <span>ВАКАНСИИ</span>
-        </router-link>
+        <template v-if="!profile">
+          <router-link tag="div" :to="{ name: 'home' }" class="menu-item">
+            <span>ГЛАВНАЯ СТРАНИЦА</span>
+          </router-link>
+          <div class="menu-item">
+            <span>О НАС</span>
+          </div>
+          <div class="menu-item dd" @mouseover="mOpened.courses = true" @mouseout="mOpened.courses = false">
+            <span>КУРСЫ</span><i class="fas fa-chevron-down fs0_7 ml-h"></i>
+            <transition name="fade-in">
+              <ul v-if="mOpened.courses">
+                <li>ПОДГОТОВКА К ЕНТ</li>
+                <li>ПОДГОТОВКА В НИШ</li>
+                <li>ПОДГОТОВКА В НУ И ЗАРУБЕЖ</li>
+                <li>АНГЛИЙСКИЙ ЯЗЫК</li>
+                <li>ОТДЕЛЬНЫЕ ПРЕДМЕТЫ</li>
+                <li>КНИЖНЫЙ КЛУБ</li>
+                <li>РОБОТОТЕХНИКА</li>
+              </ul>
+            </transition>
+          </div>
+          <div class="menu-item">
+            <span>ЛЕТНЯЯ ШКОЛА</span>
+          </div>
+          <router-link tag="div" :to="{ name: 'contacts' }" class="menu-item">
+            <span>КОНТАКТЫ</span>
+          </router-link>
+          <router-link tag="div" :to="{ name: 'vacancies' }" class="menu-item">
+            <span>ВАКАНСИИ</span>
+          </router-link>
+          <router-link tag="div" :to="{ name: 'auth' }" class="menu-item">
+            <span>ВОЙТИ</span>
+          </router-link>
+        </template>
       </div>
     </div>
   </div>
@@ -46,6 +51,11 @@
           courses: false,
         },
       };
+    },
+    computed: {
+      profile() {
+        return this.$store.state.profile;
+      },
     },
   }
 </script>

@@ -6,6 +6,10 @@
   background-color: #ffffff;
 }
 
+.app-bg1 {
+  background-color: #f7f7f7;
+}
+
 .spnr {
   display: inline-block;
   width: 1rem;
@@ -160,9 +164,9 @@ ul > li {
 input, textarea {
   display: block;
   width: 100%;
-  padding: .7rem 1rem;
+  padding: .8rem 1rem;
   line-height: 1.5;
-  color: #999999;
+  color: #000;
   border: 1px solid #eee;
   border-radius: 0.25rem;
   background-color: #fff;
@@ -171,6 +175,10 @@ input, textarea {
 
 textarea {
   resize: none;
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: .6;
 }
 
 input:focus, textarea:focus {
@@ -182,7 +190,7 @@ button {
   padding: .8rem 1.4rem;
   text-align: center;
   white-space: nowrap;
-  font-size: 1rem;
+  font-size: 1.07rem;
   line-height: 1.5;
   color: #fff;
   border: 1px solid transparent;
@@ -201,17 +209,31 @@ button:hover {
   background-color: #8cd54a;
 }
 
-.app-form-block {
+.app-form-block1 {
   display: block;
   width: 100%;
 }
 
-.app-form-block > label {
+.app-form-block1 > label {
   display: block;
   width: 100%;
   margin-bottom: .6rem;
   font-size: .9rem;
   font-weight: 400;
+}
+
+.app-form-block2 {
+  display: block;
+  width: 100%;
+}
+
+.app-form-block2 > label {
+  display: block;
+  width: 100%;
+  margin-bottom: .6rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: #333;
 }
 
 .fade-in-enter-active, .fade-in-leave-active {

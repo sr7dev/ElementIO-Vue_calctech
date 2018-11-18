@@ -9,7 +9,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appLoading: false,
     profile: null,
   },
   getters: {
@@ -21,9 +20,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setAppLoading(state, value) {
-      state.appLoading = value;
-    },
     setProfile(state, value) {
       // if (!!state.profile !== !!value) {
       //   if (value) {
@@ -37,7 +33,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    refreshProfile({commit, dispatch, state, getters}) {
+    refreshProfile({commit}) {
       console.log('refreshProfile');
       return ajax.reqAPI('profile').then(response => {
         commit('setProfile', response.data);

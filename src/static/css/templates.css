@@ -271,6 +271,62 @@
   position: fixed;
 }
 
+.pos-top-0 {
+  top: 0;
+}
+
+.pos-right-0 {
+  right: 0;
+}
+
+.pos-left-0 {
+  left: 0;
+}
+
+.pos-bottom-0 {
+  bottom: 0;
+}
+
+.pos-zi-1 {
+  z-index: 1;
+}
+
+.pos-zi-2 {
+  z-index: 2;
+}
+
+.pos-zi-3 {
+  z-index: 3;
+}
+
+.pos-zi-4 {
+  z-index: 4;
+}
+
+.pos-zi-5 {
+  z-index: 5;
+}
+
+.pos-zi-6 {
+  z-index: 6;
+}
+
+.pos-zi-7 {
+  z-index: 7;
+}
+
+.pos-zi-8 {
+  z-index: 8;
+}
+
+.pos-zi-9 {
+  z-index: 9;
+}
+
+.pos-zi-10 {
+  z-index: 10;
+}
+
 .d-none {
   display: none !important;
 }
