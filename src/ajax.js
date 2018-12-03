@@ -1,7 +1,7 @@
 import utils from './utils'
 import stg from './stg'
 
-let API_PREFIX = 'api/', HOST = 'http://ct/';
+let API_PREFIX = 'api/', HOST = 'http://35.224.168.117/';
 // if (process.env.NODE_ENV !== 'production') {
 //   HOST = 'http://localhost:9090/';
 // }
