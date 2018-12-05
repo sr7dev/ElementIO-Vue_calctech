@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white pb-8">
+  <div class="bg-white pb-8 animated fadeIn">
     <div class="b1">
       <div class="font-weight-bold display-3">СЛОЖНЫЕ ТЕМЫ ЛЕГКО</div>
       <h1 class="mt-4">

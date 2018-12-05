@@ -3,12 +3,12 @@
     <template v-if="ready">
       <router-view></router-view>
     </template>
-    <div v-else-if="error" class="d-wide-flex-center p-1">
-      <div class="pos-fix pos-top-0 pos-left-0 pos-zi-1 d-wide-flex-center t-align-center color-red app-fs-20">
+    <div v-else-if="error" class="fixed-top h-100 d-flex align-items-center justify-content-center bg-white p-4">
+      <div class="font-xl font-weight-bold text-danger">
         Извините, сайт временно не доступен, попробуйте зайти позже
       </div>
     </div>
-    <div v-else="" class="pos-fix pos-top-0 pos-left-0 pos-zi-1 d-wide-flex-center">
+    <div v-else="" class="fixed-top h-100 d-flex align-items-center justify-content-center bg-white">
       <i class="spnr big"></i>
     </div>
   </div>
@@ -47,16 +47,9 @@
 </script>
 
 <style lang="scss">
-  /* CoreUI Icons Set */
-  /*@import '~@coreui/icons/css/coreui-icons.min.css';*/
-
   /* Import Font Awesome Icons Set */
   $fa-font-path: '~font-awesome/fonts/';
   @import '~font-awesome/scss/font-awesome.scss';
-
-  /* Import Simple Line Icons Set */
-  /*$simple-line-font-path: '~simple-line-icons/fonts/';*/
-  /*@import '~simple-line-icons/scss/simple-line-icons.scss';*/
 
   /* Import Bootstrap Vue Styles */
   @import '~bootstrap-vue/dist/bootstrap-vue.css';

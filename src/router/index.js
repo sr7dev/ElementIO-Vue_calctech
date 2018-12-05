@@ -1,53 +1,37 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-const App = () => import('@/components/App');
-const Home = () => import('@/components/Home');
-const Contacts = () => import('@/components/Contacts');
-const Vacancies = () => import('@/components/Vacancies');
-const Auth = () => import('@/components/Auth');
+const LApp = () => import('@/components/landing/App');
+const LHome = () => import('@/components/landing/Home');
+// const LContacts = () => import('@/components/landing/Contacts');
+// const LVacancies = () => import('@/components/landing/Vacancies');
+const LAuth = () => import('@/components/landing/Auth');
 
 Vue.use(Router);
 
 let router = new Router({
   linkActiveClass: 'open active',
+  scrollBehavior() {
+    return {x: 0, y: 0};
+  },
   routes: [
     {
       path: '/',
-      component: {template: '<router-view></router-view>'},
-      redirect: {name: 'app'},
+      name: 'l_app',
+      component: LApp,
+      redirect: {name: 'l_home'},
       children: [
         {
-          path: 'app',
-          name: 'app',
-          component: App,
-          redirect: {name: 'home'},
-          children: [
-            {
-              path: 'home',
-              name: 'home',
-              component: Home,
-              props: {routeName: 'home'},
-            },
-            {
-              path: 'contacts',
-              name: 'contacts',
-              component: Contacts,
-              props: {routeName: 'contacts'},
-            },
-            {
-              path: 'vacancies',
-              name: 'vacancies',
-              component: Vacancies,
-              props: {routeName: 'vacancies'},
-            },
-            {
-              path: 'auth',
-              name: 'auth',
-              component: Auth,
-              props: {routeName: 'auth'},
-            },
-          ],
+          path: 'home',
+          name: 'l_home',
+          component: LHome,
+          props: {routeName: 'l_home'},
+        },
+        {
+          path: 'auth',
+          name: 'l_auth',
+          component: LAuth,
+          props: {routeName: 'l_auth'},
         },
       ],
     },

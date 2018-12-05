@@ -9,7 +9,7 @@
         </b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="font-weight-bold ml-auto">
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'l_home'}" class="px-2">
               ГЛАВНАЯ
             </b-nav-item>
             <b-nav-item class="px-2">
@@ -33,7 +33,7 @@
             <b-nav-item class="px-2">
               ВАКАНСИИ
             </b-nav-item>
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'l_auth'}" class="px-2">
               ВОЙТИ
             </b-nav-item>
           </b-navbar-nav>

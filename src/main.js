@@ -12,8 +12,14 @@ moment.locale('ru');
 
 Vue.use(BootstrapVue);
 
-new Vue({
-  store,
-  router,
-  render: h => h(Scene),
-}).$mount('#scene');
+function init() {
+  new Vue({
+    store,
+    router,
+    render: h => h(Scene),
+  }).$mount('#scene');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
