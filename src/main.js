@@ -1,18 +1,19 @@
-import Vue from 'vue';
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
 import moment from "moment";
 import "moment/locale/ru";
 import store from './store';
-import router from './router';
+import Scene from './Scene'
+import router from './router'
+
+Vue.config.productionTip = false;
 
 moment.locale('ru');
 
-function initSystem() {
-  new Vue({
-    el: '#app',
-    store,
-    router,
-    template: '<router-view></router-view>',
-  });
-}
+Vue.use(BootstrapVue);
 
-document.addEventListener('DOMContentLoaded', initSystem);
+new Vue({
+  store,
+  router,
+  render: h => h(Scene),
+}).$mount('#scene');

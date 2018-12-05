@@ -28,7 +28,7 @@ function cpfetch(url, opts) {
   if (typeof fetch !== 'undefined') {
     return fetch(url, opts);
   }
-  return (new Promise(function (resolve, reject) {
+  return (new Promise(function (resolve) {
     let xhr = getXHR();
     xhr.open(opts.method || 'GET', url, true);
     xhr.onreadystatechange = (() => {

@@ -1,22 +1,20 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Scene from "./Scene.vue";
-import App from "./components/App.vue";
-import Home from "./components/Home.vue";
-import Contacts from "./components/Contacts.vue";
-import Vacancies from "./components/Vacancies.vue";
-import Auth from "./components/Auth.vue";
+const App = () => import('@/components/App');
+const Home = () => import('@/components/Home');
+const Contacts = () => import('@/components/Contacts');
+const Vacancies = () => import('@/components/Vacancies');
+const Auth = () => import('@/components/Auth');
 
 Vue.use(Router);
 
 let router = new Router({
-  linkActiveClass: 'active',
+  linkActiveClass: 'open active',
   routes: [
     {
       path: '/',
-      name: 'scene',
-      component: Scene,
+      component: {template: '<router-view></router-view>'},
       redirect: {name: 'app'},
       children: [
         {
@@ -55,7 +53,7 @@ let router = new Router({
     },
     {
       path: '*',
-      redirect: {name: 'scene'},
+      redirect: {path: '/'},
     },
   ],
 });

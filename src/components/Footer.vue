@@ -1,26 +1,26 @@
 <template>
-  <div class="app-footer">
-    <div class="app-section row1">
-      <div class="app-section-cont">
-        <div class="cont">
-          <div class="col col1">
-            <div class="logo-cont"><img src="../static/img/logo.png"/></div>
-            <div class="quote">
+  <div class="vendor-footer">
+    <div class="row1 py-4 text-white-80 font-lg">
+      <b-container>
+        <b-row>
+          <b-col lg="3" md="6" class="py-4">
+            <img src="img/logo.png" style="width: 134px; height: 31px"/>
+            <div class="mt-4 lh1_6">
               Наша цель - дать детям возможность получения качественного и доступного образования.
             </div>
-          </div>
-          <div class="flex"></div>
-          <div class="col col2">
+          </b-col>
+          <b-col lg="3" md="6" class="py-4"></b-col>
+          <b-col lg="3" md="6" class="py-4">
             <div class="hdr">ПОЛЕЗНЫЕ ССЫЛКИ</div>
             <ul class="menu">
-              <li><span>О нас</span> <i class="fas fa-angle-right" style="text-decoration: none"></i></li>
-              <li><span>Курсы</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Летняя Школа</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Вакансии</span> <i class="fas fa-angle-right"></i></li>
-              <li><span>Наши контакты</span> <i class="fas fa-angle-right"></i></li>
+              <li><span>О нас</span> <i class="fa fa-angle-right"></i></li>
+              <li><span>Курсы</span> <i class="fa fa-angle-right"></i></li>
+              <li><span>Летняя Школа</span> <i class="fa fa-angle-right"></i></li>
+              <li><span>Вакансии</span> <i class="fa fa-angle-right"></i></li>
+              <li><span>Наши контакты</span> <i class="fa fa-angle-right"></i></li>
             </ul>
-          </div>
-          <div class="col col3">
+          </b-col>
+          <b-col lg="3" md="6" class="py-4">
             <div class="hdr">НАШИ КОНТАКТЫ</div>
             <div class="address">
               Кокшетау, Акмолинская область<br/>
@@ -28,59 +28,34 @@
               Телефон: <a href="tel:+77478552148">+7 747 855 2148</a><br/>
               Email: <a href="mailto:calctech.kokshe@gmail.com">calctech.kokshe@gmail.com</a>
             </div>
-          </div>
-        </div>
-      </div>
+          </b-col>
+        </b-row>
+      </b-container>
     </div>
-    <div class="app-section row2">
-      <div class="app-section-cont">
-        <div class="cont">
-          2018 © Все права защищены.
-        </div>
-      </div>
+    <div class="row2 font-lg text-white-80 py-4">
+      <b-container>2018 © Все права защищены.</b-container>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .app-footer > .row1 {
+  .vendor-footer .row1 {
     background-color: rgba(0, 0, 0, .9);
   }
 
-  .app-footer > .row1 .cont {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    padding: 5rem 0 4rem;
-    color: rgba(255, 255, 255, .8);
-  }
-
-  .app-footer .col {
-    flex-shrink: 0;
-    width: 255px;
-    margin-right: 2rem;
-  }
-
-  .app-footer .col:last-child {
-    margin-right: 0;
-  }
-
-  .app-footer .quote {
-    margin-top: 1.5rem;
-    line-height: 1.6;
-  }
-
-  .app-footer .hdr {
+  .vendor-footer .hdr {
     padding-bottom: .5rem;
     border-bottom: 1px solid rgba(114, 192, 44, .6);
   }
 
-  .app-footer .menu {
+  .vendor-footer .menu {
+    list-style: none;
     display: block;
-    margin-top: .85rem;
+    margin: .85rem 0 0;
+    padding: 0;
   }
 
-  .app-footer .menu > li {
+  .vendor-footer .menu > li {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,34 +65,29 @@
     cursor: pointer;
   }
 
-  .app-footer .menu > li:last-child {
+  .vendor-footer .menu > li:last-child {
     border-bottom: none;
   }
 
-  .app-footer .menu > li:hover > span {
+  .vendor-footer .menu > li:hover > span {
     text-decoration: underline;
   }
 
-  .app-footer .address {
+  .vendor-footer .address {
     line-height: 2;
     margin-top: 1.4rem;
   }
 
-  .app-footer .address a {
+  .vendor-footer .address a {
     color: #72c02c;
     text-decoration: none;
   }
 
-  .app-footer .address a:hover {
+  .vendor-footer .address a:hover {
     text-decoration: underline;
   }
 
-  .app-footer > .row2 {
+  .vendor-footer .row2 {
     background-color: rgba(0, 0, 0, 1);
-  }
-
-  .app-footer > .row2 .cont {
-    padding: 1.5rem 0;
-    color: rgba(255, 255, 255, .8);
   }
 </style>

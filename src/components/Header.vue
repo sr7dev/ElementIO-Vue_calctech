@@ -1,57 +1,47 @@
 <template>
-  <div class="app-section">
-    <div class="app-section-cont">
-      <div class="app-header">
-        <div class="logo-cont"><img src="../static/img/logo.png"/></div>
-        <div class="flex">&nbsp;</div>
-        <template v-if="!profile">
-          <router-link tag="div" :to="{ name: 'home' }" class="menu-item">
-            <span>ГЛАВНАЯ СТРАНИЦА</span>
-          </router-link>
-          <div class="menu-item">
-            <span>О НАС</span>
-          </div>
-          <div class="menu-item dd" @mouseover="mOpened.courses = true" @mouseout="mOpened.courses = false">
-            <span>КУРСЫ</span><i class="fas fa-chevron-down fs0_7 ml-h"></i>
-            <transition name="fade-in">
-              <ul v-if="mOpened.courses">
-                <li>ПОДГОТОВКА К ЕНТ</li>
-                <li>ПОДГОТОВКА В НИШ</li>
-                <li>ПОДГОТОВКА В НУ И ЗАРУБЕЖ</li>
-                <li>АНГЛИЙСКИЙ ЯЗЫК</li>
-                <li>ОТДЕЛЬНЫЕ ПРЕДМЕТЫ</li>
-                <li>КНИЖНЫЙ КЛУБ</li>
-                <li>РОБОТОТЕХНИКА</li>
-              </ul>
-            </transition>
-          </div>
-          <div class="menu-item">
-            <span>ЛЕТНЯЯ ШКОЛА</span>
-          </div>
-          <router-link tag="div" :to="{ name: 'contacts' }" class="menu-item">
-            <span>КОНТАКТЫ</span>
-          </router-link>
-          <router-link tag="div" :to="{ name: 'vacancies' }" class="menu-item">
-            <span>ВАКАНСИИ</span>
-          </router-link>
-          <router-link tag="div" :to="{ name: 'auth' }" class="menu-item">
-            <span>ВОЙТИ</span>
-          </router-link>
-        </template>
-      </div>
-    </div>
-  </div>
+  <Header fixed>
+    <b-container>
+      <b-navbar toggleable="lg" class="w-100">
+        <b-navbar-toggle target="nav_collapse" class="ml-auto"></b-navbar-toggle>
+        <b-navbar-brand href="#/">
+          <img class="navbar-brand-full" src="img/logo.png" width="134" height="31" alt="CoreUI Logo">
+          <!--<img class="navbar-brand-minimized" src="img/logo.png" width="134" height="31" alt="CoreUI Logo">-->
+        </b-navbar-brand>
+        <b-collapse is-nav id="nav_collapse">
+          <b-navbar-nav class="font-weight-bold ml-auto">
+            <b-nav-item class="px-2">
+              ГЛАВНАЯ
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              О НАС
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              КУРСЫ
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              ЛЕТНЯЯ ШКОЛА
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              КОНТАКТЫ
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              ВАКАНСИИ
+            </b-nav-item>
+            <b-nav-item class="px-2">
+              ВОЙТИ
+            </b-nav-item>
+          </b-navbar-nav>
+        </b-collapse>
+      </b-navbar>
+    </b-container>
+  </Header>
 </template>
 
 <script>
+  import {Header} from '@coreui/vue'
+
   export default {
-    data() {
-      return {
-        mOpened: {
-          courses: false,
-        },
-      };
-    },
+    components: {Header},
     computed: {
       profile() {
         return this.$store.state.profile;
@@ -59,57 +49,3 @@
     },
   }
 </script>
-
-<style scoped>
-  .app-header {
-    display: flex;
-    align-items: center;
-    font-size: .9rem;
-    font-weight: 600;
-    white-space: nowrap;
-    padding: 1rem 0;
-  }
-
-  .app-header > .logo-cont {
-    display: inline-block;
-    padding: .5rem .5rem .5rem 0;
-  }
-
-  .app-header > .menu-item {
-    position: relative;
-    display: inline-block;
-    padding: 1rem;
-    cursor: pointer;
-  }
-
-  .app-header > .menu-item:last-child {
-    padding-right: 0;
-  }
-
-  .app-header > .menu-item > span, .app-header > .menu-item > i {
-    vertical-align: middle;
-  }
-
-  .app-header > .menu-item > ul {
-    position: absolute;
-    z-index: 2;
-    top: 100%;
-    left: 0;
-    display: block;
-    border: 1px solid #f1f1f1;
-    background-color: white;
-  }
-
-  .app-header > .menu-item > ul > li {
-    display: block;
-    padding: .6rem 1.8rem;
-    font-size: .9rem;
-    font-weight: 400;
-    line-height: 1.6;
-    background-color: rgba(245, 245, 245, 0);
-  }
-
-  .app-header > .menu-item > ul > li:hover {
-    background-color: rgba(245, 245, 245, 1);
-  }
-</style>
