@@ -38,7 +38,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .vendor-footer .row1 {
     background-color: rgba(0, 0, 0, .9);
   }
@@ -79,7 +79,7 @@
   }
 
   .vendor-footer .address a {
-    color: #72c02c;
+    color: $app-color-green1;
     text-decoration: none;
   }
 

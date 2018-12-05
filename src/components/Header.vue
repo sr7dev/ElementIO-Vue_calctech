@@ -15,9 +15,15 @@
             <b-nav-item class="px-2">
               О НАС
             </b-nav-item>
-            <b-nav-item class="px-2">
-              КУРСЫ
-            </b-nav-item>
+            <b-nav-item-dropdown text="КУРСЫ" left>
+              <b-dropdown-item href="#/">Подготовка к ЕНТ</b-dropdown-item>
+              <b-dropdown-item href="#/">Подготовка в НИШ</b-dropdown-item>
+              <b-dropdown-item href="#/">Подготовка в НУ и зарубеж</b-dropdown-item>
+              <b-dropdown-item href="#/">Английский язык</b-dropdown-item>
+              <b-dropdown-item href="#/">Отдельные предметы</b-dropdown-item>
+              <b-dropdown-item href="#/">Книжный Клуб</b-dropdown-item>
+              <b-dropdown-item href="#/">Робототехника</b-dropdown-item>
+            </b-nav-item-dropdown>
             <b-nav-item class="px-2">
               ЛЕТНЯЯ ШКОЛА
             </b-nav-item>

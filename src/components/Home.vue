@@ -247,7 +247,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .b1 {
     display: flex;
     flex-direction: column;
@@ -285,7 +285,7 @@
     border-radius: 10rem;
     font-size: 26px;
     color: white;
-    background-color: #72c02c;
+    background-color: $app-color-green1;
   }
 
   .b4 .img-cont {
@@ -320,13 +320,13 @@
   .b5 .hdr {
     font-size: 1.2rem;
     line-height: 1.4;
-    color: #72c02c;
+    color: $app-color-green1;
     padding-bottom: .5rem;
     cursor: pointer;
   }
 
   .b5 .hdr:hover {
-    color: #5c9924;
+    color: $app-color-green2;
   }
 
   .b5 .dsc {
@@ -356,7 +356,7 @@
     border-bottom: 1px solid rgba(114, 192, 44, .3);
     font-size: .785rem;
     line-height: 1.6;
-    color: #72c02c;
+    color: $app-color-green1;
   }
 
   .b6 .info > .quote {
