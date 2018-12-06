@@ -3,12 +3,12 @@
     <b-container>
       <b-navbar toggleable="lg" class="w-100">
         <b-navbar-toggle target="nav_collapse" class="ml-auto"></b-navbar-toggle>
-        <b-navbar-brand href="#/">
+        <b-navbar-brand :to="{name: 'l_home'}">
           <img class="navbar-brand-full" src="img/logo.png" width="134" height="31" alt="CoreUI Logo">
           <!--<img class="navbar-brand-minimized" src="img/logo.png" width="134" height="31" alt="CoreUI Logo">-->
         </b-navbar-brand>
         <b-collapse is-nav id="nav_collapse">
-          <b-navbar-nav class="font-weight-bold ml-auto">
+          <b-navbar-nav class="font-weight-bold font-sm ml-auto">
             <b-nav-item :to="{name: 'l_home'}" class="px-2">
               ГЛАВНАЯ
             </b-nav-item>

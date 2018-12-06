@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import stg from './stg'
   import dict from './dict'
 
   export default {

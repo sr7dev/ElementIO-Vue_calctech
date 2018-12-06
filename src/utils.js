@@ -1,5 +1,5 @@
-import _ from "lodash";
 import moment from "moment";
+import constants from "./constants";
 
 export default {
   serializeObj(obj) {
@@ -63,5 +63,9 @@ export default {
         return _.find(objSrc, ['id', x]);
       },
     );
+  },
+  retrieveApiErrorDsc(error) {
+    if (!error) return '';
+    return (error.data || {}).error_dsc || constants.SystemErrMsg;
   },
 }
