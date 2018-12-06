@@ -25,24 +25,19 @@
         error: false,
       }
     },
-    methods: {
-      start() {
-        // stg.set('auth_token', '');
-        dict.reload().then(() => this.$store.dispatch('refreshProfile')).then(() => {
-          this.ready = true;
-        }).catch(error => {
-          if (error.status === 401) {
-            this.$store.commit('setProfile', null);
-            this.ready = true;
-          } else {
-            this.error = true;
-            console.log(error);
-          }
-        });
-      },
-    },
     created() {
-      this.start();
+      // stg.set('auth_token', '');
+      dict.reload().then(() => this.$store.dispatch('refreshProfile')).then(() => {
+        this.ready = true;
+      }).catch(error => {
+        if (error.status === 401) {
+          this.$store.commit('setProfile', null);
+          this.ready = true;
+        } else {
+          this.error = true;
+          console.log(error);
+        }
+      });
     },
   }
 </script>

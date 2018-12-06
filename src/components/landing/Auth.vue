@@ -68,7 +68,7 @@
           without_token: true,
         }).then(response => {
           stg.set('auth_token', response.data.token);
-          this.$router.push({path: '/'});
+          this.$router.push('/');
         }).catch(error => {
           this.errorFB = utils.retrieveApiErrorDsc(error);
           this.loading = false;
@@ -77,7 +77,7 @@
     },
     beforeCreate() {
       if (this.$store.state.profile || stg.get('auth_token')) {
-        this.$router.push({path: '/'});
+        this.$router.push({name: 'app'});
       }
     },
   }
