@@ -48,7 +48,6 @@
   import utils from '../../utils.js'
 
   export default {
-    props: ['routeName'],
     data() {
       return {
         loading: false,
@@ -68,7 +67,7 @@
           without_token: true,
         }).then(response => {
           stg.set('auth_token', response.data.token);
-          this.$router.push('/');
+          return this.$store.dispatch('refreshProfile').then(() => this.$router.push({name: 'adm'}));
         }).catch(error => {
           this.errorFB = utils.retrieveApiErrorDsc(error);
           this.loading = false;
@@ -77,7 +76,7 @@
     },
     beforeCreate() {
       if (this.$store.state.profile || stg.get('auth_token')) {
-        this.$router.push({name: 'app'});
+        this.$router.push({name: 'adm'});
       }
     },
   }

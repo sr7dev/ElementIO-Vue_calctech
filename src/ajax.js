@@ -1,11 +1,6 @@
+import constants from './constants'
 import utils from './utils'
 import stg from './stg'
-
-let API_PREFIX = 'api/', HOST = 'http://35.224.168.117/';
-// if (process.env.NODE_ENV !== 'production') {
-//   HOST = 'http://localhost:9090/';
-// }
-API_PREFIX = HOST + API_PREFIX;
 
 let lang = 'ru';
 
@@ -50,8 +45,6 @@ function cpfetch(url, opts) {
 }
 
 export default {
-  HOST,
-  API_PREFIX,
   req(url, opts) {
     opts = opts || {};
     opts.headers = {};
@@ -86,9 +79,6 @@ export default {
     });
   },
   reqAPI(url, opts) {
-    return this.req(API_PREFIX + url, opts);
-  },
-  reqHost(url, opts) {
-    return this.req(HOST + url, opts);
+    return this.req(constants.ApiUrl + url, opts);
   },
 }

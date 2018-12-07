@@ -1,9 +1,13 @@
+import _ from "lodash";
 import moment from "moment";
 import constants from "./constants";
 
 export default {
   serializeObj(obj) {
     return Object.keys(obj).filter(k => (obj[k] !== '')).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&')
+  },
+  fmtNameFromObj(o) {
+    return (o.first_name || 'Noname') + (o.last_name ? (' '+o.last_name[0] + '.') : '');
   },
   fmtPhone(v) {
     if (!v) return '';
@@ -29,6 +33,16 @@ export default {
     if (!v && v !== 0) return '';
     curr = curr || 'тг';
     return `${v.toLocaleString()} ${curr}`;
+  },
+  fmtMediaImage(v, w, h, m) {
+    if (!v) return '';
+    return constants.MediaUrl + v + '?' + _.join(_.map(_.omitBy({w, h, m}, _.isNil), (v, k) => `${k}=${v}`), '&');
+  },
+  fmtMediaImageFit(v, w, h) {
+    return this.fmtMediaImage(v, w, h, 'fit');
+  },
+  fmtMediaImageFill(v, w, h) {
+    return this.fmtMediaImage(v, w, h, 'fill');
   },
   normalizeYoutubeURL(v) {
     if (v.indexOf('youtu.be') > -1) {

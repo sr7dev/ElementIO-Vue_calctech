@@ -7,7 +7,6 @@
       </Sidebar>
       <main class="main">
         <div class="container-fluid">
-          hello world
           <router-view></router-view>
         </div>
       </main>

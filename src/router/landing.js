@@ -6,21 +6,19 @@ const LAuth = () => import('@/components/landing/Auth');
 
 export default {
   path: '/',
-  name: 'l_app',
+  name: 'l-app',
   component: LApp,
-  redirect: {name: 'l_home'},
+  redirect: {name: 'l-home'},
   children: [
     {
       path: 'home',
-      name: 'l_home',
+      name: 'l-home',
       component: LHome,
-      props: {routeName: 'l_home'},
     },
     {
       path: 'auth',
-      name: 'l_auth',
+      name: 'l-auth',
       component: LAuth,
-      props: {routeName: 'l_auth'},
     },
   ],
 };

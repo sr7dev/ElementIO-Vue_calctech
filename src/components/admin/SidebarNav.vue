@@ -5,15 +5,22 @@
 <script>
   import {SidebarNav} from '@coreui/vue'
 
+  let pathPrefix = '/adm/';
+
   export default {
     components: {SidebarNav},
     data() {
       return {
         items: [
           {
-            name: 'Пользователи',
-            url: '/usrs',
-            icon: 'fa fa-user-o',
+            name: 'Главная',
+            url: pathPrefix+'dashboard',
+            icon: 'fa fa-home',
+          },
+          {
+            name: 'Предметы',
+            url: pathPrefix+'refs/subjects',
+            icon: 'icon-layers',
           },
         ],
       };
