@@ -18,15 +18,19 @@ let router = new Router({
     AdmRoutes,
     {
       path: '*',
-      redirect: {path: '/'},
+      redirect(intentRoute) {
+        console.log('fail to find route:', intentRoute.fullPath);
+        return {path: '/'};
+      },
     },
   ],
 });
 
 router.beforeEach((to, from, next) => {
+  // console.log(to);
   if (to.matched.some(r => r.meta.requiresAuth)) {
     if (!store.state.profile) {
-      next({name: 'l_app'});
+      next({name: 'l-app'});
     } else {
       next()
     }

@@ -9,6 +9,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // dic
+    subjects: [],
+
     profile: null,
   },
   getters: {
@@ -20,6 +23,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    set(state, q) {
+      state[q[0]] = q[1];
+    },
     setProfile(state, value) {
       // if (!!state.profile !== !!value) {
       //   if (value) {
@@ -37,6 +43,16 @@ export default new Vuex.Store({
       console.log('refreshProfile');
       return ajax.reqAPI('profile').then(response => {
         commit('setProfile', response.data);
+      });
+    },
+    reloadDic({dispatch}) {
+      return Promise.all([
+        dispatch('reloadSubjects'),
+      ]);
+    },
+    reloadSubjects({commit}) {
+      return ajax.reqAPI(`dic/subjects`, {without_token: true}).then(response => {
+        commit('set', ['subjects', response.data]);
       });
     },
   },

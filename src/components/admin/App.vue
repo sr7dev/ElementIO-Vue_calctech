@@ -6,7 +6,7 @@
         <SidebarNav></SidebarNav>
       </Sidebar>
       <main class="main">
-        <div class="container-fluid">
+        <div class="container-fluid pt-3">
           <router-view></router-view>
         </div>
       </main>

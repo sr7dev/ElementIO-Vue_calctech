@@ -16,7 +16,6 @@
 
 <script>
   import stg from './stg'
-  import dict from './dict'
 
   export default {
     data() {
@@ -27,7 +26,7 @@
     },
     created() {
       // stg.set('auth_token', '');
-      dict.reload().then(() => this.$store.dispatch('refreshProfile')).then(() => {
+      this.$store.dispatch('reloadDic').then(() => this.$store.dispatch('refreshProfile')).then(() => {
         this.ready = true;
       }).catch(error => {
         if (error.status === 401) {
