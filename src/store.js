@@ -13,6 +13,8 @@ export default new Vuex.Store({
     subjects: [],
 
     profile: null,
+
+    modal: null,
   },
   getters: {
     phps: (state) => (ids) => {
@@ -25,6 +27,19 @@ export default new Vuex.Store({
   mutations: {
     set(state, q) {
       state[q[0]] = q[1];
+    },
+    alertMsg(state, msg) {
+      state.modal = {msg};
+    },
+    confirm(state, pars) {
+      state.modal = {
+        hdr: pars.hdr,
+        msg: pars.msg,
+        buttons: [
+          {txt: 'Да', variant: 'success', cb: pars.okCb},
+          {txt: 'Отмена', cb: pars.cancelCb},
+        ],
+      };
     },
     setProfile(state, value) {
       // if (!!state.profile !== !!value) {

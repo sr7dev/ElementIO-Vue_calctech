@@ -19,7 +19,7 @@
         </b-card-body>
         <b-card-footer v-if="!loading">
           <b-button type="submit" variant="success" class="mr-3">
-            Сохранить
+            {{id ? 'Изменить' : 'Создать'}}
           </b-button>
           <b-button variant="secondary" @click="$router.back()">
             Отмена

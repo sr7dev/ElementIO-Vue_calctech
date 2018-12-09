@@ -6,6 +6,9 @@ import store from './store';
 import Scene from './Scene'
 import router from './router'
 
+// require('es6-promise/auto');
+require('es6-promise').polyfill();
+
 Vue.config.productionTip = false;
 
 moment.locale('ru');

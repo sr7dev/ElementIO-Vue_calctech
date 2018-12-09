@@ -2,6 +2,7 @@
   <div id="scene">
     <template v-if="ready">
       <router-view></router-view>
+      <Modal v-if="$store.state.modal"></Modal>
     </template>
     <div v-else-if="error" class="fixed-top h-100 d-flex align-items-center justify-content-center bg-white p-4">
       <div class="font-xl font-weight-bold text-danger">
@@ -16,8 +17,10 @@
 
 <script>
   import stg from './stg'
+  import Modal from './components/common/modals/Modal'
 
   export default {
+    components: {Modal},
     data() {
       return {
         ready: false,
