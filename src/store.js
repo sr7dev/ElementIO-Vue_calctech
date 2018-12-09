@@ -10,6 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     // dic
+    langs: [],
     subjects: [],
 
     profile: null,
@@ -63,7 +64,13 @@ export default new Vuex.Store({
     reloadDic({dispatch}) {
       return Promise.all([
         dispatch('reloadSubjects'),
+        dispatch('reloadLangs'),
       ]);
+    },
+    reloadLangs({commit}) {
+      return ajax.reqAPI(`dic/langs`, {without_token: true}).then(response => {
+        commit('set', ['langs', response.data]);
+      });
     },
     reloadSubjects({commit}) {
       return ajax.reqAPI(`dic/subjects`, {without_token: true}).then(response => {

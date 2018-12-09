@@ -2,6 +2,8 @@ const App = () => import('@/components/admin/App');
 const Dashboard = () => import('@/components/admin/Dashboard');
 const SubjectsTable = () => import('@/components/admin/refs/subjects/Table');
 const SubjectCE = () => import('@/components/admin/refs/subjects/CE');
+const LangsTable = () => import('@/components/admin/refs/langs/Table');
+const LangCE = () => import('@/components/admin/refs/langs/CE');
 
 
 export default {
@@ -20,7 +22,21 @@ export default {
       path: 'refs',
       name: 'a-refs',
       component: {template: '<router-view></router-view>'},
+      redirect: {name: 'a-refs-langs'},
       children: [
+        {
+          path: 'langs',
+          name: 'a-refs-langs',
+          component: LangsTable,
+          props: {routeName: 'a-refs-langs'},
+          children: [
+            {
+              path: 'ce/:lang_id',
+              name: 'a-refs-langs-ce',
+              component: LangCE,
+            },
+          ],
+        },
         {
           path: 'subjects',
           name: 'a-refs-subjects',

@@ -14,13 +14,25 @@
         items: [
           {
             name: 'Главная',
-            url: pathPrefix+'dashboard',
-            icon: 'fa fa-home',
+            url: pathPrefix + 'dashboard',
+            icon: 'icon-home',
           },
           {
-            name: 'Предметы',
-            url: pathPrefix+'refs/subjects',
+            name: 'Справочники',
             icon: 'icon-layers',
+            url: pathPrefix + 'refs',
+            children: [
+              {
+                name: 'Предметы',
+                url: pathPrefix + 'refs/subjects',
+                icon: 'icon-puzzle',
+              },
+              {
+                name: 'Языки',
+                url: pathPrefix + 'refs/langs',
+                icon: 'icon-puzzle',
+              },
+            ],
           },
         ],
       };
