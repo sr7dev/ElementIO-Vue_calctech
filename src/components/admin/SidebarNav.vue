@@ -23,13 +23,23 @@
             url: pathPrefix + 'refs',
             children: [
               {
+                name: 'Языки',
+                url: pathPrefix + 'refs/langs',
+                icon: 'icon-puzzle',
+              },
+              {
+                name: 'Классы',
+                url: pathPrefix + 'refs/grades',
+                icon: 'icon-puzzle',
+              },
+              {
                 name: 'Предметы',
                 url: pathPrefix + 'refs/subjects',
                 icon: 'icon-puzzle',
               },
               {
-                name: 'Языки',
-                url: pathPrefix + 'refs/langs',
+                name: 'Темы',
+                url: pathPrefix + 'refs/topics',
                 icon: 'icon-puzzle',
               },
             ],
