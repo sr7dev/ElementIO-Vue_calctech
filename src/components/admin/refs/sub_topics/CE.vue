@@ -6,8 +6,8 @@
         <b-card-body>
           <div v-if="loading" class="text-center"><i class="spnr"></i></div>
           <template v-else="">
-            <b-form-group label="Предмет">
-              <b-select v-model.number="data.subject_id" :options="subjects" value-field="id" text-field="name"></b-select>
+            <b-form-group label="Тема">
+              <b-select v-model.number="data.topic_id" :options="topics" value-field="id" text-field="name"></b-select>
             </b-form-group>
             <b-form-group label="Наименование">
               <b-form-input type="text" v-model.trim="data.name"/>
@@ -39,7 +39,7 @@
   import utils from "../../../../utils";
   import ajax from "../../../../ajax";
 
-  let emptyData = () => ({subject_id: null, name: null, ord: null});
+  let emptyData = () => ({topic_id: null, name: null, ord: null});
 
   export default {
     data() {
@@ -52,19 +52,19 @@
     },
     computed: {
       id() {
-        return parseInt(this.$route.params.topic_id) || 0;
+        return parseInt(this.$route.params.sub_topic_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить тему' : 'Создать тему'
+        return this.id ? 'Измененить подтему' : 'Создать подтему'
       },
-      subjects() {
-        return this.$store.state.subjects;
+      topics() {
+        return this.$store.state.topics;
       },
     },
     methods: {
       fetch() {
         if (this.id) {
-          this.data = _.pick(_.find(this.$store.state.topics, {id: this.id}) || {}, ['subject_id', 'name', 'ord']);
+          this.data = _.pick(_.find(this.$store.state.sub_topics, {id: this.id}) || {}, ['topic_id', 'name', 'ord']);
         } else {
           this.data = emptyData();
         }
@@ -76,16 +76,16 @@
         this.failFB = '';
         let req = null;
         let body = {
-          subject: parseInt(this.data.subject_id) || 0,
+          topic: parseInt(this.data.topic_id) || 0,
           name: this.data.name,
           ord: parseInt(this.data.ord) || 0,
         };
         if (this.id) {
-          req = ajax.reqAPI(`dic/topics/${this.id}`, {method: 'PUT', body});
+          req = ajax.reqAPI(`dic/sub_topics/${this.id}`, {method: 'PUT', body});
         } else {
-          req = ajax.reqAPI(`dic/topics`, {method: 'POST', body});
+          req = ajax.reqAPI(`dic/sub_topics`, {method: 'POST', body});
         }
-        req.then(() => this.$store.dispatch('reloadTopics')).then(() => {
+        req.then(() => this.$store.dispatch('reloadSubTopics')).then(() => {
           this.$router.back();
           this.loading = false;
         }).catch(error => {

@@ -42,6 +42,11 @@
                 url: pathPrefix + 'refs/topics',
                 icon: 'icon-puzzle',
               },
+              {
+                name: 'Подтемы',
+                url: pathPrefix + 'refs/sub_topics',
+                icon: 'icon-puzzle',
+              },
             ],
           },
         ],
