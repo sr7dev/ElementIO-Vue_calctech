@@ -16,11 +16,20 @@ moment.locale('ru');
 Vue.use(BootstrapVue);
 
 function init() {
-  new Vue({
-    store,
-    router,
-    render: h => h(Scene),
-  }).$mount('#scene');
+  store.dispatch('reloadDic').then(() => store.dispatch('refreshProfile')).catch(error => {
+    if (error.status === 401) {
+      store.commit('setProfile', null);
+    } else {
+      console.log(error);
+      store.commit('set', ['appError', true]);
+    }
+  }).finally(() => {
+    new Vue({
+      store,
+      router,
+      render: h => h(Scene),
+    }).$mount('#scene');
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -52,7 +52,7 @@
         return parseInt(this.$route.params.lang_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить язык' : 'Создать язык'
+        return this.id ? 'Измененить язык' : 'Создать язык';
       },
     },
     methods: {

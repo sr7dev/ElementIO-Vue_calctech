@@ -38,6 +38,10 @@
   }
 }
 
+.main .container-fluid {
+  padding: 0 1.25rem;
+}
+
 button:focus {
   outline: none;
 }

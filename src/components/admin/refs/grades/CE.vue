@@ -52,7 +52,7 @@
         return parseInt(this.$route.params.grade_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить класс' : 'Создать класс'
+        return this.id ? 'Измененить класс' : 'Создать класс';
       },
     },
     methods: {

@@ -10,6 +10,8 @@ const TopicsTable = () => import('@/components/admin/refs/topics/Table');
 const TopicCE = () => import('@/components/admin/refs/topics/CE');
 const SubTopicsTable = () => import('@/components/admin/refs/sub_topics/Table');
 const SubTopicCE = () => import('@/components/admin/refs/sub_topics/CE');
+const TasksTable = () => import('@/components/admin/refs/tasks/Table');
+const TaskCE = () => import('@/components/admin/refs/tasks/CE');
 
 
 export default {
@@ -94,6 +96,19 @@ export default {
               component: SubTopicCE,
             },
           ],
+        },
+      ],
+    },
+    {
+      path: 'tasks',
+      name: 'a-tasks',
+      component: TasksTable,
+      props: {routeName: 'a-tasks'},
+      children: [
+        {
+          path: 'ce/:task_id',
+          name: 'a-tasks-ce',
+          component: TaskCE,
         },
       ],
     },

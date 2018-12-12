@@ -49,6 +49,11 @@
               },
             ],
           },
+          {
+            name: 'Задачи',
+            url: pathPrefix + 'tasks',
+            icon: 'icon-home',
+          },
         ],
       };
     },

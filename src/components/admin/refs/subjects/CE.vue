@@ -52,7 +52,7 @@
         return parseInt(this.$route.params.subject_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить предмет' : 'Создать предмет'
+        return this.id ? 'Измененить предмет' : 'Создать предмет';
       },
     },
     methods: {

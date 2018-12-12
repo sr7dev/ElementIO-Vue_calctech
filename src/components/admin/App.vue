@@ -5,8 +5,8 @@
       <Sidebar fixed>
         <SidebarNav></SidebarNav>
       </Sidebar>
-      <main class="main">
-        <div class="container-fluid pt-3">
+      <main class="main px-2">
+        <div class="container-fluid pt-4">
           <router-view></router-view>
         </div>
       </main>

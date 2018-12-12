@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import _ from "lodash";
+import constants from "./constants";
 import ajax from "./ajax";
 import stg from "./stg";
 import perm from "./perm";
@@ -9,6 +10,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    appError: false,
+
     // dic
     langs: [],
     grades: [],
@@ -16,6 +19,7 @@ export default new Vuex.Store({
     topics: [],
     sub_topics: [],
     difficulties: [],
+    task_kinds: [],
     task_types: [],
     attachment_types: [],
 
@@ -75,6 +79,7 @@ export default new Vuex.Store({
         dispatch('reloadTopics'),
         dispatch('reloadSubTopics'),
         dispatch('reloadDifficulties'),
+        dispatch('reloadTaskKinds'),
         dispatch('reloadTaskTypes'),
         dispatch('reloadAttachmentTypes'),
       ]);
@@ -107,6 +112,11 @@ export default new Vuex.Store({
     reloadDifficulties({commit}) {
       return ajax.reqAPI(`dic/difficulties`, {without_token: true}).then(response => {
         commit('set', ['difficulties', response.data]);
+      });
+    },
+    reloadTaskKinds({commit}) {
+      return ajax.reqAPI(`dic/task_kinds`, {without_token: true}).then(response => {
+        commit('set', ['task_kinds', response.data]);
       });
     },
     reloadTaskTypes({commit}) {

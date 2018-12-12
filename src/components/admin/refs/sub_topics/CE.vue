@@ -55,7 +55,7 @@
         return parseInt(this.$route.params.sub_topic_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить подтему' : 'Создать подтему'
+        return this.id ? 'Измененить подтему' : 'Создать подтему';
       },
       topics() {
         return this.$store.state.topics;

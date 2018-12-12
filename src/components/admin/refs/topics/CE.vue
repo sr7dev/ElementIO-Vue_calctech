@@ -55,7 +55,7 @@
         return parseInt(this.$route.params.topic_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить тему' : 'Создать тему'
+        return this.id ? 'Измененить тему' : 'Создать тему';
       },
       subjects() {
         return this.$store.state.subjects;

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import NProgress from 'nprogress'
 
 import store from "../store"
 
@@ -26,17 +27,28 @@ let router = new Router({
   ],
 });
 
+router.beforeResolve((to, from, next) => {
+  if (to.name) {
+    NProgress.start();
+  }
+  next();
+});
+
 router.beforeEach((to, from, next) => {
   // console.log(to);
   if (to.matched.some(r => r.meta.requiresAuth)) {
     if (!store.state.profile) {
       next({name: 'l-app'});
     } else {
-      next()
+      next();
     }
   } else {
-    next()
+    next();
   }
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
