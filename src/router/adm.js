@@ -109,6 +109,7 @@ export default {
           path: 'ce/:task_id',
           name: 'a-tasks-ce',
           component: TaskCE,
+          props: {routeName: 'a-tasks-ce'},
         },
       ],
     },

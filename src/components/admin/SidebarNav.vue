@@ -18,6 +18,11 @@
             icon: 'icon-home',
           },
           {
+            name: 'Задачи',
+            url: pathPrefix + 'tasks',
+            icon: 'icon-home',
+          },
+          {
             name: 'Справочники',
             icon: 'icon-layers',
             url: pathPrefix + 'refs',
@@ -48,11 +53,6 @@
                 icon: 'icon-puzzle',
               },
             ],
-          },
-          {
-            name: 'Задачи',
-            url: pathPrefix + 'tasks',
-            icon: 'icon-home',
           },
         ],
       };

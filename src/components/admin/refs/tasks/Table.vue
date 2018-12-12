@@ -85,9 +85,7 @@
           msg: 'Вы уверены что хотите удалить эту запись?',
           okCb: () => {
             this.loading = true;
-            ajax.reqAPI(`dic/tasks/${item.id}`, {method: 'DELETE'}).then(() => {
-              return this.$store.dispatch('reloadTasks');
-            }).then(() => {
+            ajax.reqAPI(`tasks/${item.id}`, {method: 'DELETE'}).then(() => {
               this.loading = false;
             }).catch(error => {
               if (error.status === 401) {
