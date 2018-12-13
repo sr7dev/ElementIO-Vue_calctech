@@ -14,7 +14,8 @@
               <b-row>
                 <b-col lg="4">
                   <b-form-group label="Вид задачи">
-                    <b-form-radio-group buttons
+                    <b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>
+                    <b-form-radio-group v-else="" buttons
                                         button-variant="outline-primary"
                                         v-model.number="data.kind_id"
                                         :options="$store.state.task_kinds"
@@ -92,14 +93,14 @@
               <b-row>
                 <b-col md="10" lg="8">
                   <b-form-group v-if="isGroup" label="Описание">
-                    <b-form-textarea v-model.trim="data.note" :rows="5"/>
+                    <b-form-textarea v-model="data.note" :rows="5"/>
                   </b-form-group>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col md="10" lg="8">
                   <b-form-group v-if="isQuestion" label="Текст вопроса">
-                    <b-form-textarea v-model.trim="data.txt" :rows="5"/>
+                    <b-form-textarea v-model="data.txt" :rows="5"/>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -123,6 +124,11 @@
         </b-card-footer>
       </b-form>
     </b-card>
+    <template v-if="!loading && id && isQuestion">
+      <h3 class="px-3 mt-4 mb-4 text-black-50">Варианты ответов</h3>
+      <b-card no-body>
+      </b-card>
+    </template>
   </div>
 </template>
 
@@ -166,10 +172,12 @@
     },
     watch: {
       'data.subject_id'() {
-        this.data.topic_id = null;
+        if (!_.find(this.topics, {id: this.data.topic_id}))
+          this.data.topic_id = null;
       },
       'data.topic_id'() {
-        this.data.sub_topic_id = null;
+        if (!_.find(this.subTopics, {id: this.data.sub_topic_id}))
+          this.data.sub_topic_id = null;
       },
     },
     methods: {
