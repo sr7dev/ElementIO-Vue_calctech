@@ -10,6 +10,11 @@ let constants = {
   TaskTypeMultipleChoice: 2,
   TaskTypeOpen: 3,
   TaskTypeEssay: 4,
+
+  switchLabelIcon: {
+    dataOn: '\u2713',
+    dataOff: '\u2715'
+  },
 };
 
 // if (process.env.NODE_ENV !== 'production') {

@@ -22,7 +22,7 @@
             {{id ? 'Изменить' : 'Создать'}}
           </b-button>
           <b-button variant="secondary" @click="$router.back()">
-            Отмена
+            Назад
           </b-button>
         </b-card-footer>
       </b-form>

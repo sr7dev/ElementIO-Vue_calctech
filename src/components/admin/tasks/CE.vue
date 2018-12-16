@@ -1,9 +1,13 @@
 <template>
   <div class="animated fadeIn">
-    <h3 class="px-3 mb-4 text-black-50">{{headerText}}</h3>
+    <b-container fluid>
+      <b-row class="px-3 mb-3">
+        <h3 class="text-black-50">{{headerText}}</h3>
+      </b-row>
+    </b-container>
     <b-card no-body>
       <b-form @submit.prevent="onSubmit">
-        <b-card-body class="px-0">
+        <b-card-body class="px-0 pb-2">
           <b-container fluid>
             <b-row v-if="loading">
               <b-col class="text-center">
@@ -93,20 +97,20 @@
               <b-row>
                 <b-col md="10" lg="8">
                   <b-form-group v-if="isGroup" label="Описание">
-                    <b-form-textarea v-model="data.note" :rows="5"/>
+                    <b-form-textarea v-model="data.note" :rows="5" no-resize/>
                   </b-form-group>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col md="10" lg="8">
                   <b-form-group v-if="isQuestion" label="Текст вопроса">
-                    <b-form-textarea v-model="data.txt" :rows="5"/>
+                    <b-form-textarea v-model="data.txt" :rows="5" no-resize/>
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row>
+              <b-row v-if="failFB">
                 <b-col>
-                  <b-alert v-if="failFB" variant="danger" show>
+                  <b-alert variant="danger" show>
                     <i class="fa fa-warning mr-3"></i>{{failFB}}
                   </b-alert>
                 </b-col>
@@ -115,37 +119,51 @@
           </b-container>
         </b-card-body>
         <b-card-footer v-if="!loading">
-          <b-button type="submit" variant="success" class="mr-3">
+          <b-button type="submit" variant="success" class="mr-2">
             {{id ? 'Изменить' : 'Создать'}}
           </b-button>
           <b-button variant="secondary" @click="$router.back()">
-            Отмена
+            Назад
           </b-button>
         </b-card-footer>
       </b-form>
     </b-card>
     <template v-if="!loading && id && isQuestion">
-      <h3 class="px-3 mt-4 mb-4 text-black-50">Варианты ответов</h3>
-      <b-card no-body>
-      </b-card>
+      <b-container fluid>
+        <b-row class="align-items-center justify-content-between mt-5 mb-4">
+          <b-col md="auto" class="pb-2 pb-md-0">
+            <h3 class="text-black-50">Варианты ответов</h3>
+          </b-col>
+          <b-col md="auto">
+            <b-button variant="success" @click="onAddAnswerClick">
+              <i class="icon-plus mr-2"></i>Добавить новый ответ
+            </b-button>
+          </b-col>
+        </b-row>
+      </b-container>
+      <CECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="ans.id"
+              @updated="onAnswerUpdated(ans, $event)"
+              @deleted="onAnswerDeleted(ans.id)"></CECard>
     </template>
   </div>
 </template>
 
 <script>
   import _ from "lodash";
-  import constants from "../../../../constants";
-  import utils from "../../../../utils";
-  import ajax from "../../../../ajax";
+  import constants from "../../../constants";
+  import utils from "../../../utils";
+  import ajax from "../../../ajax";
+  import CECard from './answers/CECard'
 
   export default {
     props: ['routeName'],
+    components: {CECard},
     data() {
       return {
         ld: _, utils, constants,
         loading: false,
         failFB: '',
-        data: this.emptyData(),
+        data: null,
         notSelectedOption: {id: null, name: '-- не выбрано --'},
         notSelectedChoice: {id: null, name: 'не выбрано'},
       };
@@ -194,6 +212,9 @@
           title: null,
           note: null,
           txt: null,
+          answers: [],
+          attachments: [],
+          children: [],
         };
       },
       fetch() {
@@ -255,6 +276,16 @@
             this.failFB = utils.retrieveApiErrorDsc(error);
           }
         });
+      },
+      onAddAnswerClick() {
+        if (_.find(this.data.answers, {id: 0})) return;
+        this.data.answers = _.concat([{id: 0}], this.data.answers);
+      },
+      onAnswerUpdated(ans, newAns) {
+        _.assign(ans, newAns);
+      },
+      onAnswerDeleted(id) {
+        this.data.answers = _.reject(this.data.answers, {id});
       },
     },
     created() {

@@ -10,8 +10,8 @@ const TopicsTable = () => import('@/components/admin/refs/topics/Table');
 const TopicCE = () => import('@/components/admin/refs/topics/CE');
 const SubTopicsTable = () => import('@/components/admin/refs/sub_topics/Table');
 const SubTopicCE = () => import('@/components/admin/refs/sub_topics/CE');
-const TasksTable = () => import('@/components/admin/refs/tasks/Table');
-const TaskCE = () => import('@/components/admin/refs/tasks/CE');
+const TasksTable = () => import('@/components/admin/tasks/Table');
+const TaskCE = () => import('@/components/admin/tasks/CE');
 
 
 export default {

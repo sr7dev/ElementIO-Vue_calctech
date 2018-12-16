@@ -40,9 +40,9 @@
 </template>
 
 <script>
-  import constants from "../../../../constants";
-  import ajax from "../../../../ajax";
-  import utils from "../../../../utils";
+  import constants from "../../../constants";
+  import ajax from "../../../ajax";
+  import utils from "../../../utils";
 
   export default {
     props: ['routeName'],
