@@ -81,4 +81,7 @@ export default {
   reqAPI(url, opts) {
     return this.req(constants.ApiUrl + url, opts);
   },
+  reqMedia(url, opts) {
+    return this.req(constants.MediaUrl + url, opts);
+  },
 }

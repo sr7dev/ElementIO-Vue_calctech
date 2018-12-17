@@ -4,18 +4,36 @@
       <b-card-body class="px-0 pb-2">
         <b-container fluid>
           <b-row class="align-items-start">
-            <b-col lg="auto" class="d-flex align-items-center pb-3 pb-lg-0">
-              <c-switch v-model="data.is_correct" color="primary" :disabled="loading"/>
-              <div class="ml-2">верный</div>
-            </b-col>
-            <b-col lg="6">
-              <b-form-group label="Текст ответа">
-                <b-form-textarea :rows="3" v-model="data.txt" :disabled="loading" no-resize/>
+            <b-col md="6" lg="5">
+              <b-form-group label="Тип">
+                <b-form-radio-group buttons
+                                    button-variant="outline-primary"
+                                    v-model.number="data.type_id"
+                                    :options="$store.state.attachment_types"
+                                    value-field="id"
+                                    text-field="name"></b-form-radio-group>
               </b-form-group>
             </b-col>
-            <b-col lg="4">
+            <b-col sm="4" md="3">
+              <b-form-group label="Порядковый номер">
+                <b-form-input type="number" pattern="\d*" v-model.number="data.ord"/>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row class="align-items-start">
+            <b-col v-if="data.type_id === constants.AttachmentTypeText" lg="8">
+              <b-form-group label="Текст">
+                <b-form-textarea :rows="7" v-model="data.v" :disabled="loading" no-resize/>
+              </b-form-group>
+            </b-col>
+            <b-col v-if="data.type_id === constants.AttachmentTypeImage" lg="10">
               <b-form-group label="Картина">
-                <ImgInput v-model="data.img"></ImgInput>
+                <ImgInput v-model="data.v" :iw="700"></ImgInput>
+              </b-form-group>
+            </b-col>
+            <b-col v-if="data.type_id === constants.AttachmentTypeVideo" lg="8">
+              <b-form-group label="Ссылка на видео">
+                <b-form-input type="text" v-model.trim="data.v"/>
               </b-form-group>
             </b-col>
           </b-row>
@@ -51,12 +69,11 @@
   import constants from "../../../../constants"
   import ajax from "../../../../ajax"
   import utils from "../../../../utils"
-  import {Switch as cSwitch} from '@coreui/vue'
   import ImgInput from '@/components/common/ImgInput'
 
   export default {
     props: ['taskId', 'sd'],
-    components: {cSwitch, ImgInput},
+    components: {ImgInput},
     data() {
       return {
         ld: _, constants, utils,
@@ -65,13 +82,18 @@
         data: null,
       };
     },
+    // watch: {
+    //   'data.type_id'() {
+    //     this.data.v = '';
+    //   },
+    // },
     methods: {
       emptyData() {
         return {
           id: 0,
-          is_correct: false,
-          txt: '',
-          img: '',
+          type_id: constants.AttachmentTypeText,
+          v: '',
+          ord: 0,
         };
       },
       onSubmit() {
@@ -79,9 +101,9 @@
         this.failFB = '';
         let req = null;
         if (this.data.id) {
-          req = ajax.reqAPI(`tasks/${this.taskId}/answers/${this.data.id}`, {method: 'PUT', body: this.data});
+          req = ajax.reqAPI(`tasks/${this.taskId}/attachments/${this.data.id}`, {method: 'PUT', body: this.data});
         } else {
-          req = ajax.reqAPI(`tasks/${this.taskId}/answers`, {method: 'POST', body: this.data});
+          req = ajax.reqAPI(`tasks/${this.taskId}/attachments`, {method: 'POST', body: this.data});
         }
         req.then(response => {
           if (!this.data.id && response.data.id) {
@@ -106,7 +128,7 @@
         }
         this.loading = true;
         this.failFB = '';
-        ajax.reqAPI(`tasks/${this.taskId}/answers/${this.data.id}`, {method: 'DELETE'}).then(response => {
+        ajax.reqAPI(`tasks/${this.taskId}/attachments/${this.data.id}`, {method: 'DELETE'}).then(response => {
           this.$emit('deleted');
         }).catch(error => {
           if (error.status === 401) {

@@ -1,7 +1,18 @@
 <template>
   <div class="animated fadeIn">
-    <h3 class="px-3 mb-4 text-black-50">{{headerText}}</h3>
+    <b-container fluid class="mb-3">
+      <b-row>
+        <b-col class="px-0">
+          <b-button variant="primary" @click="$router.back()">
+            <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
+          </b-button>
+        </b-col>
+      </b-row>
+    </b-container>
     <b-card no-body>
+      <b-card-header>
+        <h3 class="text-black-50 m-0">{{headerText}}</h3>
+      </b-card-header>
       <b-form @submit="onSubmit">
         <b-card-body>
           <div v-if="loading" class="text-center"><i class="spnr"></i></div>
@@ -18,11 +29,8 @@
           </template>
         </b-card-body>
         <b-card-footer v-if="!loading">
-          <b-button type="submit" variant="success" class="mr-3">
+          <b-button type="submit" variant="success">
             {{id ? 'Изменить' : 'Создать'}}
-          </b-button>
-          <b-button variant="secondary" @click="$router.back()">
-            Назад
           </b-button>
         </b-card-footer>
       </b-form>

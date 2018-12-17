@@ -4,6 +4,10 @@ let constants = {
   MediaUrl: 'http://35.224.168.117/media/',
   SystemErrMsg: 'Извините, произошла системная ошибка',
 
+  AttachmentTypeText: 1,
+  AttachmentTypeImage: 2,
+  AttachmentTypeVideo: 3,
+
   TaskKindQuestion: 1,
   TaskKindGroup: 2,
   TaskTypeOneChoice: 1,

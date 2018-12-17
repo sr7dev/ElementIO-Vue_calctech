@@ -1,11 +1,18 @@
 <template>
-  <div class="animated fadeIn">
-    <b-container fluid>
-      <b-row class="px-3 mb-3">
-        <h3 class="text-black-50">{{headerText}}</h3>
+  <div class="animated fadeIn pb-5">
+    <b-container fluid class="mb-3">
+      <b-row>
+        <b-col class="px-0">
+          <b-button variant="primary" @click="$router.back()">
+            <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
+          </b-button>
+        </b-col>
       </b-row>
     </b-container>
     <b-card no-body>
+      <b-card-header>
+        <h3 class="text-black-50 m-0">{{headerText}}</h3>
+      </b-card-header>
       <b-form @submit.prevent="onSubmit">
         <b-card-body class="px-0 pb-2">
           <b-container fluid>
@@ -15,6 +22,13 @@
               </b-col>
             </b-row>
             <template v-else="">
+              <b-row v-if="failFB">
+                <b-col>
+                  <b-alert variant="danger" show>
+                    <i class="fa fa-warning mr-3"></i>{{failFB}}
+                  </b-alert>
+                </b-col>
+              </b-row>
               <b-row>
                 <b-col lg="4">
                   <b-form-group label="Вид задачи">
@@ -108,13 +122,6 @@
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row v-if="failFB">
-                <b-col>
-                  <b-alert variant="danger" show>
-                    <i class="fa fa-warning mr-3"></i>{{failFB}}
-                  </b-alert>
-                </b-col>
-              </b-row>
             </template>
           </b-container>
         </b-card-body>
@@ -122,28 +129,50 @@
           <b-button type="submit" variant="success" class="mr-2">
             {{id ? 'Изменить' : 'Создать'}}
           </b-button>
-          <b-button variant="secondary" @click="$router.back()">
-            Назад
-          </b-button>
         </b-card-footer>
       </b-form>
     </b-card>
-    <template v-if="!loading && id && isQuestion">
-      <b-container fluid>
-        <b-row class="align-items-center justify-content-between mt-5 mb-4">
-          <b-col md="auto" class="pb-2 pb-md-0">
-            <h3 class="text-black-50">Варианты ответов</h3>
+    <template v-if="!loading && showAttachments">
+      <b-container fluid class="mt-5 mb-4">
+        <b-row>
+          <b-col>
+            <h3 class="text-black-50 m-0">Приложения к задаче</h3>
           </b-col>
-          <b-col md="auto">
-            <b-button variant="success" @click="onAddAnswerClick">
-              <i class="icon-plus mr-2"></i>Добавить новый ответ
+        </b-row>
+      </b-container>
+      <AttachmentCECard v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
+                        @updated="onAttachmentUpdated(att, $event)"
+                        @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
+      <b-container fluid class="pb-3">
+        <b-row class="justify-content-center">
+          <b-col lg="auto">
+            <b-button variant="success" @click="onAddAttachmentClick">
+              <i class="icon-plus mr-2"></i>Добавить приложение
             </b-button>
           </b-col>
         </b-row>
       </b-container>
-      <CECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="ans.id"
-              @updated="onAnswerUpdated(ans, $event)"
-              @deleted="onAnswerDeleted(ans.id)"></CECard>
+    </template>
+    <template v-if="!loading && showAnswers">
+      <b-container fluid class="mt-5 mb-4">
+        <b-row>
+          <b-col>
+            <h3 class="text-black-50 m-0">Варианты ответов</h3>
+          </b-col>
+        </b-row>
+      </b-container>
+      <AnswerCECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
+                    @updated="onAnswerUpdated(ans, $event)"
+                    @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
+      <b-container fluid class="pb-3">
+        <b-row class="justify-content-center">
+          <b-col lg="auto">
+            <b-button variant="success" @click="onAddAnswerClick">
+              <i class="icon-plus mr-2"></i>Добавить ответ
+            </b-button>
+          </b-col>
+        </b-row>
+      </b-container>
     </template>
   </div>
 </template>
@@ -153,11 +182,12 @@
   import constants from "../../../constants";
   import utils from "../../../utils";
   import ajax from "../../../ajax";
-  import CECard from './answers/CECard'
+  import AttachmentCECard from './attachments/CECard'
+  import AnswerCECard from './answers/CECard'
 
   export default {
     props: ['routeName'],
-    components: {CECard},
+    components: {AttachmentCECard, AnswerCECard},
     data() {
       return {
         ld: _, utils, constants,
@@ -180,6 +210,16 @@
       },
       isGroup() {
         return this.data.kind_id === constants.TaskKindGroup;
+      },
+      showAnswers() {
+        return (
+          this.id &&
+          this.isQuestion &&
+          ([constants.TaskTypeOneChoice, constants.TaskTypeMultipleChoice].indexOf(this.data.type_id) > -1)
+        );
+      },
+      showAttachments() {
+        return this.id;
       },
       topics() {
         return _.concat([this.notSelectedOption], _.filter(this.$store.state.topics, {subject_id: this.data.subject_id}));
@@ -279,13 +319,24 @@
       },
       onAddAnswerClick() {
         if (_.find(this.data.answers, {id: 0})) return;
-        this.data.answers = _.concat([{id: 0}], this.data.answers);
+        this.data.answers.push({id: 0});
       },
       onAnswerUpdated(ans, newAns) {
         _.assign(ans, newAns);
       },
       onAnswerDeleted(id) {
         this.data.answers = _.reject(this.data.answers, {id});
+      },
+      onAddAttachmentClick() {
+        if (_.find(this.data.attachments, {id: 0})) return;
+        this.data.attachments.push({id: 0});
+      },
+      onAttachmentUpdated(att, newAns) {
+        _.assign(att, newAns);
+        this.data.attachments = _.sortBy(this.data.attachments, ['ord']);
+      },
+      onAttachmentDeleted(id) {
+        this.data.attachments = _.reject(this.data.attachments, {id});
       },
     },
     created() {
