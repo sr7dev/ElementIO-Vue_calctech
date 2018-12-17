@@ -20,7 +20,7 @@
           {
             name: 'Задачи',
             url: pathPrefix + 'tasks',
-            icon: 'icon-home',
+            icon: 'icon-calculator',
           },
           {
             name: 'Справочники',

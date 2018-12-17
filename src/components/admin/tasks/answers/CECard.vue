@@ -104,18 +104,23 @@
           this.$emit('deleted');
           return;
         }
-        this.loading = true;
-        this.failFB = '';
-        ajax.reqAPI(`tasks/${this.taskId}/answers/${this.data.id}`, {method: 'DELETE'}).then(response => {
-          this.$emit('deleted');
-        }).catch(error => {
-          if (error.status === 401) {
-            this.$store.commit('setProfile', null);
-            this.$router.push({name: 'auth'});
-          } else {
-            this.loading = false;
-            this.failFB = utils.retrieveApiErrorDsc(error);
-          }
+        this.$store.commit('confirm', {
+          msg: 'Вы уверены что хотите удалить эту запись?',
+          okCb: () => {
+            this.loading = true;
+            this.failFB = '';
+            ajax.reqAPI(`tasks/${this.taskId}/answers/${this.data.id}`, {method: 'DELETE'}).then(response => {
+              this.$emit('deleted');
+            }).catch(error => {
+              if (error.status === 401) {
+                this.$store.commit('setProfile', null);
+                this.$router.push({name: 'auth'});
+              } else {
+                this.loading = false;
+                this.failFB = utils.retrieveApiErrorDsc(error);
+              }
+            });
+          },
         });
       },
     },
