@@ -174,6 +174,33 @@
         </b-row>
       </b-container>
     </template>
+    <template v-if="!loading && showChildren">
+      <b-container fluid class="mt-5">
+        <b-row class="mb-4">
+          <b-col>
+            <h3 class="text-black-50 m-0">Дочерние задачи</h3>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col class="px-0">
+            <TableForSelect hdr="Общие задачи"></TableForSelect>
+          </b-col>
+          <b-col lg="auto" class="px-1 d-flex align-items-center justify-content-center">
+            <div class="my-1">
+              <b-button variant="secondary" class="d-lg-block">
+                <i class="icon-arrow-right"></i>
+              </b-button>
+              <b-button variant="secondary" class="d-lg-block ml-1 ml-lg-0 mt-lg-1">
+                <i class="icon-arrow-left"></i>
+              </b-button>
+            </div>
+          </b-col>
+          <b-col class="px-0">
+            <TableForSelect hdr="Дочерние задачи"></TableForSelect>
+          </b-col>
+        </b-row>
+      </b-container>
+    </template>
   </div>
 </template>
 
@@ -184,10 +211,11 @@
   import ajax from "../../../ajax";
   import AttachmentCECard from './attachments/CECard'
   import AnswerCECard from './answers/CECard'
+  import TableForSelect from './TableForSelect'
 
   export default {
     props: ['routeName'],
-    components: {AttachmentCECard, AnswerCECard},
+    components: {AttachmentCECard, AnswerCECard, TableForSelect},
     data() {
       return {
         ld: _, utils, constants,
@@ -220,6 +248,9 @@
       },
       showAttachments() {
         return this.id;
+      },
+      showChildren() {
+        return (this.id && this.isGroup);
       },
       topics() {
         return _.concat([this.notSelectedOption], _.filter(this.$store.state.topics, {subject_id: this.data.subject_id}));
