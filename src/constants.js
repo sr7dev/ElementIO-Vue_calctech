@@ -1,7 +1,7 @@
 let constants = {
   AppName: 'CalcTech',
-  ApiUrl: 'http://35.224.168.117/api/',
-  MediaUrl: 'http://35.224.168.117/media/',
+  ApiUrl: 'http://localhost:7070/api/',
+  MediaUrl: 'http://localhost:7070/media/',
   SystemErrMsg: 'Извините, произошла системная ошибка',
 
   AttachmentTypeText: 1,
