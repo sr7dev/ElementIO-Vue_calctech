@@ -41,6 +41,8 @@
                                         text-field="name"></b-form-radio-group>
                   </b-form-group>
                 </b-col>
+              </b-row>
+              <b-row>
                 <b-col lg="4">
                   <b-form-group label="Язык">
                     <b-form-radio-group buttons
@@ -63,16 +65,13 @@
                 </b-col>
               </b-row>
               <b-row>
-                <b-col lg="8">
+                <b-col lg="4">
                   <b-form-group label="Класс">
-                    <b-form-radio-group v-model.number="data.grade_id"
-                                        :options="ld.concat([notSelectedChoice], $store.state.grades)"
-                                        value-field="id"
-                                        text-field="name"></b-form-radio-group>
+                    <b-select v-model.number="data.grade_id"
+                              :options="ld.concat([notSelectedOption], $store.state.grades)"
+                              value-field="id" text-field="name"></b-select>
                   </b-form-group>
                 </b-col>
-              </b-row>
-              <b-row>
                 <b-col lg="4">
                   <b-form-group label="Предмет">
                     <b-select v-model.number="data.subject_id"
@@ -80,6 +79,8 @@
                               value-field="id" text-field="name"></b-select>
                   </b-form-group>
                 </b-col>
+              </b-row>
+              <b-row>
                 <b-col lg="4">
                   <b-form-group label="Тема">
                     <b-select v-model.number="data.topic_id" :options="topics"
@@ -289,18 +290,18 @@
         let req = null;
         let body = _.assign(
           {
-            kind: this.data.kind_id,
-            type: this.data.type_id,
-            lang: this.data.lang_id,
+            kind_id: this.data.kind_id,
+            type_id: this.data.type_id,
+            lang_id: this.data.lang_id,
             title: this.data.title,
           },
           (this.data.kind_id === constants.TaskKindQuestion) && {txt: this.data.txt},
           (this.data.kind_id === constants.TaskKindGroup) && {note: this.data.note},
-          this.data.grade_id && {grade: this.data.grade_id},
-          this.data.subject_id && {subject: this.data.subject_id},
-          this.data.topic_id && {topic: this.data.topic_id},
-          this.data.sub_topic_id && {sub_topic: this.data.sub_topic_id},
-          this.data.difficulty_id && {difficulty: this.data.difficulty_id},
+          this.data.grade_id && {grade_id: this.data.grade_id},
+          this.data.subject_id && {subject_id: this.data.subject_id},
+          this.data.topic_id && {topic_id: this.data.topic_id},
+          this.data.sub_topic_id && {sub_topic_id: this.data.sub_topic_id},
+          this.data.difficulty_id && {difficulty_id: this.data.difficulty_id},
         );
         if (this.id) {
           req = ajax.reqAPI(`tasks/${this.id}`, {method: 'PUT', body});

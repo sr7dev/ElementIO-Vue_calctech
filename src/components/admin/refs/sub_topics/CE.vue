@@ -84,7 +84,7 @@
         this.failFB = '';
         let req = null;
         let body = {
-          topic: parseInt(this.data.topic_id) || 0,
+          topic_id: parseInt(this.data.topic_id) || 0,
           name: this.data.name,
           ord: parseInt(this.data.ord) || 0,
         };

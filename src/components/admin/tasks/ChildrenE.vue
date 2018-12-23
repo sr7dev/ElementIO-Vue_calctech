@@ -14,8 +14,8 @@
                 <b-col class="p-0">
                   Все задачи
                 </b-col>
-                <b-col md="auto" class="p-0">
-                  <b-button variant="primary" size="sm" @click="">
+                <b-col md="auto" class="p-0 ml-md-3">
+                  <b-button variant="" size="sm" @click="">
                     <i class="fa fa-filter px-1"></i>
                   </b-button>
                 </b-col>
@@ -34,7 +34,7 @@
               </b-row>
             </b-container>
           </b-card-header>
-          <b-card-body class="p-1">
+          <b-card-body class="p-1 pt-2">
             <div class="font-sm text-black-50 mb-1">Показано: 3 из 65</div>
             <table class="table table-sm table-bordered table-hover mb-0">
               <thead class="bg-gray-100 text-black-50">
@@ -80,8 +80,8 @@
               </b-row>
             </b-container>
           </b-card-header>
-          <b-card-body class="p-1">
-            <div class="font-sm text-black-50 mb-1">Элементов: 2</div>
+          <b-card-body class="p-1 pt-2">
+            <div class="font-sm text-black-50 mb-1">Элементов: {{children.length}}</div>
             <table class="table table-sm table-bordered table-hover mb-0">
               <thead class="bg-gray-100 text-black-50">
               <tr>
