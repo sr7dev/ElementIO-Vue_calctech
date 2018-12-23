@@ -175,7 +175,7 @@
       </b-container>
     </template>
     <template v-if="!loading && showChildren">
-      <ChildrenE :children="data.children"></ChildrenE>
+      <ChildrenE :children.sync="data.children"></ChildrenE>
     </template>
   </div>
 </template>
@@ -187,7 +187,7 @@
   import ajax from "../../../ajax";
   import AttachmentCECard from './attachments/CECard'
   import AnswerCECard from './answers/CECard'
-  import ChildrenE from './children_e/ChildrenE'
+  import ChildrenE from './ChildrenE'
 
   export default {
     props: ['routeName'],

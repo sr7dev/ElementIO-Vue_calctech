@@ -50,6 +50,10 @@ button:focus {
   cursor: pointer;
 }
 
+.cursor-move {
+  cursor: move;
+}
+
 .lh1_2 {
   line-height: 1.2;
 }
@@ -64,4 +68,12 @@ button:focus {
 
 .text-white-80 {
   color: rgba(255, 255, 255, .8);
+}
+
+.width-1per {
+  width: 1%;
+}
+
+.b-table-mb-0 .table {
+  margin-bottom: 0;
 }
