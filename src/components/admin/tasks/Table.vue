@@ -9,7 +9,7 @@
                 <h3 class="text-black-50 m-0">Задачи</h3>
               </b-col>
               <b-col md="auto" class="p-0 ml-md-4">
-                <b-button variant="" @click="showFilter=true">
+                <b-button :variant="isFiltered ? 'primary' : 'secondary'" @click="showFilter=true">
                   <i class="fa fa-filter px-1"></i>
                 </b-button>
               </b-col>
@@ -17,8 +17,9 @@
                 <b-form-input type="text" placeholder="поиск..."/>
               </b-col>
               <b-col md="auto" class="p-0 ml-md-4">
-                <b-pagination :total-rows="100"
-                              :per-page="10"
+                <b-pagination v-model="page"
+                              :total-rows="total_count"
+                              :per-page="page_size"
                               :limit="1"
                               hide-ellipsis
                               hide-goto-end-buttons
@@ -32,7 +33,11 @@
           <template v-else="">
             <div class="text-black-50 mb-2">Показано: {{page}} из {{total_count}}</div>
             <b-table responsive="sm"
-                     :fields="fetching ? null : fields" :items="itemsProvider" :busy.sync="fetching"
+                     :fields="fetching ? null : fields"
+                     :items="itemsProvider"
+                     :current-page="page_size"
+                     :per-page="page"
+                     :busy.sync="fetching"
                      thead-class="bg-gray-100"
                      thead-tr-class="align-middle"
                      tbody-class="cursor-pointer"
@@ -69,6 +74,7 @@
 </template>
 
 <script>
+  import _ from "lodash"
   import constants from "../../../constants";
   import ajax from "../../../ajax";
   import utils from "../../../utils";
@@ -96,10 +102,18 @@
         sort: "",
       };
     },
+    computed: {
+      isFiltered() {
+        return !_.isEmpty(this.filterPars);
+      },
+    },
     methods: {
       itemsProvider(ctx) {
         this.failFB = '';
-        return ajax.reqAPI(`tasks`, {pars: this.filterPars}).then(response => {
+        let pars = _.assign({}, this.filterPars, {
+          page: this.page,
+        });
+        return ajax.reqAPI(`tasks`, {pars}).then(response => {
           let data = response.data;
           this.page_size = data.page_size;
           this.page = data.page;
@@ -117,6 +131,7 @@
       },
       onFilterUpdated(pars) {
         this.filterPars = pars;
+        this.page = 1;
         this.$refs.table.refresh();
       },
       onAddClick() {

@@ -24,7 +24,7 @@
               <b-form-radio-group buttons
                                   button-variant="outline-primary"
                                   v-model.number="data.difficulty_id"
-                                  :options="ld.concat([notSelectedChoice], $store.state.difficulties)"
+                                  :options="ld.concat([notSelectedChoice, notSetChoice], $store.state.difficulties)"
                                   value-field="id"
                                   text-field="name"></b-form-radio-group>
             </b-form-group>
@@ -46,14 +46,14 @@
           <b-col lg="6">
             <b-form-group label="Класс">
               <b-select v-model.number="data.grade_id"
-                        :options="ld.concat([notSelectedOption], $store.state.grades)"
+                        :options="ld.concat([notSelectedOption, notSetOption], $store.state.grades)"
                         value-field="id" text-field="name"></b-select>
             </b-form-group>
           </b-col>
           <b-col lg="6">
             <b-form-group label="Предмет">
               <b-select v-model.number="data.subject_id"
-                        :options="ld.concat([notSelectedOption], $store.state.subjects)"
+                        :options="ld.concat([notSelectedOption, notSetOption], $store.state.subjects)"
                         value-field="id" text-field="name"></b-select>
             </b-form-group>
           </b-col>
@@ -85,6 +85,7 @@
     </b-form>
     <div slot="modal-footer">
       <b-button variant="success" class="px-3" @click="onSubmit">Применить</b-button>
+      <b-button variant="secondary" class="px-3 ml-2" @click="onResetClick">Сбросить</b-button>
       <b-button variant="secondary" class="px-3 ml-2" @click="onClose">Отмена</b-button>
     </div>
   </b-modal>
@@ -102,7 +103,33 @@
         data: null,
         notSelectedOption: {id: null, name: 'любой'},
         notSelectedChoice: {id: null, name: 'любой'},
+        notSetOption: {id: -1, name: 'не указан'},
+        notSetChoice: {id: -1, name: 'не указан'},
       }
+    },
+    computed: {
+      isQuestion() {
+        return this.data.kind_id === constants.TaskKindQuestion;
+      },
+      isGroup() {
+        return this.data.kind_id === constants.TaskKindGroup;
+      },
+      topics() {
+        return _.concat([this.notSelectedOption, this.notSetOption], _.filter(this.$store.state.topics, {subject_id: this.data.subject_id}));
+      },
+      subTopics() {
+        return _.concat([this.notSelectedOption, this.notSetOption], _.filter(this.$store.state.sub_topics, {topic_id: this.data.topic_id}));
+      },
+    },
+    watch: {
+      'data.subject_id'() {
+        if (!_.find(this.topics, {id: this.data.topic_id}))
+          this.data.topic_id = null;
+      },
+      'data.topic_id'() {
+        if (!_.find(this.subTopics, {id: this.data.sub_topic_id}))
+          this.data.sub_topic_id = null;
+      },
     },
     methods: {
       emptyData() {
@@ -121,33 +148,13 @@
         this.$emit('close');
       },
       onSubmit() {
-        let data = this.data;
+        let data = _.omitBy(this.data, _.isNil);
         this.onClose();
         this.$emit('update', data);
       },
-    },
-    computed: {
-      isQuestion() {
-        return this.data.kind_id === constants.TaskKindQuestion;
-      },
-      isGroup() {
-        return this.data.kind_id === constants.TaskKindGroup;
-      },
-      topics() {
-        return _.concat([this.notSelectedOption], _.filter(this.$store.state.topics, {subject_id: this.data.subject_id}));
-      },
-      subTopics() {
-        return _.concat([this.notSelectedOption], _.filter(this.$store.state.sub_topics, {topic_id: this.data.topic_id}));
-      },
-    },
-    watch: {
-      'data.subject_id'() {
-        if (!_.find(this.topics, {id: this.data.topic_id}))
-          this.data.topic_id = null;
-      },
-      'data.topic_id'() {
-        if (!_.find(this.subTopics, {id: this.data.sub_topic_id}))
-          this.data.sub_topic_id = null;
+      onResetClick() {
+        this.data = this.emptyData();
+        this.onSubmit();
       },
     },
     created() {
