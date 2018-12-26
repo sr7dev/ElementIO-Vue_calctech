@@ -15,17 +15,18 @@
                   Все задачи
                 </b-col>
                 <b-col md="auto" class="p-0 ml-md-3">
-                  <b-button variant="" size="sm" @click="">
+                  <b-button :variant="isSrcFiltered ? 'primary' : 'secondary'" size="sm" @click="srcShowFilter=true">
                     <i class="fa fa-filter px-1"></i>
                   </b-button>
                 </b-col>
                 <b-col md="auto" class="p-0 ml-md-3">
-                  <b-form-input type="text" size="sm" placeholder="поиск..."/>
+                  <b-form-input type="text" v-model="srcSearch" size="sm" placeholder="поиск..."/>
                 </b-col>
                 <b-col md="auto" class="p-0 ml-md-3">
-                  <b-pagination size="sm"
-                                :total-rows="100"
-                                :per-page="10"
+                  <b-pagination v-model="srcPage"
+                                size="sm"
+                                :total-rows="srcTotalCount"
+                                :per-page="srcPageSize"
                                 :limit="1"
                                 hide-ellipsis
                                 hide-goto-end-buttons
@@ -35,31 +36,36 @@
             </b-container>
           </b-card-header>
           <b-card-body class="p-1 pt-2">
-            <div class="font-sm text-black-50 mb-1">Показано: 3 из 65</div>
-            <table class="table table-sm table-bordered table-hover mb-0">
-              <thead class="bg-gray-100 text-black-50">
-              <tr>
-                <th class="width-1per">Вид</th>
-                <th>Заголовок</th>
-                <th class="width-1per">Сложность</th>
-              </tr>
-              </thead>
-              <draggable v-model="srcItems"
-                         :options="{group: 'task-items', dataIdAttr: 'id', filter: '.text-secondary'}"
-                         element="tbody">
-                <tr v-for="(item, i) in srcItems" :key="'ai-'+i+'-'+item.id"
-                    :class="{'text-secondary': srcItemInChildren(item), 'cursor-move': !srcItemInChildren(item)}">
-                  <template v-if="item.id">
-                    <td>{{item.kind_name}}</td>
-                    <td>{{item.title}}</td>
-                    <td>{{item.difficulty_name}}</td>
-                  </template>
-                  <td v-else="" colspan="3" class="border-0">
-                    &nbsp;
-                  </td>
+            <div v-if="srcFetching" class="text-center"><i class="spnr"></i></div>
+            <template v-else="">
+              <div class="font-sm text-black-50 mb-1">Показано: {{Math.min(srcPageSize, srcTotalCount)}} из
+                {{srcTotalCount}}
+              </div>
+              <table class="table table-sm table-bordered table-hover mb-0">
+                <thead class="bg-gray-100 text-black-50">
+                <tr>
+                  <th class="width-1per">Вид</th>
+                  <th>Заголовок</th>
+                  <th class="width-1per">Сложность</th>
                 </tr>
-              </draggable>
-            </table>
+                </thead>
+                <draggable v-model="srcItems"
+                           :options="{group: 'task-items', dataIdAttr: 'id', filter: '.text-secondary'}"
+                           element="tbody">
+                  <tr v-for="(item, i) in srcItems" :key="'ai-'+i+'-'+item.id"
+                      :class="{'text-secondary': srcItemInChildren(item), 'cursor-move': !srcItemInChildren(item)}">
+                    <template v-if="item.id">
+                      <td>{{item.kind_name}}</td>
+                      <td>{{item.title}}</td>
+                      <td>{{item.difficulty_name}}</td>
+                    </template>
+                    <td v-else="" colspan="3" class="border-light">
+                      &nbsp;
+                    </td>
+                  </tr>
+                </draggable>
+              </table>
+            </template>
           </b-card-body>
         </b-card>
       </b-col>
@@ -71,8 +77,8 @@
           <b-card-header class="p-2">
             <b-container fluid>
               <b-row class="align-items-center">
-                <b-col class="p-0">
-                  Дочерние задачи
+                <b-col class="p-0 d-flex align-items-center">
+                  Дочерние задачи<i v-if="saving" class="spnr ml-3"></i>
                 </b-col>
                 <b-col md="auto" class="p-0 mr-2">
                   <b-form-input type="text" size="sm" placeholder="поиск..."/>
@@ -100,7 +106,7 @@
                     <td>{{item.title}}</td>
                     <td>{{item.difficulty_name}}</td>
                   </template>
-                  <td v-else="" colspan="3" class="border-0">
+                  <td v-else="" colspan="3" class="border-light">
                     &nbsp;
                   </td>
                 </tr>
@@ -110,16 +116,21 @@
         </b-card>
       </b-col>
     </b-row>
+    <FilterModal v-if="srcShowFilter" @close="srcShowFilter=false"
+                 :pars="srcFilterPars" @update="onSrcFilterUpdated"></FilterModal>
   </b-container>
 </template>
 
 <script>
   import _ from 'lodash'
-  import draggable from 'vuedraggable'
+  import ajax from "../../../ajax";
+  import utils from "../../../utils";
+  import draggable from 'vuedraggable';
+  import FilterModal from "./FilterModal";
 
   export default {
-    props: ['children'],
-    components: {draggable},
+    props: ['children', 'saving'],
+    components: {FilterModal, draggable},
     data() {
       return {
         tableFields: [
@@ -127,23 +138,30 @@
           {key: 'title', label: 'Заголовок'},
           {key: 'difficulty_name', label: 'Сложность', thClass: 'width-1per'},
         ],
-        srcRows: [
-          {id: 101, kind_name: 'Вопрос1', title: 'Title1', difficulty_name: '5'},
-          {id: 102, kind_name: 'Вопрос2', title: 'Title2', difficulty_name: '5'},
-          {id: 103, kind_name: 'Вопрос3', title: 'Title3', difficulty_name: '5'},
-        ],
+        srcRows: [],
+        srcFetching: true,
+        srcNeedRefetch: false,
+        srcFailFB: '',
+        srcPageSize: 20,
+        srcPage: 1,
+        srcTotalCount: 0,
+        srcShowFilter: false,
+        srcFilterPars: {},
+        srcSearch: '',
       };
     },
     computed: {
       maxItemCount() {
         return Math.max(this.children.length, this.srcRows.length);
       },
+      isSrcFiltered() {
+        return !_.isEmpty(this.srcFilterPars);
+      },
       srcItems: {
         get() {
           return _.assign(_.fill(new Array(this.maxItemCount), {id: 0}), this.srcRows);
         },
         set(value) {
-          // console.log('daaaaaa', value);
         },
       },
       dstItems: {
@@ -155,10 +173,65 @@
         },
       },
     },
+    watch: {
+      srcPage() {
+        this.srcFetch();
+      },
+      srcSearch() {
+        if (this.srcFetching) {
+          this.srcNeedRefetch = true;
+        } else {
+          this.srcFetch(true);
+        }
+      },
+      srcFetching(v) {
+        if (!v && this.srcNeedRefetch) {
+          this.srcNeedRefetch = false;
+          this.$nextTick(() => {
+            this.srcFetch(true);
+          });
+        }
+      },
+    },
     methods: {
+      srcFetch(reset) {
+        this.srcFetching = true;
+        if (reset) {
+          this.srcPage = 1;
+        }
+        this.srcFailFB = '';
+        let pars = _.assign({}, this.srcFilterPars, {
+          page: this.srcPage,
+          page_size: this.srcPageSize,
+          search: this.srcSearch,
+        });
+        return ajax.reqAPI(`tasks`, {pars}).then(response => {
+          let data = response.data;
+          this.srcPageSize = data.page_size;
+          this.srcPage = data.page;
+          this.srcTotalCount = data.total_count;
+          this.srcRows = data.results;
+        }).catch(error => {
+          if (error.status === 401) {
+            this.$store.commit('setProfile', null);
+            this.$router.push({name: 'l-auth'});
+          } else {
+            this.srcFailFB = utils.retrieveApiErrorDsc(error);
+          }
+        }).finally(() => {
+          this.srcFetching = false;
+        });
+      },
+      onSrcFilterUpdated(pars) {
+        this.srcFilterPars = pars;
+        this.srcFetch();
+      },
       srcItemInChildren(item) {
         return _.find(this.children, {id: item.id});
       },
+    },
+    created() {
+      this.srcFetch();
     },
   }
 </script>

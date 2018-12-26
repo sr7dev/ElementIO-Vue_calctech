@@ -176,7 +176,7 @@
       </b-container>
     </template>
     <template v-if="!loading && showChildren">
-      <ChildrenE :children.sync="data.children"></ChildrenE>
+      <ChildrenE :children="data.children" @update:children="onChildrenUpdated" :saving="childrenSaving"></ChildrenE>
     </template>
   </div>
 </template>
@@ -201,6 +201,8 @@
         data: null,
         notSelectedOption: {id: null, name: '-- не выбрано --'},
         notSelectedChoice: {id: null, name: 'не выбрано'},
+        childrenSaving: false,
+        childrenNeedResave: false,
       };
     },
     computed: {
@@ -244,6 +246,14 @@
       'data.topic_id'() {
         if (!_.find(this.subTopics, {id: this.data.sub_topic_id}))
           this.data.sub_topic_id = null;
+      },
+      childrenSaving(v) {
+        if (!v && this.childrenNeedResave) {
+          this.childrenNeedResave = false;
+          this.$nextTick(() => {
+            this.saveChildren();
+          });
+        }
       },
     },
     methods: {
@@ -345,6 +355,26 @@
       },
       onAttachmentDeleted(id) {
         this.data.attachments = _.reject(this.data.attachments, {id});
+      },
+      onChildrenUpdated(newList) {
+        this.data.children = newList;
+        if (this.childrenSaving) {
+          this.childrenNeedResave = true;
+        } else {
+          this.saveChildren();
+        }
+      },
+      saveChildren() {
+        this.childrenSaving = true;
+        let body = {child_ids: _.map(this.data.children, 'id')};
+        ajax.reqAPI(`tasks/${this.id}`, {method: 'PUT', body}).then(response => {
+          this.childrenSaving = false;
+        }).catch(error => {
+          if (error.status === 401) {
+            this.$store.commit('setProfile', null);
+            this.$router.push({name: 'auth'});
+          }
+        });
       },
     },
     created() {

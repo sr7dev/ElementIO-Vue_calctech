@@ -14,12 +14,12 @@
                 </b-button>
               </b-col>
               <b-col md="auto" class="p-0 ml-md-4">
-                <b-form-input type="text" placeholder="поиск..."/>
+                <b-form-input type="text" v-model.trim="search" placeholder="поиск..."/>
               </b-col>
               <b-col md="auto" class="p-0 ml-md-4">
                 <b-pagination v-model="page"
-                              :total-rows="total_count"
-                              :per-page="page_size"
+                              :total-rows="totalCount"
+                              :per-page="pageSize"
                               :limit="1"
                               hide-ellipsis
                               hide-goto-end-buttons
@@ -31,12 +31,12 @@
         <b-card-body class="pb-1">
           <div v-if="loading" class="text-center"><i class="spnr"></i></div>
           <template v-else="">
-            <div class="text-black-50 mb-2">Показано: {{page}} из {{total_count}}</div>
+            <div class="text-black-50 mb-2">Показано: {{Math.min(pageSize, totalCount)}} из {{totalCount}}</div>
             <b-table responsive="sm"
-                     :fields="fetching ? null : fields"
+                     :fields="fields"
                      :items="itemsProvider"
-                     :current-page="page_size"
-                     :per-page="page"
+                     :current-page="page"
+                     :per-page="pageSize"
                      :busy.sync="fetching"
                      thead-class="bg-gray-100"
                      thead-tr-class="align-middle"
@@ -88,18 +88,20 @@
         utils, constants,
         loading: false,
         fetching: false,
+        needRefetch: false,
         failFB: '',
         fields: [
           {key: 'kind_name', label: 'Вид', thStyle: 'width: 1%'},
           {key: 'title', label: 'Заголовок'},
           {key: 'actions', label: '', thStyle: 'width: 1%', tdClass: 'py-2'},
         ],
+        pageSize: 20,
+        page: 1,
+        totalCount: 0,
         showFilter: false,
         filterPars: {},
-        page_size: 20,
-        page: 1,
-        total_count: 0,
-        sort: "",
+        search: '',
+        sort: '',
       };
     },
     computed: {
@@ -107,17 +109,39 @@
         return !_.isEmpty(this.filterPars);
       },
     },
+    watch: {
+      search() {
+        if (this.fetching) {
+          this.needRefetch = true;
+        } else {
+          this.refresh();
+        }
+      },
+      fetching(v) {
+        if (!v && this.needRefetch) {
+          this.needRefetch = false;
+          this.$nextTick(() => {
+            this.refresh();
+          });
+        }
+      },
+    },
     methods: {
+      refresh() {
+        this.page = 1;
+        this.$refs.table.refresh();
+      },
       itemsProvider(ctx) {
         this.failFB = '';
         let pars = _.assign({}, this.filterPars, {
           page: this.page,
+          search: this.search,
         });
         return ajax.reqAPI(`tasks`, {pars}).then(response => {
           let data = response.data;
-          this.page_size = data.page_size;
+          this.pageSize = data.page_size;
           this.page = data.page;
-          this.total_count = data.total_count;
+          this.totalCount = data.total_count;
           this.sort = data.sort;
           return data.results;
         }).catch(error => {
@@ -131,8 +155,7 @@
       },
       onFilterUpdated(pars) {
         this.filterPars = pars;
-        this.page = 1;
-        this.$refs.table.refresh();
+        this.refresh();
       },
       onAddClick() {
         this.$router.push({path: 'ce/0', append: true});
