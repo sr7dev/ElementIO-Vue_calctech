@@ -109,16 +109,16 @@
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row>
+              <b-row v-if="isGroup">
                 <b-col md="10" lg="8">
-                  <b-form-group v-if="isGroup" label="Описание">
+                  <b-form-group label="Описание">
                     <b-form-textarea v-model="data.note" :rows="5" no-resize/>
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row>
+              <b-row v-if="isQuestion">
                 <b-col md="10" lg="8">
-                  <b-form-group v-if="isQuestion" label="Текст вопроса">
+                  <b-form-group label="Текст вопроса">
                     <b-form-textarea v-model="data.txt" :rows="5" no-resize/>
                   </b-form-group>
                 </b-col>
