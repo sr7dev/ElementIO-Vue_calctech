@@ -116,13 +116,20 @@
                   </b-form-group>
                 </b-col>
               </b-row>
-              <b-row v-if="isQuestion">
-                <b-col md="10" lg="8">
-                  <b-form-group label="Текст вопроса">
-                    <b-form-textarea v-model="data.txt" :rows="5" no-resize/>
-                  </b-form-group>
-                </b-col>
-              </b-row>
+              <template v-if="isQuestion">
+                <b-row>
+                  <b-col md="10" lg="8">
+                    <b-form-group label="Текст вопроса">
+                      <b-form-textarea v-model="data.txt" :rows="5" no-resize/>
+                    </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row v-if="data.txt">
+                  <b-col md="10" lg="8">
+                    <MathJaxVue :formula="data.txt"></MathJaxVue>
+                  </b-col>
+                </b-row>
+              </template>
             </template>
           </b-container>
         </b-card-body>
@@ -186,13 +193,14 @@
   import constants from "../../../constants";
   import utils from "../../../utils";
   import ajax from "../../../ajax";
+  import MathJaxVue from '@/components/common/MathJaxVue'
   import AttachmentCECard from './attachments/CECard'
   import AnswerCECard from './answers/CECard'
   import ChildrenE from './ChildrenE'
 
   export default {
     props: ['routeName'],
-    components: {AttachmentCECard, AnswerCECard, ChildrenE},
+    components: {MathJaxVue, AttachmentCECard, AnswerCECard, ChildrenE},
     data() {
       return {
         ld: _, utils, constants,
