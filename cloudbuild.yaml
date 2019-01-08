@@ -1,29 +1,46 @@
 substitutions:
-  _REPO_NAME: gcr.io/dauren-pr/calctech_site:latest
+  _PROJECT_NAME: calctech
+  _APP_NAME: site
+  _REPO_NAME: gcr.io/dauren-pr/calctech_site
   _SERVER_URI: user@35.224.168.117
 
 steps:
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$_REPO_NAME', '.']
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$_REPO_NAME']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
-  - kms
-  - decrypt
-  - --ciphertext-file=ct_user.enc
-  - --plaintext-file=ct_user
-  - --location=global
-  - --keyring=calctech
-  - --key=key1
-- name: 'gcr.io/cloud-builders/git'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    chmod 0700 ct_user
-    ssh -o StrictHostKeyChecking=no -i ct_user $_SERVER_URI "/home/user/refresh.sh"
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - kms
+      - decrypt
+      - --ciphertext-file=ct_user.enc
+      - --plaintext-file=ct_user
+      - --location=global
+      - --keyring=calctech
+      - --key=key1
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        for digest in $(gcloud container images list-tags $_REPO_NAME --limit=999999 --filter="-tags:*" --format='get(digest)'); do
+          gcloud container images delete -q --force-delete-tags "${_REPO_NAME}@${digest}"
+        done
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '$_REPO_NAME:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '$_REPO_NAME:latest']
+  - name: 'gcr.io/cloud-builders/git'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        chmod 0700 ct_user
+        ssh -o StrictHostKeyChecking=no -i ct_user $_SERVER_URI "/home/user/refresh.sh"
+  - name: 'gcr.io/cloud-builders/curl'
+    args:
+      - -X
+      - POST
+      - --data-urlencode
+      - 'payload={"icon_emoji": ":tophat:", "username": "$_PROJECT_NAME GCB", "attachments": [{"color": "#36a64f", "title": "$_APP_NAME", "text": "successfully deployed - $_APP_NAME"}]}'
+      - https://hooks.slack.com/services/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
