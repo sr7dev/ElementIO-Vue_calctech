@@ -42,5 +42,5 @@ steps:
       - -X
       - POST
       - --data-urlencode
-      - 'payload={"icon_emoji": ":tophat:", "username": "$_PROJECT_NAME GCB", "attachments": [{"color": "#36a64f", "title": "$_APP_NAME", "text": "successfully deployed - $_APP_NAME"}]}'
+      - 'payload={"icon_emoji": ":necktie:", "username": "$_PROJECT_NAME GCB", "attachments": [{"color": "#36a64f", "title": "$_APP_NAME", "text": "successfully deployed - $_APP_NAME"}]}'
       - https://hooks.slack.com/services/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
