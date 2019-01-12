@@ -230,7 +230,7 @@
         return (
           this.id &&
           this.isQuestion &&
-          ([constants.TaskTypeOneChoice, constants.TaskTypeMultipleChoice].indexOf(this.data.type_id) > -1)
+          ([constants.TaskTypeOneChoice, constants.TaskTypeMultipleChoice, constants.TaskTypeOpen].indexOf(this.data.type_id) > -1)
         );
       },
       showAttachments() {
