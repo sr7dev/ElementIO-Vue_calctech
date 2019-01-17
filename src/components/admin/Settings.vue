@@ -111,6 +111,7 @@
                     this.$refs.form.validate((valid) => {
                         if (valid) {
                             this.$message.success('Данные успешно сохранены!');
+                            this.state.disabled = true
                         } else {
                             this.$message.error('Ошибка при сохранении')
                             return false;
