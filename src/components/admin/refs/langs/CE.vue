@@ -1,14 +1,14 @@
 <template>
   <div v-loading="loading" class="animated fadeIn">
-    <b-container fluid class="mb-3">
-      <b-row>
-        <b-col class="px-0">
-          <el-button type="primary" @click="$router.back()">
+    <el-container>
+      <el-row>
+        <el-col>
+          <el-button class="mb-3" type="primary" @click="$router.back()">
             <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
           </el-button>
-        </b-col>
-      </b-row>
-    </b-container>
+        </el-col>
+      </el-row>
+    </el-container>
     <el-card>
       <div slot="header">
         <h3 class="text-black-50 m-0">{{headerText}}</h3>

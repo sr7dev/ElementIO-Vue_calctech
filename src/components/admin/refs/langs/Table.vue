@@ -1,7 +1,7 @@
 <template>
     <div v-loading="state.loading">
         <template v-if="$route.name === routeName">
-            <el-card no-body class="animated fadeIn">
+            <el-card class="animated fadeIn">
                 <div slot="header" class="clearfix" v-if="!state.loading">
                     <div class="d-flex align-items-center justify-content-between">
                         <h3 class="text-black-50">Языки</h3>
@@ -134,9 +134,3 @@
         },
     }
 </script>
-
-<style lang="scss">
-    .el-table tr {
-        cursor: pointer;
-    }
-</style>

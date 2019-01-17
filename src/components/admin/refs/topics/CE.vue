@@ -1,43 +1,64 @@
 <template>
-  <div class="animated fadeIn">
-    <b-container fluid class="mb-3">
-      <b-row>
-        <b-col class="px-0">
-          <b-button variant="primary" @click="$router.back()">
+  <div v-loading="loading" class="animated fadeIn">
+    <el-container>
+      <el-row>
+        <el-col>
+          <el-button class="mb-3" type="primary" @click="$router.back()">
             <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
-          </b-button>
-        </b-col>
-      </b-row>
-    </b-container>
-    <b-card no-body>
-      <b-card-header>
+          </el-button>
+        </el-col>
+      </el-row>
+    </el-container>
+    <el-card>
+      <div slot="header">
         <h3 class="text-black-50 m-0">{{headerText}}</h3>
-      </b-card-header>
-      <b-form @submit="onSubmit">
-        <b-card-body>
-          <div v-if="loading" class="text-center"><i class="spnr"></i></div>
-          <template v-else="">
-            <b-form-group label="Предмет">
-              <b-select v-model.number="data.subject_id" :options="subjects" value-field="id" text-field="name"></b-select>
-            </b-form-group>
-            <b-form-group label="Наименование">
-              <b-form-input type="text" v-model.trim="data.name"/>
-            </b-form-group>
-            <b-form-group label="Порядковый номер (в списке)">
-              <b-form-input type="number" pattern="\d*" v-model.number="data.ord"/>
-            </b-form-group>
-            <b-alert v-if="failFB" variant="danger" show>
-              <i class="fa fa-warning mr-3"></i>{{failFB}}
-            </b-alert>
-          </template>
-        </b-card-body>
-        <b-card-footer v-if="!loading">
-          <b-button type="submit" variant="success">
-            {{id ? 'Изменить' : 'Создать'}}
-          </b-button>
-        </b-card-footer>
-      </b-form>
-    </b-card>
+      </div>
+      <el-form label-position="top">
+        <el-form-item label="Предмет:">
+          <el-select v-model="data.subject_id">
+            <el-option
+                    v-for="item in subjects"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Наименование:">
+          <el-input v-model="data.name"></el-input>
+        </el-form-item>
+        <el-form-item label="Порядковый номер (в списке):">
+          <el-input pattern="\d*" type="number" v-model="data.ord"></el-input>
+        </el-form-item>
+        <el-button type="success" @click="onSubmit"> <!-- submit -->
+          {{id ? 'Изменить' : 'Создать'}}
+        </el-button>
+      </el-form>
+      <!--<b-form @submit="onSubmit">-->
+        <!--<b-card-body>-->
+          <!--<div v-if="loading" class="text-center"><i class="spnr"></i></div>-->
+          <!--<template v-else="">-->
+            <!--<b-form-group label="Предмет">-->
+              <!--<b-select v-model.number="data.subject_id" :options="subjects" value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--<b-form-group label="Наименование">-->
+              <!--<b-form-input type="text" v-model.trim="data.name"/>-->
+            <!--</b-form-group>-->
+            <!--<b-form-group label="Порядковый номер (в списке)">-->
+              <!--<b-form-input type="number" pattern="\d*" v-model.number="data.ord"/>-->
+            <!--</b-form-group>-->
+            <!--<b-alert v-if="failFB" variant="danger" show>-->
+              <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
+            <!--</b-alert>-->
+          <!--</template>-->
+        <!--</b-card-body>-->
+        <!--<b-card-footer v-if="!loading">-->
+          <!--<b-button type="submit" variant="success">-->
+            <!--{{id ? 'Изменить' : 'Создать'}}-->
+          <!--</b-button>-->
+        <!--</b-card-footer>-->
+      <!--</b-form>-->
+    </el-card>
   </div>
 </template>
 

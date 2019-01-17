@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="$route.name === routeName">
-            <el-card no-body class="animated fadeIn">
+            <el-card class="animated fadeIn">
                 <div slot="header" v-if="!state.loading">
                     <div class="d-flex align-items-center justify-content-between">
                         <h3 class="text-black-50">Классы</h3>
