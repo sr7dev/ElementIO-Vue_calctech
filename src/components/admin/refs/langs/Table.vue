@@ -17,6 +17,7 @@
                 <el-table
                         :data="items"
                         @row-click="onItemClick"
+                        empty-text="Записи не найдены"
                         style="width: 100%">
                     <el-table-column
                             prop="id"
@@ -33,6 +34,8 @@
                         <template slot-scope="scope">
                             <el-button
                                     type="danger"
+                                    size="small"
+                                    icon="el-icon-delete"
                                     @click.stop="onItemDeleteClick(scope.row)">Удалить</el-button>
                         </template>
                     </el-table-column>
@@ -80,9 +83,6 @@
             items() {
                 return this.$store.state.langs;
             },
-        },
-        created(){
-            console.log(this.items);
         },
         methods: {
             onAddClick() {
