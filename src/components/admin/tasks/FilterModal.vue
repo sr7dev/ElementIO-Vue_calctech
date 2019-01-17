@@ -10,7 +10,7 @@
       <b-container fluid>
         <b-row>
           <b-col lg="6">
-            <b-form-group label="Вид задачи">
+            <b-form-group label="Вид задания">
               <b-form-radio-group buttons
                                   button-variant="outline-primary"
                                   v-model.number="data.kind_id"

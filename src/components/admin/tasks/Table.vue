@@ -6,7 +6,7 @@
           <b-container fluid>
             <b-row>
               <b-col class="p-0">
-                <h3 class="text-black-50 m-0">Задачи</h3>
+                <h3 class="text-black-50 m-0">Задания</h3>
               </b-col>
               <b-col md="auto" class="p-0 ml-md-4">
                 <b-button :variant="isFiltered ? 'primary' : 'secondary'" @click="showFilter=true">

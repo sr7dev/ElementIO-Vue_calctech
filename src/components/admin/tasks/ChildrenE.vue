@@ -2,7 +2,7 @@
   <b-container fluid class="mt-5">
     <b-row class="mb-4">
       <b-col>
-        <h3 class="text-black-50 m-0">Дочерние задачи</h3>
+        <h3 class="text-black-50 m-0">Дочерние задания</h3>
       </b-col>
     </b-row>
     <b-row>
@@ -12,7 +12,7 @@
             <b-container fluid>
               <b-row class="align-items-center">
                 <b-col class="p-0">
-                  Все задачи
+                  Все задания
                 </b-col>
                 <b-col md="auto" class="p-0 ml-md-3">
                   <b-button :variant="isSrcFiltered ? 'primary' : 'secondary'" size="sm" @click="srcShowFilter=true">
@@ -78,7 +78,7 @@
             <b-container fluid>
               <b-row class="align-items-center">
                 <b-col class="p-0 d-flex align-items-center">
-                  Дочерние задачи<i v-if="saving" class="spnr ml-3"></i>
+                  Дочерние задания<i v-if="saving" class="spnr ml-3"></i>
                 </b-col>
                 <b-col md="auto" class="p-0 mr-2">
                   <b-form-input type="text" size="sm" placeholder="поиск..."/>

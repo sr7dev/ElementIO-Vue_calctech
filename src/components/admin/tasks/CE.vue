@@ -31,7 +31,7 @@
               </b-row>
               <b-row>
                 <b-col lg="4">
-                  <b-form-group label="Вид задачи">
+                  <b-form-group label="Вид задания">
                     <b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>
                     <b-form-radio-group v-else="" buttons
                                         button-variant="outline-primary"
@@ -144,7 +144,7 @@
       <b-container fluid class="mt-5 mb-4">
         <b-row>
           <b-col>
-            <h3 class="text-black-50 m-0">Приложения к задаче</h3>
+            <h3 class="text-black-50 m-0">Приложения к заданию</h3>
           </b-col>
         </b-row>
       </b-container>
@@ -218,7 +218,7 @@
         return parseInt(this.$route.params.task_id) || 0;
       },
       headerText() {
-        return this.id ? 'Измененить задачу' : 'Создать задачу';
+        return this.id ? 'Измененить задание' : 'Создать задание';
       },
       isQuestion() {
         return this.data.kind_id === constants.TaskKindQuestion;
