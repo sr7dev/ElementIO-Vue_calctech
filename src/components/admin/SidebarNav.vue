@@ -1,61 +1,66 @@
 <template>
-  <SidebarNav :navItems="items"></SidebarNav>
+    <SidebarNav :navItems="items"></SidebarNav>
 </template>
 
 <script>
-  import {SidebarNav} from '@coreui/vue'
+    import {SidebarNav} from '@coreui/vue'
 
-  let pathPrefix = '/adm/';
+    let pathPrefix = '/adm/';
 
-  export default {
-    components: {SidebarNav},
-    data() {
-      return {
-        items: [
-          {
-            name: 'Главная',
-            url: pathPrefix + 'dashboard',
-            icon: 'icon-home',
-          },
-          {
-            name: 'Задачи',
-            url: pathPrefix + 'tasks',
-            icon: 'icon-calculator',
-          },
-          {
-            name: 'Справочники',
-            icon: 'icon-layers',
-            url: pathPrefix + 'refs',
-            children: [
-              {
-                name: 'Языки',
-                url: pathPrefix + 'refs/langs',
-                icon: 'icon-puzzle',
-              },
-              {
-                name: 'Классы',
-                url: pathPrefix + 'refs/grades',
-                icon: 'icon-puzzle',
-              },
-              {
-                name: 'Предметы',
-                url: pathPrefix + 'refs/subjects',
-                icon: 'icon-puzzle',
-              },
-              {
-                name: 'Темы',
-                url: pathPrefix + 'refs/topics',
-                icon: 'icon-puzzle',
-              },
-              {
-                name: 'Подтемы',
-                url: pathPrefix + 'refs/sub_topics',
-                icon: 'icon-puzzle',
-              },
-            ],
-          },
-        ],
-      };
-    },
-  }
+    export default {
+        components: {SidebarNav},
+        data() {
+            return {
+                items: [
+                    {
+                        name: 'Главная',
+                        url: pathPrefix + 'dashboard',
+                        icon: 'icon-home',
+                    },
+                    {
+                        name: 'Задания',
+                        url: pathPrefix + 'tasks',
+                        icon: 'icon-calculator',
+                    },
+                    {
+                        name: 'Справочники',
+                        icon: 'icon-layers',
+                        url: pathPrefix + 'refs',
+                        children: [
+                            {
+                                name: 'Языки',
+                                url: pathPrefix + 'refs/langs',
+                                icon: 'icon-puzzle',
+                            },
+                            {
+                                name: 'Классы',
+                                url: pathPrefix + 'refs/grades',
+                                icon: 'icon-puzzle',
+                            },
+                            {
+                                name: 'Предметы',
+                                url: pathPrefix + 'refs/subjects',
+                                icon: 'icon-puzzle',
+                            },
+                            {
+                                name: 'Темы',
+                                url: pathPrefix + 'refs/topics',
+                                icon: 'icon-puzzle',
+                            },
+                            {
+                                name: 'Подтемы',
+                                url: pathPrefix + 'refs/sub_topics',
+                                icon: 'icon-puzzle',
+                            },
+                        ],
+                    },
+                    {
+                        name: 'Настройки',
+                        icon: 'icon-settings',
+                        url: pathPrefix + 'settings'
+                    }
+                ],
+            };
+        },
+    }
 </script>

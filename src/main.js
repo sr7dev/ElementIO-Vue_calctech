@@ -5,6 +5,8 @@ import "moment/locale/ru";
 import store from './store';
 import Scene from './Scene'
 import router from './router'
+import VueTyperPlugin from 'vue-typer'
+
 
 // require('es6-promise/auto');
 require('es6-promise').polyfill();
@@ -14,6 +16,8 @@ Vue.config.productionTip = false;
 moment.locale('ru');
 
 Vue.use(BootstrapVue);
+Vue.use(VueTyperPlugin)
+
 
 function init() {
   store.dispatch('reloadDic').then(() => store.dispatch('refreshProfile')).catch(error => {
