@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div v-loading="state.loading">
         <template v-if="$route.name === routeName">
             <el-card no-body class="animated fadeIn">
-                <div slot="header" class="clearfix" v-if="!loading">
+                <div slot="header" class="clearfix" v-if="!state.loading">
                     <div class="d-flex align-items-center justify-content-between">
                         <h3 class="text-black-50">Языки</h3>
                         <div>
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <!--<b-card-body class="pb-1">-->
-                <div v-if="loading" class="text-center pb-2"><i class="spnr"></i></div>
+                <!--<div v-if="state.loading" class="text-center pb-2"><i class="spnr"></i></div>-->
                 <el-table
                         :data="items"
                         @row-click="onItemClick"
@@ -65,7 +65,9 @@
         data() {
             return {
                 utils, constants,
-                loading: false,
+                state: {
+                    loading: false,
+                },
                 failFB: '',
                 fields: [
                     {key: 'ord', label: '№', thStyle: 'width: 1%', class: 'text-center px-4'},
@@ -91,24 +93,43 @@
                 this.$router.push({path: 'ce/' + item.id, append: true});
             },
             onItemDeleteClick(item ) {
-                this.$store.commit('confirm', {
-                    msg: 'Вы уверены что хотите удалить эту запись?',
-                    okCb: () => {
-                        this.loading = true;
+
+                this.$confirm('Вы уверены что хотите удалить эту запись?')
+                    .then(_ => {
+                        this.state.loading = true;
                         ajax.reqAPI(`dic/langs/${item.id}`, {method: 'DELETE'}).then(() => {
                             return this.$store.dispatch('reloadLangs');
                         }).then(() => {
-                            this.loading = false;
+                            this.state.loading = false;
                         }).catch(error => {
                             if (error.status === 401) {
                                 this.$store.commit('setProfile', null);
                                 this.$router.push({name: 'auth'});
                             } else {
-                                this.loading = false;
+                                this.state.loading = false;
                             }
                         });
-                    },
-                });
+                    })
+                    .catch(_ => {});
+
+                // this.$store.commit('confirm', {
+                //     msg: 'Вы уверены что хотите удалить эту запись?',
+                //     okCb: () => {
+                //         this.loading = true;
+                //         ajax.reqAPI(`dic/langs/${item.id}`, {method: 'DELETE'}).then(() => {
+                //             return this.$store.dispatch('reloadLangs');
+                //         }).then(() => {
+                //             this.loading = false;
+                //         }).catch(error => {
+                //             if (error.status === 401) {
+                //                 this.$store.commit('setProfile', null);
+                //                 this.$router.push({name: 'auth'});
+                //             } else {
+                //                 this.loading = false;
+                //             }
+                //         });
+                //     },
+                // });
             },
         },
     }

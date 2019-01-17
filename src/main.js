@@ -8,6 +8,8 @@ import router from './router'
 import VueTyperPlugin from 'vue-typer'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/ru-RU'
+
 
 
 
@@ -20,7 +22,8 @@ moment.locale('ru');
 
 Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale })
+
 
 
 function init() {
