@@ -1,47 +1,28 @@
 <template>
-    <div class="py-3">
-        <b-row>
-            <b-col lg="3">
-                <b-card tag="article"
-                        class="mb-2 user-card">
-                    <div class="card-text user-card__content">
-                        <div class="user-card__content__title">Мой профиль</div>
-                        <img class="user-card__content__avatar" :src="avatar">
-                        <div class="user-card__content__info">
-                            <div class="user-card__content__info__item">
-                                {{profile.first_name}}
-                            </div>
-                            <div class="user-card__content__info__item">
-                                {{profile.last_name}}
-                            </div>
-                            <div class="user-card__content__info__item">
-                                {{profile.username}}
+    <div>
+        <el-row>
+            <el-col :span="6">
+                <el-form label-position="top">
+                    <el-card>
+                        <div class="card-text user-card__content">
+                            <div class="user-card__content__title">Мой профиль</div>
+                            <img class="user-card__content__avatar" :src="avatar">
+                            <div class="user-card__content__info">
+                                <div class="user-card__content__info__item">
+                                    {{profile.first_name}}
+                                </div>
+                                <div class="user-card__content__info__item">
+                                    {{profile.last_name}}
+                                </div>
+                                <div class="user-card__content__info__item">
+                                    {{profile.username}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </b-card>
-            </b-col>
-            <b-col>
-                <b-card>
-                    <b-card>
-                        <b-media no-body class="py-3">
-                            <div class="icon mr-4" style="background-color: #e64b3b"><i
-                                    class="fa fa-sort-alpha-asc font-lg"></i></div>
-                            <b-media-body>
-                                <div class="hdr">
-                                    Отдельные предметы
-                                </div>
-                                <div class="dsc">
-                                    Подтянем математику, физику, химию, биологию, английский по школьной и
-                                    университетской программ.
-                                    Подробнее...
-                                </div>
-                            </b-media-body>
-                        </b-media>
-                    </b-card>
-                </b-card>
-            </b-col>
-        </b-row>
+                    </el-card>
+                </el-form>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -55,18 +36,53 @@
             return {
                 utils, constants,
                 profile: {},
-                // notification
+                notifications: [
+                    {
+                        title: 'Уведомление',
+                        message: 'Модератор одобрил вопрос/задание',
+                    },
+                    {
+                        title: 'Уведомление',
+                        message: 'Вы добавлены в группу учеников',
+                    },
+                    {
+                        title: 'Уведомление',
+                        message: 'Вам присвоена группа учеников',
+                    },
+                    {
+                        title: 'Уведомление',
+                        message: 'Новое задание',
+                    }
+                ]
             };
         },
         computed: {
             avatar() {
                 return this.profile.avatar ? this.profile.avatar : 'img/default_avatar.jpg'
-            }
+            },
         },
         created() {
             this.profile = this.$store.state.profile
-        }
+            if (this.notifications.length) this.openNotifications()
+        },
+        methods: {
+            openNotifications() {
+                this.notifications.forEach((item, index) => {
+                    setTimeout(() => {
+                            this.$notify({
+                                title: item.title,
+                                message: item.message,
+                                duration: 0,
+                                type: 'success',
+                                offset: 100
+                            })
+                        }, 1000 * (index + 1)
+                    )
+                })
+            }
+        },
     }
+
 </script>
 
 <style lang="scss">
@@ -98,6 +114,7 @@
             }
         }
     }
+
     .icon {
         display: inline-flex;
         justify-content: center;

@@ -6,6 +6,9 @@ import store from './store';
 import Scene from './Scene'
 import router from './router'
 import VueTyperPlugin from 'vue-typer'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
 
 
 // require('es6-promise/auto');
@@ -17,6 +20,7 @@ moment.locale('ru');
 
 Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
+Vue.use(ElementUI);
 
 
 function init() {
