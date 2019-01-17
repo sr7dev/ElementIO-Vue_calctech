@@ -34,7 +34,7 @@
               ВАКАНСИИ
             </b-nav-item>
             <b-nav-item :to="{name: (profile ? 'adm' : 'l-auth')}" class="px-2">
-              {{ (profile ? 'КАБИНЕТ' : 'ВОЙТИ') }}
+              {{ (profile ? 'КАБИНЕТ' : 'ВХОД / РЕГИСТРАЦИЯ') }}
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
