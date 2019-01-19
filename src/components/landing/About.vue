@@ -86,16 +86,18 @@
                 Мы молодая квалифицированная команда, ориентирующаяся на преподавании точных,<br/>
                 естественных наук и английского языка.
             </div>
-            <el-col class="about__team__item" v-for="item in team" :span="5">
-                <img :src="item.avatar">
-                <div class="about__team__item__info">
-                    <div class="about__team__item__info__name">{{item.name}}</div>
-                    <div class="about__team__item__info__position">{{item.position}}</div>
-                    <div class="about__team__item__info__quote">
-                        {{item.quote}}
+            <el-container class="about__team__list container">
+                <div class="about__team__list__item" v-for="item in team" >
+                    <img :src="item.avatar">
+                    <div class="about__team__list__item__info">
+                        <div class="about__team__list__item__info__name">{{item.name}}</div>
+                        <div class="about__team__list__item__info__position">{{item.position}}</div>
+                        <div class="about__team__list__item__info__quote">
+                            {{item.quote}}
+                        </div>
                     </div>
                 </div>
-            </el-col>
+            </el-container>
         </el-row>
     </el-row>
 </template>
@@ -187,35 +189,43 @@
         &__team {
             text-align: center;
             padding-top: 100px;
-            &__item {
-                margin: 30px;
-                img {
-                    width: 100%;
-                }
-                &__info {
-                    &__name {
-                        font-size: 1.25rem;
-                        font-weight: 600;
-                        color: black;
+            &__list {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                &__item {
+                    width: 217px;
+                    margin: 30px;
+                    img {
+                        width: 100%;
                     }
-                    &__position {
-                        margin-top: .5rem;
-                        padding-bottom: .6rem;
-                        border-bottom: 1px solid rgba(114, 192, 44, .3);
-                        font-size: .785rem;
-                        line-height: 1.6;
-                        color: $app-color-green1;
-                    }
-                    &__quote {
-                        margin-top: 1rem;
-                        font-size: 1rem;
-                        line-height: 1.6;
-                        font-weight: 300;
+                    &__info {
+                        &__name {
+                            font-size: 1.25rem;
+                            font-weight: 600;
+                            color: black;
+                        }
+                        &__position {
+                            margin-top: .5rem;
+                            padding-bottom: .6rem;
+                            border-bottom: 1px solid rgba(114, 192, 44, .3);
+                            font-size: .785rem;
+                            line-height: 1.6;
+                            color: $app-color-green1;
+                        }
+                        &__quote {
+                            margin-top: 1rem;
+                            font-size: 1rem;
+                            line-height: 1.6;
+                            font-weight: 300;
+                        }
                     }
                 }
             }
         }
     }
+
+
 
     .Masthead__image.is-parallax > img {
         position: absolute;
@@ -228,5 +238,15 @@
         margin-right: 10px;
     }
 
+    /*@media (max-width: 1440px) {*/
+        /*.about__team__list__item {*/
+            /*width: 400px;*/
+        /*}*/
+    /*}*/
+    /*@media (max-width: 1380px) {*/
+        /*.about__team__list__item {*/
+            /*width: 620px;*/
+        /*}*/
+    /*}*/
 
 </style>
