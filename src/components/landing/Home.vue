@@ -240,7 +240,6 @@
                     <b-col md-4>
                         <b-card tag="article"
                                 class="mb-2 progress-card"
-                                style="box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.09);"
                         >
                             <div class="card-text text-center" style="padding: 10px">
                                 <div class="icon" style="background-color: #000000; width: 50px; height: 50px;">
@@ -577,7 +576,7 @@
     }
 
     .progress-card {
-
+        box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.09);
         border-color: #eee;
 
         &__title {
