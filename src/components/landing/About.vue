@@ -79,6 +79,13 @@
             </el-col>
         </el-row>
         <el-row class="about__team">
+                <h2 class="d-inline-block pb-3 border-bottom border-success">
+                    Наша команда
+                </h2>
+            <div class="font-xl font-weight-light text-black-50 text-center mt-2 mb-5">
+                Мы молодая квалифицированная команда, ориентирующаяся на преподавании точных,<br/>
+                естественных наук и английского языка.
+            </div>
             <el-col class="about__team__item" v-for="item in team" :span="5">
                 <img :src="item.avatar">
                 <div class="about__team__item__info">
@@ -175,10 +182,11 @@
         }
         &__content {
             padding-top: 50px;
-            height: 400px;
             background: white;
         }
         &__team {
+            text-align: center;
+            padding-top: 100px;
             &__item {
                 margin: 30px;
                 img {

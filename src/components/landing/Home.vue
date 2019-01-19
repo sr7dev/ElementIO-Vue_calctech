@@ -283,7 +283,10 @@
                 </div>
                 <div class="font-xl font-weight-light text-black-50 text-center mt-2 mb-5">
                     Мы молодая квалифицированная команда, ориентирующаяся на преподавании точных,<br/>
-                    естественных наук и английского языка. Подробнее...
+                    естественных наук и английского языка.
+                    <router-link :to="{name: 'About'}">
+                        Подробнее...
+                    </router-link>
                 </div>
                 <b-row>
                     <b-col lg="3" sm="6" class="pb-5">
@@ -589,5 +592,9 @@
         }
     }
 
+    a, a:hover {
+        color: $app-color-green1;
+        outline: none;
+    }
 
 </style>
