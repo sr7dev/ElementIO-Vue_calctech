@@ -85,3 +85,76 @@ button:focus {
 .el-table tr {
   cursor: pointer;
 }
+
+
+.course {
+  padding-top: 100px;
+  &__title {
+    font-size: 1.7rem;
+    line-height: 1.4;
+    color: $app-color-green1;
+    padding-bottom: 2.5rem;
+    cursor: pointer;
+    font-weight: 300;
+  }
+  &__content-card {
+    ul {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #777;
+    }
+    box-shadow: 0 0 5px #ddd;
+    border-color: #eee;
+    padding: 1.2em;
+  }
+  &__img-card {
+    box-shadow: 0 0 5px #ddd;
+    border-color: #eee;
+    img {
+      width: 100%;
+    }
+  }
+  &__costs {
+    border-color: #eee;
+    border-bottom: solid 1px #00000014;
+    margin-bottom: 50px;
+    &__item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      &:hover {
+        transform: scale3d(1.05, 1.05, 1.05);
+        transition-duration: .3s;
+        cursor: pointer;
+      }
+      &__sum {
+        padding: 40px;
+        border-right: dashed 1px #00000014;
+        strong {
+          color: $app-color-green1;
+          font-size: 2.5rem;
+        }
+      }
+      &__description {
+        padding-left: 40px;
+        h3 {
+          font-size: 1rem;
+        }
+        p {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+.card-body {
+    padding: 0;
+}
+
+.button {
+  color: $app-color-green1;
+  border-color: $app-color-green1;
+  background-color: transparent;
+}

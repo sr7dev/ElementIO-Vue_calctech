@@ -3,8 +3,13 @@
         <el-row>
             <el-col :span="8">
                 <el-card style="position: relative">
-                    <el-button @click="editUserInfo" style="position: absolute; right: 20px" type="primary"
+                    <el-button v-if="state.disabled" @click="editUserInfo" style="position: absolute; right: 20px"
+                               type="primary"
                                icon="el-icon-edit" circle></el-button>
+                    <el-button v-else icon="el-icon-close" type="danger"
+                               circle
+                               @click="state.disabled = !state.disabled"
+                               style="position: absolute; right: 20px"></el-button>
                     <el-upload
                             class="avatar-uploader"
                             :action="constants.MediaUrl + 'temp'"
@@ -93,10 +98,13 @@
             },
         },
         methods: {
-            putProfileImage(response){
+            putProfileImage(response) {
                 console.log(response);
                 this.profile.avatar = response.path
-                let req = ajax.reqAPI(`profile/${this.profile.id}`, {method: 'PUT', body: {avatar : this.profile.avatar}});
+                let req = ajax.reqAPI(`profile/${this.profile.id}`, {
+                    method: 'PUT',
+                    body: {avatar: this.profile.avatar}
+                });
                 req.then(response => {
                     console.log(response);
                 })

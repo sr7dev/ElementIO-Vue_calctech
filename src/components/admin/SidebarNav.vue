@@ -58,6 +58,11 @@
                         name: 'Настройки',
                         icon: 'icon-settings',
                         url: pathPrefix + 'settings'
+                    },
+                    {
+                        name: 'Уведомления',
+                        icon: 'icon-info',
+                        url: pathPrefix + 'notifications'
                     }
                 ],
             };

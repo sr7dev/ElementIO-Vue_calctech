@@ -13,6 +13,7 @@ const SubTopicCE = () => import('@/components/admin/refs/sub_topics/CE');
 const TasksTable = () => import('@/components/admin/tasks/Table');
 const TaskCE = () => import('@/components/admin/tasks/CE');
 const Settings = () => import('@/components/admin/Settings');
+const Notifications = () => import('@/components/admin/Notifications');
 
 
 export default {
@@ -118,6 +119,11 @@ export default {
             path: 'settings',
             name: 'settings',
             component: Settings,
+        },
+        {
+            path: 'notifications',
+            name: 'notifications',
+            component: Notifications,
         },
     ],
 };
