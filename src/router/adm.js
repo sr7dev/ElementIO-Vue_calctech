@@ -14,6 +14,10 @@ const TasksTable = () => import('@/components/admin/tasks/Table');
 const TaskCE = () => import('@/components/admin/tasks/CE');
 const Settings = () => import('@/components/admin/Settings');
 const Notifications = () => import('@/components/admin/Notifications');
+const Roles = () => import('@/components/admin/roles/Table');
+const RolesCE = () => import('@/components/admin/roles/CE');
+
+
 
 
 export default {
@@ -124,6 +128,23 @@ export default {
             path: 'notifications',
             name: 'notifications',
             component: Notifications,
+        },
+        {
+            path: 'roles',
+            component: {template: '<router-view></router-view>'},
+            redirect: {name: 'roles'},
+            children: [
+                {
+                    path: '',
+                    name: 'roles',
+                    component: Roles,
+                },
+                {
+                    path: 'ce/:roles_id',
+                    name: 'RolesCE',
+                    component: RolesCE,
+                },
+            ],
         },
     ],
 };

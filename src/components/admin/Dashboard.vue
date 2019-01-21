@@ -62,6 +62,10 @@
             },
         },
         created() {
+            getRoles().then(response => {
+                console.log(response);
+            })
+
             this.profile = this.$store.state.profile
             if (this.notifications.length) this.openNotifications()
         },

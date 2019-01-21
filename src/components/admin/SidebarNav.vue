@@ -63,6 +63,11 @@
                         name: 'Уведомления',
                         icon: 'icon-info',
                         url: pathPrefix + 'notifications'
+                    },
+                    {
+                        name: 'Роли и полномочия',
+                        icon: 'icon-info',
+                        url: pathPrefix + 'roles'
                     }
                 ],
             };
