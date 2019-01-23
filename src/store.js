@@ -22,6 +22,8 @@ export default new Vuex.Store({
         task_types: [],
         attachment_types: [],
         roles: [],
+        users: [],
+        groups: [],
 
         profile: null,
 
@@ -127,6 +129,16 @@ export default new Vuex.Store({
         reloadRoles({commit}) {
             return ajax.reqAPI(`roles`).then(response => {
                 commit('set', ['roles', response.data]);
+            });
+        },
+        reloadUsers({commit}) {
+            return ajax.reqAPI(`usrs`).then(response => {
+                commit('set', ['users', response.data.results]);
+            });
+        },
+        reloadGroups({commit}) {
+            return ajax.reqAPI(`groups`).then(response => {
+                commit('set', ['groups', response.data.results]);
             });
         },
         reloadAttachmentTypes({commit}) {

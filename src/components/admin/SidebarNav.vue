@@ -68,6 +68,16 @@
                         name: 'Роли и полномочия',
                         icon: 'icon-info',
                         url: pathPrefix + 'roles'
+                    },
+                    {
+                        name: 'Пользователи',
+                        icon: 'icon-info',
+                        url: pathPrefix + 'users'
+                    },
+                    {
+                        name: 'Группы',
+                        icon: 'icon-info',
+                        url: pathPrefix + 'groups'
                     }
                 ],
             };

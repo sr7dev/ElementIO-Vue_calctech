@@ -90,7 +90,7 @@
                 }).catch(err => {
                     console.log(err);
                     this.state.loading = false
-                    this.message.error('Возникла ошибка')
+                    this.$message.error('Возникла ошибка')
                 })
             }
         }

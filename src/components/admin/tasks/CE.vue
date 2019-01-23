@@ -23,10 +23,22 @@
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item :span="8" label="Язык">
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item label="Язык">
                             <el-input v-if="id" type="text" :value="data.kind_name" disabled/>
                             <el-radio-group v-model="data.lang_id">
                                 <el-radio-button v-for="item in $store.state.langs" :label="item.id">{{item.name}}
+                                </el-radio-button>
+                            </el-radio-group>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="Сложность">
+                            <el-radio-group v-model="data.difficulty_id">
+                                <el-radio-button v-for="item in difficulties" :label="item.id">{{item.name}}
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
@@ -87,71 +99,71 @@
                                     </b-alert>
                                 </b-col>
                             </b-row>
-                            <b-row>
-                                <b-col lg="4">
-                                    <b-form-group label="Вид задания">
-                                        <b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>
-                                        <b-form-radio-group v-else="" buttons
-                                                            button-variant="outline-primary"
-                                                            v-model.number="data.kind_id"
-                                                            :options="$store.state.task_kinds"
-                                                            value-field="id"
-                                                            text-field="name"></b-form-radio-group>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col lg="4">
-                                    <b-form-group label="Язык">
-                                        <b-form-radio-group buttons
-                                                            button-variant="outline-primary"
-                                                            v-model.number="data.lang_id"
-                                                            :options="$store.state.langs"
-                                                            value-field="id"
-                                                            text-field="name"></b-form-radio-group>
-                                    </b-form-group>
-                                </b-col>
-                                <b-col lg="4">
-                                    <b-form-group label="Сложность">
-                                        <b-form-radio-group buttons
-                                                            button-variant="outline-primary"
-                                                            v-model.number="data.difficulty_id"
-                                                            :options="ld.concat([notSelectedChoice], $store.state.difficulties)"
-                                                            value-field="id"
-                                                            text-field="name"></b-form-radio-group>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col lg="4">
-                                    <b-form-group label="Класс">
-                                        <b-select v-model.number="data.grade_id"
-                                                  :options="ld.concat([notSelectedOption], $store.state.grades)"
-                                                  value-field="id" text-field="name"></b-select>
-                                    </b-form-group>
-                                </b-col>
-                                <b-col lg="4">
-                                    <b-form-group label="Предмет">
-                                        <b-select v-model.number="data.subject_id"
-                                                  :options="ld.concat([notSelectedOption], $store.state.subjects)"
-                                                  value-field="id" text-field="name"></b-select>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col lg="4">
-                                    <b-form-group label="Тема">
-                                        <b-select v-model.number="data.topic_id" :options="topics"
-                                                  value-field="id" text-field="name"></b-select>
-                                    </b-form-group>
-                                </b-col>
-                                <b-col lg="4">
-                                    <b-form-group label="Подтема">
-                                        <b-select v-model.number="data.sub_topic_id" :options="subTopics"
-                                                  value-field="id" text-field="name"></b-select>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
+                            <!--<b-row>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Вид задания">-->
+                                        <!--<b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
+                                        <!--<b-form-radio-group v-else="" buttons-->
+                                                            <!--button-variant="outline-primary"-->
+                                                            <!--v-model.number="data.kind_id"-->
+                                                            <!--:options="$store.state.task_kinds"-->
+                                                            <!--value-field="id"-->
+                                                            <!--text-field="name"></b-form-radio-group>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                            <!--</b-row>-->
+                            <!--<b-row>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Язык">-->
+                                        <!--<b-form-radio-group buttons-->
+                                                            <!--button-variant="outline-primary"-->
+                                                            <!--v-model.number="data.lang_id"-->
+                                                            <!--:options="$store.state.langs"-->
+                                                            <!--value-field="id"-->
+                                                            <!--text-field="name"></b-form-radio-group>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Сложность">-->
+                                        <!--<b-form-radio-group buttons-->
+                                                            <!--button-variant="outline-primary"-->
+                                                            <!--v-model.number="data.difficulty_id"-->
+                                                            <!--:options="ld.concat([notSelectedChoice], $store.state.difficulties)"-->
+                                                            <!--value-field="id"-->
+                                                            <!--text-field="name"></b-form-radio-group>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                            <!--</b-row>-->
+                            <!--<b-row>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Класс">-->
+                                        <!--<b-select v-model.number="data.grade_id"-->
+                                                  <!--:options="ld.concat([notSelectedOption], $store.state.grades)"-->
+                                                  <!--value-field="id" text-field="name"></b-select>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Предмет">-->
+                                        <!--<b-select v-model.number="data.subject_id"-->
+                                                  <!--:options="ld.concat([notSelectedOption], $store.state.subjects)"-->
+                                                  <!--value-field="id" text-field="name"></b-select>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                            <!--</b-row>-->
+                            <!--<b-row>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Тема">-->
+                                        <!--<b-select v-model.number="data.topic_id" :options="topics"-->
+                                                  <!--value-field="id" text-field="name"></b-select>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                                <!--<b-col lg="4">-->
+                                    <!--<b-form-group label="Подтема">-->
+                                        <!--<b-select v-model.number="data.sub_topic_id" :options="subTopics"-->
+                                                  <!--value-field="id" text-field="name"></b-select>-->
+                                    <!--</b-form-group>-->
+                                <!--</b-col>-->
+                            <!--</b-row>-->
                             <b-row>
                                 <b-col md="8" lg="6">
                                     <b-form-group v-if="isQuestion" label="Тип вопроса">
@@ -273,6 +285,9 @@
             };
         },
         computed: {
+            difficulties() {
+                return this.ld.concat([this.notSelectedChoice], this.$store.state.difficulties)
+            },
             subjects() {
                 return this.ld.concat([this.notSelectedOption], this.$store.state.subjects)
             },

@@ -16,6 +16,13 @@ const Settings = () => import('@/components/admin/Settings');
 const Notifications = () => import('@/components/admin/Notifications');
 const Roles = () => import('@/components/admin/roles/Table');
 const RolesCE = () => import('@/components/admin/roles/CE');
+const Users = () => import('@/components/admin/users/Table');
+const UsersCE = () => import('@/components/admin/users/CE');
+const Groups = () => import('@/components/admin/groups/Table');
+const GroupsCE = () => import('@/components/admin/groups/CE');
+
+
+
 
 
 
@@ -143,6 +150,40 @@ export default {
                     path: 'ce/:roles_id',
                     name: 'RolesCE',
                     component: RolesCE,
+                },
+            ],
+        },
+        {
+            path: 'users',
+            component: {template: '<router-view></router-view>'},
+            redirect: {name: 'users'},
+            children: [
+                {
+                    path: '',
+                    name: 'users',
+                    component: Users,
+                },
+                {
+                    path: 'ce/:users_id',
+                    name: 'UsersCE',
+                    component: UsersCE,
+                },
+            ],
+        },
+        {
+            path: 'groups',
+            component: {template: '<router-view></router-view>'},
+            redirect: {name: 'groups'},
+            children: [
+                {
+                    path: '',
+                    name: 'groups',
+                    component: Groups,
+                },
+                {
+                    path: 'ce/:groups_id',
+                    name: 'GroupsCE',
+                    component: GroupsCE,
                 },
             ],
         },
