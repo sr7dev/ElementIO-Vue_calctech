@@ -96,7 +96,7 @@
                 }
                 &__icon {
                     color: $app-color-green1;
-                    font-size: 5rem;
+                    font-size: 3rem;
                     width: 50%;
                 }
             }

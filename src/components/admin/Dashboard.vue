@@ -22,6 +22,9 @@
                     </el-card>
                 </el-form>
             </el-col>
+            <el-col :span="16" :offset="2">
+                <notifications></notifications>
+            </el-col>
         </el-row>
     </div>
 </template>
@@ -29,31 +32,16 @@
 <script>
     import constants from "@/constants";
     import utils from "@/utils";
-
+    import notifications from "@/components/admin/Notifications"
 
     export default {
+        components: {
+            notifications
+        },
         data() {
             return {
                 utils, constants,
                 profile: {},
-                notifications: [
-                    {
-                        title: 'Уведомление',
-                        message: 'Модератор одобрил вопрос/задание',
-                    },
-                    {
-                        title: 'Уведомление',
-                        message: 'Вы добавлены в группу учеников',
-                    },
-                    {
-                        title: 'Уведомление',
-                        message: 'Вам присвоена группа учеников',
-                    },
-                    {
-                        title: 'Уведомление',
-                        message: 'Новое задание',
-                    }
-                ]
             };
         },
         computed: {
@@ -62,29 +50,9 @@
             },
         },
         created() {
-            getRoles().then(response => {
-                console.log(response);
-            })
-
             this.profile = this.$store.state.profile
-            if (this.notifications.length) this.openNotifications()
         },
-        methods: {
-            openNotifications() {
-                this.notifications.forEach((item, index) => {
-                    setTimeout(() => {
-                            this.$notify({
-                                title: item.title,
-                                message: item.message,
-                                duration: 0,
-                                type: 'success',
-                                offset: 100
-                            })
-                        }, 1000 * (index + 1)
-                    )
-                })
-            }
-        },
+        methods: {},
     }
 
 </script>
