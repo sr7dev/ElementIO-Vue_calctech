@@ -46,7 +46,7 @@
         },
         computed: {
             avatar() {
-                return this.profile.avatar ? this.profile.avatar : 'img/default_avatar.jpg'
+                return this.profile.avatar ? constants.MediaUrl + this.profile.avatar : 'img/default_avatar.jpg'
             },
         },
         created() {
