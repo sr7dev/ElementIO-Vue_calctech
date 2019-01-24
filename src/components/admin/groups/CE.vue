@@ -10,8 +10,8 @@
             </el-row>
         </el-container>
         <el-steps align-center :active="active" class="m-5" finish-status="success">
-            <el-step title="Опишите группу"></el-step>
-            <el-step title="Назначьте студентов и преподавателя"></el-step>
+            <el-step title="Опишите группу и назначьте преподавателя"></el-step>
+            <el-step title="Назначьте студентов"></el-step>
             <el-step title="Сохраните"></el-step>
         </el-steps>
         <el-card class="mb-5">
@@ -22,6 +22,11 @@
                     <el-form label-position="top">
                         <el-form-item label="Название группы:">
                             <el-input v-model="group.name"></el-input>
+                        </el-form-item>
+                        <el-form-item label="Преподаватель">
+                            <el-select style="width: 100%" v-model="group.tutor_id" @change="onTutorChange">
+                                <el-option v-for="item in users" :label="item.label" :value="item.key"></el-option>
+                            </el-select>
                         </el-form-item>
                         <el-form-item label="Заметки:">
                             <el-input type="textarea" :autosize="{ minRows: 3 }" v-model="group.note"></el-input>
@@ -38,12 +43,6 @@
                             :data="users"
                             :right-default-checked="state.tutor_id"
                             @right-check-change="onGroupListChange">
-                        <el-button class="transfer-footer"
-                                   round type="primary"
-                                   slot="right-footer"
-                                   size="small"
-                                   @click="setTutor"
-                        >Назначить преподавателем</el-button>
                     </el-transfer>
                 </el-col>
             </el-row>
@@ -57,7 +56,7 @@
 </template>
 
 <script>
-    import {getGroup, putGroup, postGroup, putUserGroup, setGroupTutor} from './api'
+    import {getGroup, postGroup, putGroup, putUserGroup} from './api'
 
     export default {
         data: () => {
@@ -74,17 +73,21 @@
             }
         },
         async created() {
-            await this.$store.dispatch('reloadUsers').then(() => {
-                this.users = this.$store.state.users.results.map(item => {
-                    return {key: item.id, label: item.first_name, disabled: false}
-                })
+            await this.$store.dispatch('reloadUsers')
+            this.users = this.$store.state.users.results.map(item => {
+                return {key: item.id, label: item.first_name, disabled: false}
             })
             if (this.id) {
                 await getGroup(this.id).then(response => {
                     this.group = response.data
-                    if (this.group.tutor_id) this.state.tutor_id.push(this.group.tutor_id)
+                    if (this.group.tutor_id) {
+                        this.state.tutor_id.push(this.group.tutor_id)
+                        this.users.forEach(item => {
+                            if (item.key === this.group.tutor_id) item.disabled = true
+                        })
+                    }
                     this.groupUsers = this.group.students.map(item => {
-                        return item.id
+                        if (item.id !== this.group.tutor_id) return item.id
                     })
                 })
             }
@@ -99,21 +102,6 @@
             },
         },
         methods: {
-            setTutor () {
-                if (this.state.tutor_id.length === 1) {
-                    let body = {
-                        tutor_id: this.state.tutor_id[0]
-                    }
-                    setGroupTutor(this.id, body).then(response => {
-                        this.$message.success('Преподаватель успешно назначен')
-                        console.log(response, 'Назначили учителя');
-                    })
-                } else if (this.state.tutor_id.length < 1) {
-                    this.$message.error('Выберите преподавателя')
-                } else  {
-                    this.$message.error('Нельзя назначить больше 1 преподавателя')
-                }
-            },
             prev() {
                 if (this.active-- < 0) this.active = 0;
             },
@@ -123,22 +111,35 @@
                     let body = {
                         name: this.group.name,
                         note: this.group.note,
+                        tutor_id: this.group.tutor_id
                     }
-                    if(this.id) {
+                    this.state.tutor_id.push(this.group.tutor_id)
+                    if (this.id) {
                         req = putGroup(this.id, body)
                     } else {
                         req = postGroup(body)
                     }
                     req.then(response => {
                         if (response.data !== null) this.state.group_id = response.data.id
+                        this.users.forEach(item => {
+                            if (item.key === this.state.tutor_id[0]) item.disabled = true
+                        })
                     })
                 }
                 if (this.active++ > 2) this.active = 0;
             },
-            onGroupListChange(keys){
+            onTutorChange(val){
+                this.state.tutor_id[0] = val
+                this.users.forEach(item => {
+                    item.disabled = item.key === val;
+                })
+                this.groupUsers = this.groupUsers.filter(item => item !== val)
+                this.onUsersListChange()
+            },
+            onGroupListChange(keys) {
                 this.state.tutor_id = keys;
             },
-            onUsersListChange(){
+            onUsersListChange() {
                 let body = {
                     usr_ids: [...this.groupUsers]
                 }
@@ -152,15 +153,16 @@
                 let body = {
                     name: this.group.name,
                     note: this.group.note,
+                    tutor_id: this.group.tutor_id
                 }
-                if(this.id) {
+                if (this.id) {
                     req = putGroup(this.id, body)
                 } else {
                     req = postGroup(body)
                 }
                 req.then(resposne => {
                     this.state.loading = false;
-                    this.$message.success( this.id ? 'Группа успешно изменена' : 'Роль успешно создана')
+                    this.$message.success(this.id ? 'Группа успешно изменена' : 'Роль успешно создана')
                     this.$router.push({name: 'groups'})
                 }).catch(err => {
                     console.log(err);
@@ -185,10 +187,4 @@
             }
         }
     }
-    /*.el-transfer-panel {*/
-        /*width: 45%;*/
-    /*}*/
-    /*.el-transfer-panel .el-transfer-panel__footer {*/
-        /*text-align: center;*/
-    /*}*/
 </style>

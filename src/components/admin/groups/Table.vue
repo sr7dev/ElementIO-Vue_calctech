@@ -93,7 +93,7 @@
                 this.state.loading = false
             },
             formatter(row) {
-                return (_.find(this.$store.state.users, {id: row.tutor_id}) || {name: ''}).first_name;
+                return (_.find(this.$store.state.users.results, {id: row.tutor_id}) || {name: ''}).first_name;
             },
             onItemClick(item, $event) {
                 if ($event.target.getAttribute('class') === 'cell') {

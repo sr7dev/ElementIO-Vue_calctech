@@ -61,6 +61,8 @@
                     this.role = response.data
                     this.state.loading = false
                 })
+            } else {
+                this.state.loading = false
             }
         },
         computed: {

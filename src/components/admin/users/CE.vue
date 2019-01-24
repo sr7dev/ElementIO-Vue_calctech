@@ -28,8 +28,9 @@
                 </el-form-item>
                 <el-form-item label="Роль:">
                     <el-select v-model="user.roles">
-                        <el-option v-for="item in roles"
+                        <el-option v-for="item in stateRoles"
                                    :label="item.name"
+                                   :key="item.id"
                                    :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
@@ -53,13 +54,14 @@
                 user: {}
             }
         },
-        created() {
+         created() {
             this.$store.dispatch('reloadRoles')
             if (this.id) {
-                getUser(this.id).then(response => {
+                 getUser(this.id).then(response => {
                     this.user = response.data
-                    this.user.roles = response.data.roles[0]
-                    this.state.loading = false
+                    this.user.roles = response.data.roles[0].name
+                     console.log(response.data.roles);
+                     this.state.loading = false
                 })
             }
         },
@@ -70,7 +72,7 @@
             headerText() {
                 return this.id ? 'Изменить пользователя' : 'Создать пользователя';
             },
-            roles() {
+            stateRoles() {
                 return this.$store.state.roles
             }
         },
@@ -82,7 +84,8 @@
                     first_name: this.user.first_name,
                     last_name: this.user.last_name,
                     username: this.user.username,
-                    password: this.user.password
+                    password: this.user.password,
+                    roles: this.user.roles
                 }
                 if(this.id) {
                     req = putUser(this.id, body)

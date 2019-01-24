@@ -14,8 +14,10 @@
                             class="avatar-uploader"
                             :action="constants.MediaUrl + 'temp'"
                             :on-success="putProfileImage"
+                            :before-upload="() => state.loading = true"
                             :show-file-list="false">
-                        <img class="avatar" :src="avatar">
+                        <img class="avatar"
+                             :src="utils.fmtMediaImageFit(profile.avatar ? profile.avatar : 'img/default_avatar.jpg', 300, 300)">
                         <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
                     </el-upload>
                     <el-form
@@ -51,6 +53,8 @@
 <script>
     import constants from "@/constants";
     import ajax from "@/ajax";
+    import utils from '@/utils'
+
 
     let rule = {required: true, message: 'Это поле не может быть пустым', trigger: 'blur'}
     export default {
@@ -58,11 +62,14 @@
         data() {
             return {
                 constants,
+                utils,
                 state: {
                     loading: true,
                     disabled: true,
                 },
-                profile: {},
+                profile: {
+                    avatar: ''
+                },
                 rules: {
                     last_name: [
                         rule
@@ -90,16 +97,15 @@
         created() {
             this.profile = this.$store.state.profile
             this.state.loading = false
-            console.log(this.profile);
         },
-        computed: {
-            avatar() {
-                return this.profile.avatar ? constants.MediaUrl + this.profile.avatar : 'img/default_avatar.jpg'
-            },
-        },
+        // computed: {
+        //     avatar() {
+        //         return this.profile.avatar ? constants.MediaUrl + this.profile.avatar : 'img/default_avatar.jpg'
+        //     },
+        // },
         methods: {
             putProfileImage(response) {
-                this.state.loading = true
+                // this.state.loading = true
                 this.profile.avatar = response.path
                 let req = ajax.reqAPI(`usrs/${this.profile.id}`, {
                     method: 'PUT',
@@ -114,10 +120,12 @@
                     this.$message.error('Произошла ошибка')
                     console.log(err);
                 })
-            },
+            }
+            ,
             editUserInfo() {
                 this.state.disabled = false
-            },
+            }
+            ,
             checkValid() {
                 if (this.profile.newPassword !== this.profile.repeatPassword) {
                     this.$message.error('Пароли не совпадают')

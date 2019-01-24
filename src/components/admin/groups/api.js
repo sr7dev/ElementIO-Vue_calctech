@@ -40,15 +40,6 @@ export function putGroup(id, body) {
     )
 }
 
-export function setGroupTutor(id, body) {
-    return ajax.reqAPI(
-        `groups/${id}`,
-        {
-            method: 'PUT',
-            body
-        }
-    )
-}
 
 export function putUserGroup(id, body) {
     return ajax.reqAPI(
