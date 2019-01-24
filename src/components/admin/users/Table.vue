@@ -1,5 +1,6 @@
 <template>
     <div v-loading="state.loading">
+        <h1 class="text-black-50">Пользователи</h1>
         <el-container>
             <el-table
                     @row-click="onItemClick"
@@ -92,11 +93,15 @@
             this.state.loading = false
         },
         methods: {
-            onPageChange(){
-                this.$store.dispatch('reloadUsers', this.params)
+            async onPageChange(){
+                this.state.loading = true
+                await this.$store.dispatch('reloadUsers', this.params)
+                this.state.loading = false
             },
-            onItemClick(item) {
-                this.$router.push({path: 'ce/' + item.id, append: true});
+            onItemClick(item, $event) {
+                if ($event.target.getAttribute('class') === 'cell') {
+                    this.$router.push({path: 'ce/' + item.id, append: true});
+                }
             },
             onItemDeleteClick(item) {
                 this.$confirm('Вы уверены что хотите удалить этого пользователя?')

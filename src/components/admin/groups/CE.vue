@@ -75,7 +75,7 @@
         },
         async created() {
             await this.$store.dispatch('reloadUsers').then(() => {
-                this.users = this.$store.state.users.map(item => {
+                this.users = this.$store.state.users.results.map(item => {
                     return {key: item.id, label: item.first_name, disabled: false}
                 })
             })

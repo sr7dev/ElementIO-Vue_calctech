@@ -27,7 +27,7 @@
                     <el-input v-model="user.password"></el-input>
                 </el-form-item>
                 <el-form-item label="Роль:">
-                    <el-select v-model="user.role">
+                    <el-select v-model="user.roles">
                         <el-option v-for="item in roles"
                                    :label="item.name"
                                    :value="item.id"></el-option>
@@ -48,7 +48,7 @@
         data: () => {
             return {
                 state: {
-                    loading: false
+                    loading: true
                 },
                 user: {}
             }
@@ -57,7 +57,9 @@
             this.$store.dispatch('reloadRoles')
             if (this.id) {
                 getUser(this.id).then(response => {
-                    console.log(response);
+                    this.user = response.data
+                    this.user.roles = response.data.roles[0]
+                    this.state.loading = false
                 })
             }
         },

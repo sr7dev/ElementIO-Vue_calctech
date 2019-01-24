@@ -50,8 +50,9 @@
                 },
             }
         },
-        created(){
-            this.$store.dispatch('reloadRoles').then(() => this.state.loading = false)
+        async created(){
+            await this.$store.dispatch('reloadRoles')
+            this.state.loading = false
         },
         computed: {
             tableData() {
@@ -59,8 +60,10 @@
             }
         },
         methods: {
-            onItemClick(item) {
-                this.$router.push({path: 'ce/' + item.id, append: true});
+            onItemClick(item, $event) {
+                if ($event.target.getAttribute('class') === 'cell') {
+                    this.$router.push({path: 'ce/' + item.id, append: true});
+                }
             },
             onItemDeleteClick(item) {
                 this.$confirm('Вы уверены что хотите удалить эту роль?')

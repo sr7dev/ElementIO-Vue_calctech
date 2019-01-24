@@ -88,9 +88,10 @@
             onAddClick() {
                 this.$router.push({path: 'ce/0', append: true});
             },
-            onItemClick(item) {
-                // this.largeModal = true;
-                this.$router.push({path: 'ce/' + item.id, append: true});
+            onItemClick(item, $event) {
+                if ($event.target.getAttribute('class') === 'cell') {
+                    this.$router.push({path: 'ce/' + item.id, append: true});
+                }
             },
             onItemDeleteClick(item ) {
 

@@ -13,18 +13,18 @@
                     </div>
                 </div>
                 <!--<b-card-body class="pb-1">-->
-                    <!--<div v-if="loading" class="text-center pb-2"><i class="spnr"></i></div>-->
-                    <!--<b-table v-else="" responsive="sm"-->
-                             <!--:fields="fields" :items="items"-->
-                             <!--tbody-class="cursor-pointer"-->
-                             <!--@row-clicked="onItemClick"-->
-                             <!--empty-text="Записи не найдены" bordered hover>-->
-                        <!--<template slot="actions" slot-scope="data">-->
-                            <!--<el-button type="danger" size="small" @click.stop="onItemDeleteClick(data.item)">-->
-                                <!--<i class="fa fa-trash mr-2"></i>удалить-->
-                            <!--</el-button>-->
-                        <!--</template>-->
-                    <!--</b-table>-->
+                <!--<div v-if="loading" class="text-center pb-2"><i class="spnr"></i></div>-->
+                <!--<b-table v-else="" responsive="sm"-->
+                <!--:fields="fields" :items="items"-->
+                <!--tbody-class="cursor-pointer"-->
+                <!--@row-clicked="onItemClick"-->
+                <!--empty-text="Записи не найдены" bordered hover>-->
+                <!--<template slot="actions" slot-scope="data">-->
+                <!--<el-button type="danger" size="small" @click.stop="onItemDeleteClick(data.item)">-->
+                <!--<i class="fa fa-trash mr-2"></i>удалить-->
+                <!--</el-button>-->
+                <!--</template>-->
+                <!--</b-table>-->
                 <el-table
                         empty-text="Записи не найдены"
                         :data="items"
@@ -47,7 +47,8 @@
                                     type="danger"
                                     size="small"
                                     icon="el-icon-delete"
-                                    @click.stop="onItemDeleteClick(scope.row)">Удалить</el-button>
+                                    @click.stop="onItemDeleteClick(scope.row)">Удалить
+                            </el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -88,9 +89,10 @@
             onAddClick() {
                 this.$router.push({path: 'ce/0', append: true});
             },
-            onItemClick(item) {
-                // this.largeModal = true;
-                this.$router.push({path: 'ce/' + item.id, append: true});
+            onItemClick(item, $event) {
+                if ($event.target.getAttribute('class') === 'cell') {
+                    this.$router.push({path: 'ce/' + item.id, append: true});
+                }
             },
             onItemDeleteClick(item) {
                 this.$confirm('Вы уверены что хотите удалить эту запись?')
@@ -109,7 +111,8 @@
                             }
                         });
                     })
-                    .catch(_ => {});
+                    .catch(_ => {
+                    });
                 // this.$store.commit('confirm', {
                 //     msg: 'Вы уверены что хотите удалить эту запись?',
                 //     okCb: () => {

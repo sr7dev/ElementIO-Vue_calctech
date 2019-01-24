@@ -47,7 +47,7 @@
             return {
                 perms,
                 state: {
-                    loading: false
+                    loading: true
                 },
                 role: {
                     name: '',
@@ -59,6 +59,7 @@
             if (this.id) {
                 getRole(this.id).then(response => {
                     this.role = response.data
+                    this.state.loading = false
                 })
             }
         },
