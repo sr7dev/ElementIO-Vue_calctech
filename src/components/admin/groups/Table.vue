@@ -42,11 +42,22 @@
                                 size="mini"
                                 type="danger"
                                 icon="el-icon-delete"
-                                @click="onItemDeleteClick(scope.row)">Удалить</el-button>
+                                @click="onItemDeleteClick(scope.row)">Удалить
+                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>
         </el-container>
+        <el-row class="mt-5" type="flex" justify="start">
+            <el-pagination
+                    :current-page.sync="params.page"
+                    :total="params.total_count"
+                    :page-size="params.page_size"
+                    background
+                    @current-change="onPageChange"
+                    layout="prev, pager, next">
+            </el-pagination>
+        </el-row>
     </div>
 </template>
 
@@ -59,21 +70,26 @@
             return {
                 state: {
                     loading: true
-                }
+                },
+                params: {}
             }
         },
         computed: {
             tableData() {
-                return this.$store.state.groups
+                return this.$store.state.groups.results
             }
         },
-        created(){
-            this.$store.dispatch('reloadGroups').then( () => {
-                this.state.loading = false
-            })
+        async created() {
+            await this.$store.dispatch('reloadGroups')
+            this.params = {...this.$store.state.groups}
+            delete this.params.results
+            this.state.loading = false
         },
         methods: {
-            formatter(row){
+            onPageChange(){
+                this.$store.dispatch('reloadGroups', this.params)
+            },
+            formatter(row) {
                 return (_.find(this.$store.state.users, {id: row.tutor_id}) || {name: ''}).first_name;
             },
             onItemClick(item) {

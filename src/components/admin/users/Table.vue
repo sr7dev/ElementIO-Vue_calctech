@@ -52,6 +52,16 @@
                 </el-table-column>
             </el-table>
         </el-container>
+        <el-row class="mt-5" type="flex" justify="start">
+            <el-pagination
+                    :current-page.sync="params.page"
+                    :total="params.total_count"
+                    :page-size="params.page_size"
+                    @current-change="onPageChange"
+                    background
+                    layout="prev, pager, next">
+            </el-pagination>
+        </el-row>
     </div>
 </template>
 
@@ -63,21 +73,30 @@
             return {
                 state: {
                     loading: true
+                },
+                params: {
+                    page: 1,
+                    page_size: 4
                 }
             }
         },
         computed: {
             tableData() {
-                return this.$store.state.users
-            }
+                return this.$store.state.users.results
+            },
         },
-        created(){
-            this.$store.dispatch('reloadUsers').then( () => this.state.loading = false)
+        async created(){
+            await this.$store.dispatch('reloadUsers', this.params)
+            this.params = {...this.$store.state.users}
+            delete this.params.results
+            this.state.loading = false
         },
         methods: {
+            onPageChange(){
+                this.$store.dispatch('reloadUsers', this.params)
+            },
             onItemClick(item) {
                 this.$router.push({path: 'ce/' + item.id, append: true});
-                console.log(this.tableData);
             },
             onItemDeleteClick(item) {
                 this.$confirm('Вы уверены что хотите удалить этого пользователя?')

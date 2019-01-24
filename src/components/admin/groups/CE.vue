@@ -14,12 +14,11 @@
             <el-step title="Назначьте студентов и преподавателя"></el-step>
             <el-step title="Сохраните"></el-step>
         </el-steps>
-        <el-card>
+        <el-card class="mb-5">
+            <h3 class="text-black-50 m-0">{{headerText}}</h3>
+            <hr>
             <el-row>
-                <el-col v-if="active !== 1" :span="active === 2 ? 11 : 24">
-                    <div slot="header">
-                        <h3 class="text-black-50 m-0">{{headerText}}</h3>
-                    </div>
+                <el-col v-if="active !== 1" :span="11">
                     <el-form label-position="top">
                         <el-form-item label="Название группы:">
                             <el-input v-model="group.name"></el-input>
@@ -37,6 +36,7 @@
                             :titles="['Все пользователи', 'Группа']"
                             v-model="groupUsers"
                             :data="users"
+                            :right-default-checked="state.tutor_id"
                             @right-check-change="onGroupListChange">
                         <el-button class="transfer-footer"
                                    round type="primary"
@@ -82,7 +82,7 @@
             if (this.id) {
                 await getGroup(this.id).then(response => {
                     this.group = response.data
-
+                    if (this.group.tutor_id) this.state.tutor_id.push(this.group.tutor_id)
                     this.groupUsers = this.group.students.map(item => {
                         return item.id
                     })
@@ -130,7 +130,7 @@
                         req = postGroup(body)
                     }
                     req.then(response => {
-                        this.state.group_id = response.data.id
+                        if (response.data !== null) this.state.group_id = response.data.id
                     })
                 }
                 if (this.active++ > 2) this.active = 0;

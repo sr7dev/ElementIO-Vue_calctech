@@ -94,19 +94,25 @@
         },
         computed: {
             avatar() {
-                return this.profile.avatar ? this.profile.avatar : 'img/default_avatar.jpg'
+                return this.profile.avatar ? constants.MediaUrl + this.profile.avatar : 'img/default_avatar.jpg'
             },
         },
         methods: {
             putProfileImage(response) {
-                console.log(response);
+                this.state.loading = true
                 this.profile.avatar = response.path
-                let req = ajax.reqAPI(`profile/${this.profile.id}`, {
+                let req = ajax.reqAPI(`usrs/${this.profile.id}`, {
                     method: 'PUT',
                     body: {avatar: this.profile.avatar}
                 });
                 req.then(response => {
+                    this.state.loading = false
                     console.log(response);
+                })
+                req.catch(err => {
+                    this.state.loading = false
+                    this.$message.error('Произошла ошибка')
+                    console.log(err);
                 })
             },
             editUserInfo() {
