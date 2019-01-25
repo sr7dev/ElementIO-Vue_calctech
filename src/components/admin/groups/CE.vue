@@ -42,6 +42,10 @@
                         <el-form-item label="Студенты:">
                             <el-select v-model="groupUsers"
                                        multiple
+                                       remote
+                                       reserve-keyword
+                                       filterable
+                                       :remote-method="onStudentsSearch"
                                        @remove-tag="removeStudents"
                                        placeholder="Выберите студентов"
                                        style="width: 100%"
@@ -121,6 +125,18 @@
                     this.state.loading = false
                 } else {
                     await this.$store.dispatch('reloadUsers')
+                    this.state.loading = false
+                }
+            },
+            async onStudentsSearch(query) {
+                this.state.loading = true;
+                if (query !== '') {
+                    let pars = {
+                        search: query
+                    }
+                    await this.$store.dispatch('reloadUsers', pars)
+                    this.state.loading = false
+                } else {
                     this.state.loading = false
                 }
             },
