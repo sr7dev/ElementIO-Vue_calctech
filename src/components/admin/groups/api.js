@@ -41,7 +41,7 @@ export function putGroup(id, body) {
 }
 
 
-export function putUserGroup(id, body) {
+export function putGroupStudents(id, body) {
     return ajax.reqAPI(
         `groups/${id}/add_usrs`,
         {
@@ -50,6 +50,19 @@ export function putUserGroup(id, body) {
         }
     )
 }
+
+
+export function removeGroupStudents(id, body) {
+    return ajax.reqAPI(
+        `groups/${id}/remove_usrs`,
+        {
+            method: 'PUT',
+            body
+        }
+    )
+}
+
+
 
 export function deleteGroup(id) {
     return ajax.reqAPI(

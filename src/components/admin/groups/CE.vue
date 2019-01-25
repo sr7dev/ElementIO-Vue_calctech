@@ -9,46 +9,50 @@
                 </el-col>
             </el-row>
         </el-container>
-        <el-steps align-center :active="active" class="m-5" finish-status="success">
-            <el-step title="Опишите группу и назначьте преподавателя"></el-step>
-            <el-step title="Назначьте студентов"></el-step>
-            <el-step title="Сохраните"></el-step>
-        </el-steps>
         <el-card class="mb-5">
             <h3 class="text-black-50 m-0">{{headerText}}</h3>
             <hr>
             <el-row>
-                <el-col v-if="active !== 1" :span="11">
-                    <el-form label-position="top">
+                <el-form label-position="top">
+                    <el-col :span="11">
                         <el-form-item label="Название группы:">
                             <el-input v-model="group.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="Преподаватель">
-                            <el-select style="width: 100%" v-model="group.tutor_id" @change="onTutorChange">
-                                <el-option v-for="item in users" :label="item.label" :value="item.key"></el-option>
+                        <el-form-item label="Преподаватель:">
+                            <el-select style="width: 100%"
+                                       filterable
+                                       clearable
+                                       remote
+                                       placeholder="Выберите преподавателя"
+                                       :remote-method="onTutorSearch"
+                                       v-model="group.tutor_id"
+                                       @change="onTutorChange">
+                                <el-option v-for="item in tutors" :label="item.first_name" :value="item.id"></el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="Заметки:">
+                        <el-form-item label="Описание:">
                             <el-input type="textarea" :autosize="{ minRows: 3 }" v-model="group.note"></el-input>
                         </el-form-item>
-                    </el-form>
-                </el-col>
-                <el-col v-if="active !== 0" :span="active === 2 ? 12 : 24" :offset="active === 2 ? 1 : 0 ">
-                    <el-transfer
-                            :aria-disabled="true"
-                            filterable
-                            @change="onUsersListChange"
-                            :titles="['Все пользователи', 'Группа']"
-                            v-model="groupUsers"
-                            :data="users"
-                            :right-default-checked="state.tutor_id"
-                            @right-check-change="onGroupListChange">
-                    </el-transfer>
-                </el-col>
+                    </el-col>
+                    <el-col :span="12" :offset="1">
+                        <el-form-item label="Студенты:">
+                            <el-select v-model="groupUsers"
+                                       multiple
+                                       @remove-tag="removeStudents"
+                                       placeholder="Выберите студентов"
+                                       style="width: 100%"
+                            >
+                                <el-option v-for="item in students"
+                                           :key="item.id"
+                                           :label="item.first_name"
+                                           :value="item.id">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-form>
             </el-row>
-            <el-button @click="prev">Назад</el-button>
-            <el-button v-if="active !== 2" @click="next">Далее</el-button>
-            <el-button v-if="active === 2" type="success" @click="onSave">
+            <el-button type="success" @click="onSave">
                 Сохранить
             </el-button>
         </el-card>
@@ -56,32 +60,31 @@
 </template>
 
 <script>
-    import {getGroup, postGroup, putGroup, putUserGroup} from './api'
+    import {getGroup, postGroup, putGroup, putGroupStudents, removeGroupStudents} from './api'
 
     export default {
         data: () => {
             return {
                 state: {
                     loading: true,
-                    tutor_id: [],
-                    group_id: null
+                    tutor_id: null,
+                    group_id: null,
+                    removedStudents: []
                 },
                 group: {},
-                active: 0,
-                users: [],
+                tutors: [],
                 groupUsers: []
             }
         },
         async created() {
             await this.$store.dispatch('reloadUsers')
-            this.users = this.$store.state.users.results.map(item => {
-                return {key: item.id, label: item.first_name, disabled: false}
-            })
+            this.tutors = this.$store.state.users.results
+            this.users = this.$store.state.users.results
             if (this.id) {
                 await getGroup(this.id).then(response => {
                     this.group = response.data
                     if (this.group.tutor_id) {
-                        this.state.tutor_id.push(this.group.tutor_id)
+                        this.state.tutor_id = this.group.tutor_id
                         this.users.forEach(item => {
                             if (item.key === this.group.tutor_id) item.disabled = true
                         })
@@ -100,75 +103,88 @@
             headerText() {
                 return this.id ? 'Изменить группу' : 'Создать группу';
             },
+            students() {
+                return this.$store.state.users.results.filter(item => item.id !== this.state.tutor_id)
+            },
         },
         methods: {
-            prev() {
-                if (this.active-- < 0) this.active = 0;
-            },
-            next() {
-                if (this.active === 0) {
-                    let req
-                    let body = {
-                        name: this.group.name,
-                        note: this.group.note,
-                        tutor_id: this.group.tutor_id
+            async onTutorSearch(query) {
+                this.state.loading = true;
+                if (query !== '') {
+                    let pars = {
+                        search: query
                     }
-                    this.state.tutor_id.push(this.group.tutor_id)
-                    if (this.id) {
-                        req = putGroup(this.id, body)
-                    } else {
-                        req = postGroup(body)
-                    }
-                    req.then(response => {
-                        if (response.data !== null) this.state.group_id = response.data.id
-                        this.users.forEach(item => {
-                            if (item.key === this.state.tutor_id[0]) item.disabled = true
-                        })
-                    })
+                    await this.$store.dispatch('reloadUsers', pars)
+                    this.tutors = this.$store.state.users.results
+                    this.state.loading = false
+                } else {
+                    await this.$store.dispatch('reloadUsers')
+                    this.state.loading = false
                 }
-                if (this.active++ > 2) this.active = 0;
             },
-            onTutorChange(val){
-                this.state.tutor_id[0] = val
-                this.users.forEach(item => {
-                    item.disabled = item.key === val;
-                })
-                this.groupUsers = this.groupUsers.filter(item => item !== val)
-                this.onUsersListChange()
-            },
-            onGroupListChange(keys) {
-                this.state.tutor_id = keys;
-            },
-            onUsersListChange() {
-                let body = {
-                    usr_ids: [...this.groupUsers]
+            onTutorChange(val) {
+                this.$store.dispatch('reloadUsers')
+                this.tutors = this.$store.state.users.results
+                this.state.tutor_id = val
+                if (this.groupUsers.includes(val)) {
+                    this.groupUsers.splice(this.groupUsers.indexOf(val), 1)
                 }
-                putUserGroup(this.id, body).then(response => {
-                    console.log('check', response);
-                })
             },
-            onSave() {
+            removeStudents(id) {
+                this.state.removedStudents.push(id)
+            },
+            async onSave() {
                 this.state.loading = true
-                let req
                 let body = {
                     name: this.group.name,
                     note: this.group.note,
-                    tutor_id: this.group.tutor_id
+                    tutor_id: this.group.tutor_id ? this.group.tutor_id : 0
                 }
-                if (this.id) {
-                    req = putGroup(this.id, body)
+                if (!this.id) {
+                    await postGroup(body)
+                        .then(response => {
+                            this.state.group_id = response.data.id
+                        })
+                        .catch(response => {
+                            this.state.loading = false;
+                            this.$message.error(response.data.error_dsc)
+                        })
+                    await putGroupStudents(this.state.group_id, {usr_ids: [...this.groupUsers]})
+                        .then(response => {
+                            this.state.loading = false;
+                            this.$message.success(this.id || this.state.group_id ? 'Группа успешно изменена' : 'Группа успешно создана')
+                            this.$router.push({name: 'groups'})
+                        })
+                        .catch(response => {
+                            this.state.loading = false;
+                            this.$message.error(response.data.error_dsc)
+                        })
                 } else {
-                    req = postGroup(body)
+                    if (this.state.removedStudents.length) {
+                        await removeGroupStudents(this.id, {usr_ids: [...this.state.removedStudents]})
+                    }
+                    await putGroup(this.id, body)
+                        .then(response => {
+                            this.state.loading = false;
+                            this.state.group_id = response.data.id
+                            this.$message.success(this.id ? 'Группа успешно изменена' : 'Группа успешно создана')
+                            this.$router.push({name: 'groups'})
+                        })
+                        .catch(response => {
+                            this.state.loading = false;
+                            if (response.data) this.$message.error(response.data.error_dsc)
+                        })
+                    await putGroupStudents(this.id, {usr_ids: [...this.groupUsers]})
+                        .then(response => {
+                            this.state.loading = false;
+                            this.$message.success(this.id ? 'Группа успешно изменена' : 'Группа успешно создана')
+                            this.$router.push({name: 'groups'})
+                        })
+                        .catch(response => {
+                            this.state.loading = false;
+                            this.$message.error(response.data.error_dsc)
+                        })
                 }
-                req.then(resposne => {
-                    this.state.loading = false;
-                    this.$message.success(this.id ? 'Группа успешно изменена' : 'Роль успешно создана')
-                    this.$router.push({name: 'groups'})
-                }).catch(err => {
-                    console.log(err);
-                    this.state.loading = false
-                    this.$message.error('Возникла ошибка')
-                })
             }
         }
     }

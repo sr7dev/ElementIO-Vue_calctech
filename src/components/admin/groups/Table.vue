@@ -1,5 +1,5 @@
 <template>
-    <div v-loading="state.loading">
+    <div class="mb-5" v-loading="state.loading">
         <h1 class="text-black-50">Группы</h1>
         <el-container>
             <el-table
@@ -82,6 +82,7 @@
         },
         async created() {
             await this.$store.dispatch('reloadGroups')
+            await this.$store.dispatch('reloadUsers')
             this.params = {...this.$store.state.groups}
             delete this.params.results
             this.state.loading = false
