@@ -27,7 +27,11 @@
                                        :remote-method="onTutorSearch"
                                        v-model="group.tutor_id"
                                        @change="onTutorChange">
-                                <el-option v-for="item in tutors" :label="item.first_name" :value="item.id"></el-option>
+                                <el-option v-for="item in tutors"
+                                           :label="item.first_name"
+                                           :key="item.id"
+                                           :value-key="item.first_name"
+                                           :value="item.id"></el-option>
                             </el-select>
                         </el-form-item>
                         <el-form-item label="Описание:">
@@ -44,6 +48,7 @@
                             >
                                 <el-option v-for="item in students"
                                            :key="item.id"
+                                           :value-key="item.first_name"
                                            :label="item.first_name"
                                            :value="item.id">
                                 </el-option>
@@ -85,9 +90,6 @@
                     this.group = response.data
                     if (this.group.tutor_id) {
                         this.state.tutor_id = this.group.tutor_id
-                        this.users.forEach(item => {
-                            if (item.key === this.group.tutor_id) item.disabled = true
-                        })
                     }
                     this.groupUsers = this.group.students.map(item => {
                         if (item.id !== this.group.tutor_id) return item.id
@@ -104,7 +106,7 @@
                 return this.id ? 'Изменить группу' : 'Создать группу';
             },
             students() {
-                return this.$store.state.users.results.filter(item => item.id !== this.state.tutor_id)
+                return this.$store.state.users.results ? this.$store.state.users.results.filter(item => item.id !== this.state.tutor_id) : []
             },
         },
         methods: {
