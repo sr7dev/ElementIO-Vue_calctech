@@ -16,9 +16,9 @@
                             :on-success="putProfileImage"
                             :before-upload="() => state.loading = true"
                             :show-file-list="false">
-                        <img class="avatar"
-                             :src="utils.fmtMediaImageFit(profile.avatar ? profile.avatar : 'img/default_avatar.jpg', 300, 300)">
-                        <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+                        <img v-if="profile.avatar" class="avatar"
+                             :src="utils.fmtMediaImageFit(profile.avatar, 300, 300)" >
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
                     <el-form
                             :disabled="state.disabled"
@@ -54,6 +54,7 @@
     import constants from "@/constants";
     import ajax from "@/ajax";
     import utils from '@/utils'
+    import {putUser} from './users/api'
 
 
     let rule = {required: true, message: 'Это поле не может быть пустым', trigger: 'blur'}
@@ -81,7 +82,7 @@
                         rule,
                     ],
                     newPassword: [
-                        {min: 3, max: 5, message: 'Пароль должен содержать больше 6 символов', trigger: 'blur'}
+                        {min: 6, message: 'Пароль должен содержать больше 6 символов', trigger: 'blur'}
                     ],
                     repeatPassword: [
                         {min: 6, message: 'Пароль должен содержать больше 6 символов', trigger: 'blur'}
@@ -109,7 +110,9 @@
                 this.profile.avatar = response.path
                 let req = ajax.reqAPI(`usrs/${this.profile.id}`, {
                     method: 'PUT',
-                    body: {avatar: this.profile.avatar}
+                    body: {
+                        avatar: this.profile.avatar,
+                    },
                 });
                 req.then(response => {
                     this.state.loading = false
@@ -120,25 +123,44 @@
                     this.$message.error('Произошла ошибка')
                     console.log(err);
                 })
-            }
-            ,
+            },
             editUserInfo() {
                 this.state.disabled = false
-            }
-            ,
+            },
+
             checkValid() {
-                if (this.profile.newPassword !== this.profile.repeatPassword) {
-                    this.$message.error('Пароли не совпадают')
-                } else {
+                let validPassword = this.profile.newPassword === this.profile.repeatPassword
+                let body = {
+                    last_name: this.profile.last_name,
+                    first_name: this.profile.first_name,
+                    username: this.profile.username,
+                }
+                if (!validPassword) this.$message.error('Пароли не совпадают')
+                if (validPassword && this.profile.newPassword) {
                     this.$refs.form.validate((valid) => {
                         if (valid) {
-                            this.$message.success('Данные успешно сохранены!');
-                            this.state.disabled = true
-                        } else {
-                            this.$message.error('Ошибка при сохранении')
-                            return false;
+                            this.state.loading = true
+                            putUser(this.profile.id, body)
+                                .then(response => {
+                                    this.state.loading = false
+                                    this.state.disabled = true
+                                    this.$message.success('Данные успешно сохранены!');
+                                })
+                                .catch(err => {
+                                    this.state.loading = false
+                                    this.state.disabled = true
+                                    this.$message.error('Ошибка при сохранении')
+                                })
                         }
-                    });
+                    })
+                } else {
+                    this.state.loading = true
+                    putUser(this.profile.id, body)
+                        .then(response => {
+                            this.state.loading = false
+                            this.state.disabled = true
+                            this.$message.success('Данные успешно сохранены!');
+                        })
                 }
             }
         }
