@@ -40,6 +40,16 @@ export function putUser(id, body) {
     )
 }
 
+export function putUserPassword(id, body) {
+    return ajax.reqAPI(
+        `usrs/${id}/password`,
+        {
+            method: 'PUT',
+            body
+        }
+    )
+}
+
 export function putUserRole(id, body) {
     return ajax.reqAPI(
         `roles/${id}/add_usrs`,

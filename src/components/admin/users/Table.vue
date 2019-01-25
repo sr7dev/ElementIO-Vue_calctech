@@ -112,7 +112,7 @@
             },
         },
         async created() {
-            await this.$store.dispatch('reloadUsers', this.params)
+            await this.$store.dispatch('reloadUsers')
             await this.$store.dispatch('reloadRoles')
             this.params = {...this.$store.state.users}
             delete this.params.results

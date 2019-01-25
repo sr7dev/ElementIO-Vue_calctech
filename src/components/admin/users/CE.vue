@@ -13,20 +13,20 @@
             <div slot="header">
                 <h3 class="text-black-50 m-0">{{headerText}}</h3>
             </div>
-            <el-form label-position="top">
-                <el-form-item label="Имя:">
+            <el-form :model="user" :rules="rules" ref="ruleForm" label-position="top">
+                <el-form-item prop="first_name" label="Имя:">
                     <el-input v-model="user.first_name"></el-input>
                 </el-form-item>
-                <el-form-item label="Фамилия:">
+                <el-form-item prop="last_name" label="Фамилия:">
                     <el-input v-model="user.last_name"></el-input>
                 </el-form-item>
-                <el-form-item label="Никнейм:">
+                <el-form-item prop="username" label="Email:">
                     <el-input v-model="user.username"></el-input>
                 </el-form-item>
-                <el-form-item label="Пароль:">
-                    <el-input v-model="user.password"></el-input>
+                <el-form-item :prop="id ? '' : 'newPassword' " label="Пароль:">
+                    <el-input v-model="user.newPassword"></el-input>
                 </el-form-item>
-                <el-form-item label="Роль:">
+                <el-form-item prop="roles" label="Роль:">
                     <el-select v-model="user.roles">
                         <el-option v-for="item in stateRoles"
                                    :label="item.name"
@@ -34,7 +34,7 @@
                                    :value="item.id"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-button type="success" @click="onSave"> <!-- submit -->
+                <el-button type="success" @click="checkValid"> <!-- submit -->
                     {{id ? 'Изменить' : 'Создать'}}
                 </el-button>
             </el-form>
@@ -43,27 +43,46 @@
 </template>
 
 <script>
-    import {getUser, putUser, postUser, putUserRole} from './api'
+    import {getUser, postUser, putUser, putUserPassword, putUserRole,} from './api'
+
+    let rule = {required: true, message: 'Это поле не может быть пустым', trigger: 'blur'}
 
     export default {
         data: () => {
             return {
                 state: {
-                    loading: true
+                    loading: true,
+                    usr_ids: []
+                },
+                rules: {
+                    last_name: [
+                        rule
+                    ],
+                    first_name: [
+                        rule,
+                    ],
+                    username: [
+                        rule,
+                    ],
+                    newPassword: [
+                        rule
+                    ],
+                    roles: [
+                        rule,
+                    ],
                 },
                 user: {}
             }
         },
-         created() {
-            this.$store.dispatch('reloadRoles')
+        async created() {
+            await this.$store.dispatch('reloadRoles')
             if (this.id) {
-                 getUser(this.id).then(response => {
+                await getUser(this.id).then(response => {
                     this.user = response.data
                     this.user.roles = response.data.roles[0].name
-                     console.log(response.data.roles);
-                     this.state.loading = false
                 })
             }
+            this.state.loading = false
         },
         computed: {
             id() {
@@ -77,38 +96,68 @@
             }
         },
         methods: {
-            onSave() {
+            checkValid() {
+                this.$refs.ruleForm.validate((valid) => {
+                    if (valid) {
+                        this.onSave()
+                    } else {
+                        this.$message.error('Заплоните все поля')
+                        return false;
+                    }
+                });
+            },
+            async onSave() {
                 this.state.loading = true
                 let req
+                let role_id = this.user.roles
                 let body = {
                     first_name: this.user.first_name,
                     last_name: this.user.last_name,
                     username: this.user.username,
-                    password: this.user.password,
-                    roles: this.user.roles
+                    // roles: this.user.roles,
+                    password: this.user.newPassword
                 }
-                if(this.id) {
-                    req = putUser(this.id, body)
-                } else {
-                    req = postUser(body).then(response => {
-                        let role_id = this.user.role
-                        let body = {
-                            usr_ids: [response.data.id]
-                        }
-                        putUserRole(role_id, body).then(response => {
-                            console.log(response);
+                if (this.user.newPassword && this.id) {
+                    await putUserPassword(this.id, {new_password: this.user.newPassword})
+                        .then(response => {
+                            this.state.loading = false
+                            this.$message.success(this.id ? 'Пользователь успешно изменен' : 'Пользаватель успешно создан')
                         })
-                    })
+                        .catch(err => {
+                            this.state.loading = false
+                            this.$message.error(response.data.error_dsc)
+                        })
                 }
-                req.then(resposne => {
-                    this.state.loading = false;
-                    this.$message.success( this.id ? 'Роль успешно изменена' : 'Роль успешно создана')
-                    this.$router.push({name: 'users'})
-                }).catch(err => {
-                    console.log(err);
-                    this.state.loading = false
-                    this.$message.error('Возникла ошибка')
-                })
+                if (this.id) {
+                    await putUser(this.id, body)
+                    putUserRole(role_id, {usr_ids: [this.id]})
+                        .then(response => {
+                            this.state.loading = false
+                            this.$message.success(this.id ? 'Пользователь успешно изменен' : 'Пользаватель успешно создан')
+                            this.$router.push({name: 'users'})
+                        })
+                        .catch(response => {
+                            this.state.loading = false
+                            this.$message.error(response.data.error_dsc)
+                        })
+                } else {
+                    await postUser(body).then(response => {
+                        this.state.usr_ids.push(response.data.id)
+                    }).catch(response => {
+                        this.state.loading = false
+                        this.$message.error(response.data.error_dsc)
+                    })
+                    putUserRole(role_id, {usr_ids: [...this.state.usr_ids]})
+                        .then(response => {
+                            this.state.loading = false
+                            this.$message.success(this.id ? 'Пользователь успешно изменен' : 'Пользаватель успешно создан')
+                            this.$router.push({name: 'users'})
+                        })
+                        .catch(response => {
+                            this.state.loading = false
+                            this.$message.error(response.data.error_dsc)
+                        })
+                }
             }
         }
     }
