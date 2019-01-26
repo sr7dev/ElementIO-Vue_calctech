@@ -141,22 +141,24 @@
                             this.$message.error(response.data.error_dsc)
                         })
                 } else {
-                    await postUser(body).then(response => {
-                        this.state.usr_ids.push(response.data.id)
-                    }).catch(response => {
-                        this.state.loading = false
-                        this.$message.error(response.data.error_dsc)
-                    })
-                    putUserRole(role_id, {usr_ids: [...this.state.usr_ids]})
+                    await postUser(body)
                         .then(response => {
-                            this.state.loading = false
-                            this.$message.success(this.id ? 'Пользователь успешно изменен' : 'Пользаватель успешно создан')
-                            this.$router.push({name: 'users'})
-                        })
-                        .catch(response => {
+                            this.state.usr_ids.push(response.data.id)
+                            putUserRole(role_id, {usr_ids: [...this.state.usr_ids]})
+                                .then(response => {
+                                    this.state.loading = false
+                                    this.$message.success(this.id ? 'Пользователь успешно изменен' : 'Пользаватель успешно создан')
+                                    this.$router.push({name: 'users'})
+                                })
+                                .catch(response => {
+                                    this.state.loading = false
+                                    this.$message.error(response.data.error_dsc)
+                                })
+                        }).catch(response => {
                             this.state.loading = false
                             this.$message.error(response.data.error_dsc)
                         })
+
                 }
             }
         }
