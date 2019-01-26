@@ -16,10 +16,11 @@
                 <el-form label-position="top">
                     <el-col :span="11">
                         <el-form-item label="Название группы:">
-                            <el-input v-model="group.name"></el-input>
+                            <el-input  v-model="group.name"></el-input>
                         </el-form-item>
                         <el-form-item label="Преподаватель:">
                             <el-select style="width: 100%"
+                                       automatic-dropdown
                                        filterable
                                        clearable
                                        remote
@@ -116,7 +117,7 @@
         methods: {
             async onTutorSearch(query) {
                 this.state.loading = true;
-                if (query !== '') {
+                if (query !== '' && query !== undefined ) {
                     let pars = {
                         search: query
                     }
@@ -124,7 +125,7 @@
                     this.tutors = this.$store.state.users.results
                     this.state.loading = false
                 } else {
-                    await this.$store.dispatch('reloadUsers')
+                    // await this.$store.dispatch('reloadUsers')
                     this.state.loading = false
                 }
             },

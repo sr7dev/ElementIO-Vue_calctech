@@ -20,7 +20,7 @@
                         empty-text="Записи не найдены"
                         style="width: 100%">
                     <el-table-column
-                            prop="id"
+                            type="index"
                             label="№"
                             width="180">
                     </el-table-column>

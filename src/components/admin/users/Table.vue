@@ -25,7 +25,7 @@
                             :data="tableData">
                         <el-table-column
                                 label="#"
-                                prop="id"
+                                type="index"
                                 width="100"
                         >
                         </el-table-column>

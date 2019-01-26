@@ -8,7 +8,7 @@
                     class="mt-5">
                 <el-table-column
                         label="#"
-                        prop="id"
+                        type="index"
                         width="100"
                 >
                 </el-table-column>
