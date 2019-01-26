@@ -8,18 +8,35 @@
                                icon="el-icon-edit" circle></el-button>
                     <el-button v-else icon="el-icon-close" type="danger"
                                circle
-                               @click="state.disabled = !state.disabled"
+                               @click="cancelChanges"
                                style="position: absolute; right: 20px"></el-button>
-                    <el-upload
-                            class="avatar-uploader"
-                            :action="constants.MediaUrl + 'temp'"
-                            :on-success="putProfileImage"
-                            :before-upload="() => state.loading = true"
-                            :show-file-list="false">
-                        <img v-if="profile.avatar" class="avatar"
-                             :src="utils.fmtMediaImageFit(profile.avatar, 300, 300)" >
-                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                    </el-upload>
+                    <my-upload field="file"
+                               langType="ru"
+                               v-model="show"
+                               :width="300"
+                               :height="300"
+                               @crop-upload-success="putProfileImage"
+                               :params="params"
+                               :url="constants.MediaUrl + 'temp'"
+                               img-format="png"></my-upload>
+                    <div style="width: 200px; margin: 0 auto; text-align: center">
+                        <img class="avatar"
+                             :src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'">
+                        <el-button style="margin: 10px" type="primary" size="small" @click="toggleShow">Загрузить
+                            аватар
+                        </el-button>
+                    </div>
+
+                    <!--<el-upload-->
+                    <!--class="avatar-uploader"-->
+                    <!--:action="constants.MediaUrl + 'temp'"-->
+                    <!--:on-success="putProfileImage"-->
+                    <!--:before-upload="() => state.loading = true"-->
+                    <!--:show-file-list="false">-->
+                    <!--<img v-if="profile.avatar" class="avatar"-->
+                    <!--:src="utils.fmtMediaImageFit(profile.avatar, 300, 300)" >-->
+                    <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+                    <!--</el-upload>-->
                     <el-form
                             :disabled="state.disabled"
                             label-position="top"
@@ -55,11 +72,14 @@
     import ajax from "@/ajax";
     import utils from '@/utils'
     import {putUser} from './users/api'
+    import myUpload from 'vue-image-crop-upload';
 
 
     let rule = {required: true, message: 'Это поле не может быть пустым', trigger: 'blur'}
     export default {
-
+        components: {
+            'my-upload': myUpload
+        },
         data() {
             return {
                 constants,
@@ -70,6 +90,9 @@
                 },
                 profile: {
                     avatar: ''
+                },
+                params: {
+                    name: 'file'
                 },
                 rules: {
                     last_name: [
@@ -96,17 +119,19 @@
             }
         },
         created() {
-            this.profile = this.$store.state.profile
+            this.profile = {...this.$store.state.profile}
             this.state.loading = false
         },
-        // computed: {
-        //     avatar() {
-        //         return this.profile.avatar ? constants.MediaUrl + this.profile.avatar : 'img/default_avatar.jpg'
-        //     },
-        // },
         methods: {
-            putProfileImage(response) {
-                // this.state.loading = true
+            toggleShow() {
+                this.show = !this.show;
+            },
+            cancelChanges() {
+                this.profile = this.$store.state.profile
+                this.state.disabled = true
+            },
+            async putProfileImage(response) {
+                this.state.loading = true
                 this.profile.avatar = response.path
                 let req = ajax.reqAPI(`usrs/${this.profile.id}`, {
                     method: 'PUT',
@@ -114,15 +139,16 @@
                         avatar: this.profile.avatar,
                     },
                 });
-                req.then(response => {
+                await req.then(response => {
+                    this.$store.dispatch('refreshProfile')
                     this.state.loading = false
-                    console.log(response);
                 })
                 req.catch(err => {
                     this.state.loading = false
                     this.$message.error('Произошла ошибка')
                     console.log(err);
                 })
+                this.state.loading = false
             },
             editUserInfo() {
                 this.state.disabled = false
@@ -167,36 +193,20 @@
     }
 </script>
 
-<style>
-    .avatar-uploader {
-        text-align: center;
+<style lang="scss">
+    .vue-image-crop-upload .vicp-wrap .vicp-operate a {
+        color: $app-color-green1;
     }
 
-    .avatar-uploader .el-upload {
-        border: 1px dashed #d9d9d9;
-        border-radius: 6px;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .avatar-uploader .el-upload:hover {
-        border-color: #409EFF;
-    }
-
-    .avatar-uploader-icon {
-        font-size: 28px;
-        color: #8c939d;
-        width: 178px;
-        height: 178px;
-        line-height: 178px;
-        text-align: center;
+    .vue-image-crop-upload .vicp-wrap .vicp-success {
+        color: $app-color-green1;
     }
 
     .avatar {
-        padding: 5px;
-        width: 178px;
-        height: 178px;
+        width: 200px;
+        height: 200px;
         display: block;
+        object-fit: none;
     }
+
 </style>

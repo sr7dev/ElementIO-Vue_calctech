@@ -6,7 +6,9 @@
                     <el-card>
                         <div class="card-text user-card__content">
                             <div class="user-card__content__title">Мой профиль</div>
-                            <img class="user-card__content__avatar" :src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'">
+                            <div style="width: 200px; height: 200px; margin: 0 auto">
+                                <img class="user-card__content__avatar" :src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'">
+                            </div>
                             <div class="user-card__content__info">
                                 <div class="user-card__content__info__item">
                                     {{profile.first_name}}
@@ -75,6 +77,8 @@
 
             &__avatar {
                 width: 100%;
+                height: 100%;
+                object-fit: none;
             }
 
             &__info {
