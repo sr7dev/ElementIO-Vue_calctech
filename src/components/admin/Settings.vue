@@ -115,7 +115,7 @@
                     {text: 'Select One', value: null},
                     'Carrots', 'Beans', 'Tomatoes', 'Corn'
                 ],
-                show: true
+                show: false
             }
         },
         created() {
