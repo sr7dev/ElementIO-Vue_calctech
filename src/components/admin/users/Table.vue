@@ -4,18 +4,18 @@
         <el-container class="mt-5">
             <el-row style="width: 100%">
                 <el-col>
-                    <el-input placeholder="Писк по имени" v-model="name" class="input-with-select mb-2">
+                    <el-input placeholder="Писк по имени" v-model="name"  @keyup.native.enter="onSearch" class="input-with-select mb-2">
                         <el-select @change="onRoleChange"
                                    style="width: 99px;"
                                    v-model="role_id"
                                    slot="prepend"
                                    placeholder="Роль:">
+                            <el-option label="Любая" value="0"></el-option>
                             <el-option v-for="item in roles"
                                        :key="item.id"
                                        :label="item.name"
                                        :value="item.id">
                             </el-option>
-                            <el-option label="Любая" value="0"></el-option>
                         </el-select>
                         <el-button @click="onSearch" slot="append" icon="el-icon-search"></el-button>
                     </el-input>

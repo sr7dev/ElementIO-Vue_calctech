@@ -72,7 +72,9 @@
                 state: {
                     loading: true
                 },
-                params: {}
+                params: {
+                    page_size: 5
+                }
             }
         },
         computed: {
@@ -81,7 +83,7 @@
             }
         },
         async created() {
-            await this.$store.dispatch('reloadGroups')
+            await this.$store.dispatch('reloadGroups', {page_size: 5})
             await this.$store.dispatch('reloadUsers')
             this.params = {...this.$store.state.groups}
             delete this.params.results

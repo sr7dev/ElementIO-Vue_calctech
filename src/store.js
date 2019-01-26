@@ -136,8 +136,8 @@ export default new Vuex.Store({
                 commit('set', ['users', response.data]);
             });
         },
-        reloadGroups({commit}) {
-            return ajax.reqAPI(`groups`).then(response => {
+        reloadGroups({commit}, pars) {
+            return ajax.reqAPI(`groups`, {pars}).then(response => {
                 commit('set', ['groups', response.data]);
             });
         },
