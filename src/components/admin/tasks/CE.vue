@@ -15,9 +15,9 @@
             </div>
             <el-form label-position="top">
                 <el-row>
-                    <el-col>
-                        <el-form-item :span="8" label="Вид задания">
-                            <el-input v-if="id" type="text" :value="data.kind_name" disabled/>
+                    <el-col :span="8">
+                        <el-form-item label="Вид задания">
+                            <!--<el-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
                             <el-radio-group v-model="data.kind_id">
                                 <el-radio-button v-for="item in $store.state.task_kinds" :label="item.id">{{item.name}}
                                 </el-radio-button>
@@ -28,7 +28,7 @@
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="Язык">
-                            <el-input v-if="id" type="text" :value="data.kind_name" disabled/>
+                            <!--<el-input v-if="id" type="text" :value="data.lang_id" class="mb-1" disabled/>-->
                             <el-radio-group v-model="data.lang_id">
                                 <el-radio-button v-for="item in $store.state.langs" :label="item.id">{{item.name}}
                                 </el-radio-button>
@@ -82,175 +82,214 @@
                         </el-form-item>
                     </el-col>
                 </el-row>
+                <el-row>
+                    <el-col :span="12">
+                        <el-form-item v-if="isQuestion" label="Тип вопроса">
+                            <el-select v-model="data.type_id">
+                                <el-option v-for="item in $store.state.task_types"
+                                           :label="item.name"
+                                           :value="item.id"></el-option>
+                            </el-select>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="10">
+                        <el-form-item label="Заголовок">
+                            <el-input v-model="data.title"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row v-if="isGroup">
+                    <el-col :span="10">
+                        <el-form-item label="Описание">
+                            <el-input type="textarea" :autosize="{minRows: 5}" v-model="data.note"/>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <section v-if="isQuestion">
+                    <el-row>
+                        <el-col :span="10">
+                            <el-form-item label="Текст вопроса">
+                                <el-input type="textarea" v-model="data.txt" :autosize="{minRows: 5}"/>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                    <el-row v-if="data.txt">
+                        <el-col :span="10">
+                            <MathJaxVue :formula="data.txt"></MathJaxVue>
+                        </el-col>
+                    </el-row>
+                </section>
             </el-form>
-            <b-form @submit.prevent="onSubmit">
-                <b-card-body class="px-0 pb-2">
-                    <b-container fluid>
-                        <b-row v-if="loading">
-                            <b-col class="text-center">
-                                <i class="spnr"></i>
-                            </b-col>
-                        </b-row>
-                        <template v-else="">
-                            <b-row v-if="failFB">
-                                <b-col>
-                                    <b-alert variant="danger" show>
-                                        <i class="fa fa-warning mr-3"></i>{{failFB}}
-                                    </b-alert>
-                                </b-col>
-                            </b-row>
-                            <!--<b-row>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Вид задания">-->
-                                        <!--<b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
-                                        <!--<b-form-radio-group v-else="" buttons-->
-                                                            <!--button-variant="outline-primary"-->
-                                                            <!--v-model.number="data.kind_id"-->
-                                                            <!--:options="$store.state.task_kinds"-->
-                                                            <!--value-field="id"-->
-                                                            <!--text-field="name"></b-form-radio-group>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                            <!--</b-row>-->
-                            <!--<b-row>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Язык">-->
-                                        <!--<b-form-radio-group buttons-->
-                                                            <!--button-variant="outline-primary"-->
-                                                            <!--v-model.number="data.lang_id"-->
-                                                            <!--:options="$store.state.langs"-->
-                                                            <!--value-field="id"-->
-                                                            <!--text-field="name"></b-form-radio-group>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Сложность">-->
-                                        <!--<b-form-radio-group buttons-->
-                                                            <!--button-variant="outline-primary"-->
-                                                            <!--v-model.number="data.difficulty_id"-->
-                                                            <!--:options="ld.concat([notSelectedChoice], $store.state.difficulties)"-->
-                                                            <!--value-field="id"-->
-                                                            <!--text-field="name"></b-form-radio-group>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                            <!--</b-row>-->
-                            <!--<b-row>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Класс">-->
-                                        <!--<b-select v-model.number="data.grade_id"-->
-                                                  <!--:options="ld.concat([notSelectedOption], $store.state.grades)"-->
-                                                  <!--value-field="id" text-field="name"></b-select>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Предмет">-->
-                                        <!--<b-select v-model.number="data.subject_id"-->
-                                                  <!--:options="ld.concat([notSelectedOption], $store.state.subjects)"-->
-                                                  <!--value-field="id" text-field="name"></b-select>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                            <!--</b-row>-->
-                            <!--<b-row>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Тема">-->
-                                        <!--<b-select v-model.number="data.topic_id" :options="topics"-->
-                                                  <!--value-field="id" text-field="name"></b-select>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                                <!--<b-col lg="4">-->
-                                    <!--<b-form-group label="Подтема">-->
-                                        <!--<b-select v-model.number="data.sub_topic_id" :options="subTopics"-->
-                                                  <!--value-field="id" text-field="name"></b-select>-->
-                                    <!--</b-form-group>-->
-                                <!--</b-col>-->
-                            <!--</b-row>-->
-                            <b-row>
-                                <b-col md="8" lg="6">
-                                    <b-form-group v-if="isQuestion" label="Тип вопроса">
-                                        <b-select v-model.number="data.type_id" :options="$store.state.task_types"
-                                                  value-field="id" text-field="name"></b-select>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row>
-                                <b-col md="10" lg="8">
-                                    <b-form-group label="Заголовок">
-                                        <b-form-input type="text" v-model.trim="data.title"/>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <b-row v-if="isGroup">
-                                <b-col md="10" lg="8">
-                                    <b-form-group label="Описание">
-                                        <b-form-textarea v-model="data.note" :rows="5" no-resize/>
-                                    </b-form-group>
-                                </b-col>
-                            </b-row>
-                            <template v-if="isQuestion">
-                                <b-row>
-                                    <b-col md="10" lg="8">
-                                        <b-form-group label="Текст вопроса">
-                                            <b-form-textarea v-model="data.txt" :rows="5" no-resize/>
-                                        </b-form-group>
-                                    </b-col>
-                                </b-row>
-                                <b-row v-if="data.txt">
-                                    <b-col md="10" lg="8">
-                                        <MathJaxVue :formula="data.txt"></MathJaxVue>
-                                    </b-col>
-                                </b-row>
-                            </template>
-                        </template>
-                    </b-container>
-                </b-card-body>
-                <b-card-footer v-if="!loading">
-                    <b-button type="submit" variant="success" class="mr-2">
-                        {{id ? 'Изменить' : 'Создать'}}
-                    </b-button>
-                </b-card-footer>
-            </b-form>
+            <el-button @click.prevent="onSubmit" type="success">
+                {{id ? 'Изменить' : 'Создать'}}
+            </el-button>
+            <!--<b-form @submit.prevent="onSubmit">-->
+            <!--<b-card-body class="px-0 pb-2">-->
+            <!--<b-container fluid>-->
+            <!--<b-row v-if="loading">-->
+            <!--<b-col class="text-center">-->
+            <!--<i class="spnr"></i>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<template v-else="">-->
+            <!--<b-row v-if="failFB">-->
+            <!--<b-col>-->
+            <!--<b-alert variant="danger" show>-->
+            <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
+            <!--</b-alert>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Вид задания">-->
+            <!--<b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
+            <!--<b-form-radio-group v-else="" buttons-->
+            <!--button-variant="outline-primary"-->
+            <!--v-model.number="data.kind_id"-->
+            <!--:options="$store.state.task_kinds"-->
+            <!--value-field="id"-->
+            <!--text-field="name"></b-form-radio-group>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Язык">-->
+            <!--<b-form-radio-group buttons-->
+            <!--button-variant="outline-primary"-->
+            <!--v-model.number="data.lang_id"-->
+            <!--:options="$store.state.langs"-->
+            <!--value-field="id"-->
+            <!--text-field="name"></b-form-radio-group>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Сложность">-->
+            <!--<b-form-radio-group buttons-->
+            <!--button-variant="outline-primary"-->
+            <!--v-model.number="data.difficulty_id"-->
+            <!--:options="ld.concat([notSelectedChoice], $store.state.difficulties)"-->
+            <!--value-field="id"-->
+            <!--text-field="name"></b-form-radio-group>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Класс">-->
+            <!--<b-select v-model.number="data.grade_id"-->
+            <!--:options="ld.concat([notSelectedOption], $store.state.grades)"-->
+            <!--value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Предмет">-->
+            <!--<b-select v-model.number="data.subject_id"-->
+            <!--:options="ld.concat([notSelectedOption], $store.state.subjects)"-->
+            <!--value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Тема">-->
+            <!--<b-select v-model.number="data.topic_id" :options="topics"-->
+            <!--value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--<b-col lg="4">-->
+            <!--<b-form-group label="Подтема">-->
+            <!--<b-select v-model.number="data.sub_topic_id" :options="subTopics"-->
+            <!--value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col md="8" lg="6">-->
+            <!--<b-form-group v-if="isQuestion" label="Тип вопроса">-->
+            <!--<b-select v-model.number="data.type_id" :options="$store.state.task_types"-->
+            <!--value-field="id" text-field="name"></b-select>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row>-->
+            <!--<b-col md="10" lg="8">-->
+            <!--<b-form-group label="Заголовок">-->
+            <!--<b-form-input type="text" v-model.trim="data.title"/>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row v-if="isGroup">-->
+            <!--<b-col md="10" lg="8">-->
+            <!--<b-form-group label="Описание">-->
+            <!--<b-form-textarea v-model="data.note" :rows="5" no-resize/>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<template v-if="isQuestion">-->
+            <!--<b-row>-->
+            <!--<b-col md="10" lg="8">-->
+            <!--<b-form-group label="Текст вопроса">-->
+            <!--<b-form-textarea v-model="data.txt" :rows="5" no-resize/>-->
+            <!--</b-form-group>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--<b-row v-if="data.txt">-->
+            <!--<b-col md="10" lg="8">-->
+            <!--<MathJaxVue :formula="data.txt"></MathJaxVue>-->
+            <!--</b-col>-->
+            <!--</b-row>-->
+            <!--</template>-->
+            <!--</template>-->
+            <!--</b-container>-->
+            <!--</b-card-body>-->
+            <!--<b-card-footer v-if="!loading">-->
+            <!--</b-card-footer>-->
+            <!--</b-form>-->
         </el-card>
         <template v-if="!loading && showAttachments">
-            <b-container fluid class="mt-5 mb-4">
-                <b-row>
-                    <b-col>
+            <el-container class="mt-5 mb-4">
+                <el-row>
+                    <el-col>
                         <h3 class="text-black-50 m-0">Приложения к заданию</h3>
-                    </b-col>
-                </b-row>
-            </b-container>
+                    </el-col>
+                </el-row>
+            </el-container>
             <AttachmentCECard v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
                               @updated="onAttachmentUpdated(att, $event)"
                               @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
-            <b-container fluid class="pb-3">
-                <b-row class="justify-content-center">
-                    <b-col lg="auto">
-                        <b-button variant="success" @click="onAddAttachmentClick">
+            <el-container fluid class="pb-3">
+                <el-row style="width: 100%" type="flex" justify="center">
+                    <el-col style="text-align: center;" :span="10">
+                        <el-button type="success" @click="onAddAttachmentClick">
                             <i class="icon-plus mr-2"></i>Добавить приложение
-                        </b-button>
-                    </b-col>
-                </b-row>
-            </b-container>
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-container>
         </template>
         <template v-if="!loading && showAnswers">
-            <b-container fluid class="mt-5 mb-4">
-                <b-row>
-                    <b-col>
+            <el-container class="mt-5 mb-4">
+                <el-row>
+                    <el-col>
                         <h3 class="text-black-50 m-0">Варианты ответов</h3>
-                    </b-col>
-                </b-row>
-            </b-container>
+                    </el-col>
+                </el-row>
+            </el-container>
             <AnswerCECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
                           @updated="onAnswerUpdated(ans, $event)"
                           @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
-            <b-container fluid class="pb-3">
-                <b-row class="justify-content-center">
-                    <b-col lg="auto">
-                        <b-button variant="success" @click="onAddAnswerClick">
+            <el-container fluid class="pb-3">
+                <el-row class="justify-content-center">
+                    <el-col>
+                        <el-button type="success" @click="onAddAnswerClick">
                             <i class="icon-plus mr-2"></i>Добавить ответ
-                        </b-button>
-                    </b-col>
-                </b-row>
-            </b-container>
+                        </el-button>
+                    </el-col>
+                </el-row>
+            </el-container>
         </template>
         <template v-if="!loading && showChildren">
             <ChildrenE :children="data.children" @update:children="onChildrenUpdated"

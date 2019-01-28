@@ -34,6 +34,7 @@
                         <div class="text-black-50 mb-2">Показано: {{Math.min(pageSize, totalCount)}} из {{totalCount}}
                         </div>
                         <el-table
+                                @row-click="onItemClick"
                                 :data="tableData"
                         >
                             <el-table-column
