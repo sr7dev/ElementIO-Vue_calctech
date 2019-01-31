@@ -139,7 +139,10 @@
 
                     },
                     {
-                        name: 'Группы',
+                        name: {
+                            for_admin: 'Группы',
+                            for_tutor: 'Мои группы'
+                        },
                         icon: 'icon-info',
                         url: pathPrefix + 'groups',
                         rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
