@@ -1,5 +1,58 @@
 <template>
-    <SidebarNav :navItems="items"></SidebarNav>
+    <div style="height: 100%;">
+        <el-menu default-active="dashboard"
+                 router
+                 class="el-menu-vertical-demo"
+                 style="height: 100%;"
+                 :collapse="collapsed">
+            <el-menu-item index="dashboard">
+                <i class="el-icon-location"></i>
+                <span slot="title">Главная</span>
+            </el-menu-item>
+            <el-submenu v-if="isAdmin" index="0">
+                <template slot="title">
+                    <i class="el-icon-location"></i>
+                    <span slot="title">Aдминистратор</span>
+                </template>
+                <el-submenu
+                        v-if="item.children"
+                        v-for="item in items"
+                        :index="item.url">
+                    <span slot="title">{{item.name}}</span>
+                    <el-menu-item v-for="child in item.children"
+                                  :index="child.url">
+                        <span slot="title">{{child.name}}</span>
+                    </el-menu-item>
+                </el-submenu>
+                <el-menu-item v-for="item in items"
+                              :index="item.url"
+                              v-if="item.rolesAccess.includes('ROLE_ADMIN') && !item.children">
+                    <span slot="title">{{item.name.for_admin ? item.name.for_admin : item.name}}</span>
+                </el-menu-item>
+            </el-submenu>
+            <el-submenu index="1">
+                <template slot="title">
+                    <i class="el-icon-location"></i>
+                    <span slot="title">Преподаватель</span>
+                </template>
+                <el-submenu
+                        v-if="item.children"
+                        v-for="item in items"
+                        :index="item.url">
+                    <span slot="title">{{item.name}}</span>
+                    <el-menu-item v-for="child in item.children"
+                                  :index="child.url">
+                        <span slot="title">{{child.name}}</span>
+                    </el-menu-item>
+                </el-submenu>
+                <el-menu-item v-for="item in items"
+                              :index="item.url"
+                              v-if="item.rolesAccess.includes('ROLE_ADMIN') && !item.children">
+                    <span slot="title">{{item.name.for_tutor ? item.name.for_tutor : item.name}}</span>
+                </el-menu-item>
+            </el-submenu>
+        </el-menu>
+    </div>
 </template>
 
 <script>
@@ -16,16 +69,22 @@
                         name: 'Главная',
                         url: pathPrefix + 'dashboard',
                         icon: 'icon-home',
+                        rolesAccess: []
                     },
                     {
-                        name: 'Задания',
+                        name: {
+                            for_admin: 'Задания',
+                            for_tutor: 'Мои задания'
+                        },
                         url: pathPrefix + 'tasks',
                         icon: 'icon-calculator',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
                     },
                     {
                         name: 'Справочники',
                         icon: 'icon-layers',
                         url: pathPrefix + 'refs',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT'],
                         children: [
                             {
                                 name: 'Языки',
@@ -57,30 +116,51 @@
                     {
                         name: 'Настройки',
                         icon: 'icon-settings',
-                        url: pathPrefix + 'settings'
+                        url: pathPrefix + 'settings',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
                     },
                     {
                         name: 'Уведомления',
                         icon: 'icon-info',
-                        url: pathPrefix + 'notifications'
+                        url: pathPrefix + 'notifications',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
                     },
                     {
                         name: 'Роли и полномочия',
                         icon: 'icon-info',
-                        url: pathPrefix + 'roles'
+                        url: pathPrefix + 'roles',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
                     },
                     {
                         name: 'Пользователи',
                         icon: 'icon-info',
-                        url: pathPrefix + 'users'
+                        url: pathPrefix + 'users',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
+
                     },
                     {
                         name: 'Группы',
                         icon: 'icon-info',
-                        url: pathPrefix + 'groups'
+                        url: pathPrefix + 'groups',
+                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
                     }
                 ],
             };
         },
+        computed: {
+            collapsed() {
+                return this.$store.state.isCollapsed
+            },
+            isAdmin () {
+                return this.$store.state.profile.perms.includes('*')
+            }
+        }
     }
 </script>
+
+<style>
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
+        width: 200px;
+        min-height: 400px;
+    }
+</style>

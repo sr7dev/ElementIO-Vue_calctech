@@ -49,6 +49,12 @@
                             >
                             </el-table-column>
                             <el-table-column
+                                    prop="state_id"
+                                    :formatter="formatter"
+                                    label="Статус"
+                            >
+                            </el-table-column>
+                            <el-table-column
                                     prop=""
                                     label=""
                                     width="150"
@@ -117,6 +123,8 @@
     import ajax from "@/ajax";
     import utils from "@/utils";
     import FilterModal from "./FilterModal";
+    import {getTasks} from './api'
+    import taskStates from '@/taskStates'
 
     export default {
         props: ['routeName'],
@@ -127,6 +135,7 @@
                 state: {
                     loading: true,
                 },
+                taskStates,
                 fetching: false,
                 needRefetch: false,
                 failFB: '',
@@ -146,6 +155,7 @@
             };
         },
         mounted() {
+            this.state.loading = true
             this.itemsProvider()
         },
         computed: {
@@ -171,27 +181,34 @@
             },
         },
         methods: {
+            formatter(row) {
+                return (_.find(this.taskStates, {id: row.state_id}) || {name: ''}).name;
+            },
             refresh() {
                 this.page = 1;
                 this.$refs.table.refresh();
             },
             itemsProvider(ctx) {
+                this.state.loading = true
                 this.failFB = '';
                 let pars = _.assign({}, this.filterPars, {
                     page: this.page,
                     search: this.search,
-                    page_size: this.pageSize
+                    page_size: this.pageSize,
+                    own: true
                 });
-                return ajax.reqAPI(`tasks`, {pars}).then(response => {
+                getTasks(pars).then(response => {
                     let data = response.data;
                     this.tableData = response.data.results
                     this.pageSize = data.page_size;
                     this.page = data.page;
                     this.totalCount = data.total_count;
                     this.sort = data.sort;
-                    this.state.loading = false
+                    this.state.loading = false;
                     return data.results;
+
                 }).catch(error => {
+                    this.state.loading = false
                     if (error.status === 401) {
                         this.$store.commit('setProfile', null);
                         this.$router.push({name: 'l-auth'});

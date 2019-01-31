@@ -11,12 +11,12 @@ export function getRoles() {
     )
 }
 
-export function getRole(id, params) {
+export function getRole(id, pars) {
     return ajax.reqAPI(
         `roles/${id}`,
         {
             method: 'GET',
-            params
+            pars
         }
     )
 }

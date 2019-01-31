@@ -25,8 +25,8 @@
                     >
                         <el-option v-for="item in perms"
                                    :key="item.value"
-                                   :label="item.label"
-                                   :value="item.value">
+                                   :label="item.name"
+                                   :value="item.id">
                         </el-option>
                     </el-select>
                 </el-form-item>
@@ -40,7 +40,7 @@
 
 <script>
     import {getRole, postRole, putRole} from './api'
-    import perms from './perms'
+    import perms from '@/perms'
 
     export default {
         data: () => {

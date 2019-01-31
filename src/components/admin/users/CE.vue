@@ -62,6 +62,7 @@
                         rule,
                     ],
                     username: [
+                        { type: 'email', message: 'Пожалуйста, введите корректный email', trigger: ['blur', 'change'] },
                         rule,
                     ],
                     newPassword: [

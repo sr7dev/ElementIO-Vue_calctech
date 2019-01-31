@@ -3,15 +3,16 @@ import Vuex from "vuex";
 import _ from "lodash";
 import ajax from "./ajax";
 import stg from "./stg";
-import perm from "./perm";
+import perm from "./perms";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
         appError: false,
-
+        isCollapsed: true,
         // dic
+        perms: [],
         langs: [],
         grades: [],
         subjects: [],
@@ -38,6 +39,9 @@ export default new Vuex.Store({
         },
     },
     mutations: {
+        toggleSidebar(state) {
+          state.isCollapsed = !state.isCollapsed
+        },
         set(state, q) {
             state[q[0]] = q[1];
         },
@@ -68,11 +72,17 @@ export default new Vuex.Store({
     },
     actions: {
         refreshProfile({commit}) {
-            console.log('refreshProfile');
             return ajax.reqAPI('profile').then(response => {
                 commit('setProfile', response.data);
+                console.log(response.data);
             });
         },
+        // reloadPerms({commit}) {
+        //     return ajax.reqAPI(`dic/perms`).then(response => {
+        //         commit('set', ['perms', response.data]);
+        //         console.log('perms', response.data);
+        //     });
+        // },
         reloadDic({dispatch}) {
             return Promise.all([
                 dispatch('reloadLangs'),
