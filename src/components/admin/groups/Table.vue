@@ -4,7 +4,7 @@
         <el-container>
             <el-table
                     @row-click="onItemClick"
-                    :data="tableData"
+                    :data="tutorGroups.length ? tutorGroups : tableData"
                     class="mt-5">
                 <el-table-column
                         label="#"
@@ -80,13 +80,21 @@
         computed: {
             tableData() {
                 return this.$store.state.groups.results
+            },
+            userPerms() {
+                return this.$store.state.profile.perms
+            },
+            tutorGroups() {
+                return this.$store.state.profile.students.groups
             }
         },
         async created() {
-            await this.$store.dispatch('reloadGroups', {page_size: 5})
-            await this.$store.dispatch('reloadUsers')
-            this.params = {...this.$store.state.groups}
-            delete this.params.results
+            if (!this.userPerms.includes('tutor')) {
+                await this.$store.dispatch('reloadGroups', {page_size: 5})
+                await this.$store.dispatch('reloadUsers')
+                this.params = {...this.$store.state.groups}
+                delete this.params.results
+            }
             this.state.loading = false
         },
         methods: {

@@ -16,7 +16,7 @@
                 <el-form label-position="top">
                     <el-col :span="11">
                         <el-form-item label="Название группы:">
-                            <el-input  v-model="group.name"></el-input>
+                            <el-input v-model="group.name"></el-input>
                         </el-form-item>
                         <el-form-item label="Преподаватель:">
                             <el-select style="width: 100%"
@@ -87,11 +87,12 @@
             }
         },
         async created() {
-            await this.$store.dispatch('reloadUsers')
-            this.tutors = this.$store.state.users.results
-            this.users = this.$store.state.users.results
-            if (this.id) {
-                await getGroup(this.id).then(response => {
+            if (!this.userPerms.includes('tutor')) {
+                await this.$store.dispatch('reloadUsers')
+                this.tutors = this.$store.state.users.results
+                this.users = this.$store.state.users.results
+                if (this.id) {
+                    let response = await getGroup(this.id)
                     this.group = response.data
                     if (this.group.tutor_id) {
                         this.state.tutor_id = this.group.tutor_id
@@ -99,9 +100,12 @@
                     this.groupUsers = this.group.students.map(item => {
                         if (item.id !== this.group.tutor_id) return item.id
                     })
-                })
+                }
+                this.state.loading = false
+            } else {
+                this.group = this.$store.state.profile.students.groups.filter(group => group.id === this.id)
+                this.state.loading = false
             }
-            this.state.loading = false
         },
         computed: {
             id() {
@@ -113,11 +117,14 @@
             students() {
                 return this.$store.state.users.results ? this.$store.state.users.results.filter(item => item.id !== this.state.tutor_id) : []
             },
+            userPerms() {
+                return this.$store.state.profile.perms
+            },
         },
         methods: {
             async onTutorSearch(query) {
                 this.state.loading = true;
-                if (query !== '' && query !== undefined ) {
+                if (query !== '' && query !== undefined) {
                     let pars = {
                         search: query
                     }
@@ -168,16 +175,16 @@
                             this.state.loading = false;
                             this.$message.error(response.data.error_dsc)
                         })
-                    await putGroupStudents(this.state.group_id, {usr_ids: [...this.groupUsers]})
-                        .then(response => {
-                            this.state.loading = false;
-                            this.$message.success(this.id || this.state.group_id ? 'Группа успешно изменена' : 'Группа успешно создана')
-                            this.$router.push({name: 'groups'})
-                        })
-                        .catch(response => {
-                            this.state.loading = false;
-                            this.$message.error(response.data.error_dsc)
-                        })
+                    // await putGroupStudents(this.state.group_id, {usr_ids: [...this.groupUsers]})
+                    //     .then(response => {
+                    //         this.state.loading = false;
+                    //         this.$message.success(this.id || this.state.group_id ? 'Группа успешно изменена' : 'Группа успешно создана')
+                    //         this.$router.push({name: 'groups'})
+                    //     })
+                    //     .catch(response => {
+                    //         this.state.loading = false;
+                    //         this.$message.error(response.data.error_dsc)
+                    //     })
                 } else {
                     if (this.state.removedStudents.length) {
                         await removeGroupStudents(this.id, {usr_ids: [...this.state.removedStudents]})

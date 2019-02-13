@@ -195,7 +195,7 @@
                     page: this.page,
                     search: this.search,
                     page_size: this.pageSize,
-                    own: true
+                    // own: true
                 });
                 getTasks(pars).then(response => {
                     let data = response.data;

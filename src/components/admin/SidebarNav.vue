@@ -9,48 +9,44 @@
                 <i class="el-icon-location"></i>
                 <span slot="title">Главная</span>
             </el-menu-item>
-            <el-submenu v-if="isAdmin" index="0">
+            <el-submenu index="1" v-if="adminRoutes.length">
                 <template slot="title">
                     <i class="el-icon-location"></i>
-                    <span slot="title">Aдминистратор</span>
+                    <span slot="title">Администратор</span>
                 </template>
-                <el-submenu
-                        v-if="item.children"
-                        v-for="item in items"
-                        :index="item.url">
+                <el-submenu v-for="item in adminRoutes" :index="item.url" v-if="item.children">
                     <span slot="title">{{item.name}}</span>
-                    <el-menu-item v-for="child in item.children"
-                                  :index="child.url">
+                    <el-menu-item v-for="child in item.children" :index="child.url">
                         <span slot="title">{{child.name}}</span>
                     </el-menu-item>
                 </el-submenu>
-                <el-menu-item v-for="item in items"
-                              :index="item.url"
-                              v-if="item.rolesAccess.includes('ROLE_ADMIN') && !item.children">
-                    <span slot="title">{{item.name.for_admin ? item.name.for_admin : item.name}}</span>
+                <el-menu-item v-for="item in adminRoutes" :index="item.url" v-if="!item.children">
+                    <span slot="title">{{item.name}}</span>
                 </el-menu-item>
             </el-submenu>
-            <el-submenu index="1">
+            <el-submenu index="2">
                 <template slot="title">
                     <i class="el-icon-location"></i>
                     <span slot="title">Преподаватель</span>
                 </template>
-                <el-submenu
-                        v-if="item.children"
-                        v-for="item in items"
-                        :index="item.url">
+                <el-submenu v-for="item in tutorRoutes" :index="item.url" v-if="item.children">
                     <span slot="title">{{item.name}}</span>
-                    <el-menu-item v-for="child in item.children"
-                                  :index="child.url">
+                    <el-menu-item v-for="child in item.children" :index="child.url">
                         <span slot="title">{{child.name}}</span>
                     </el-menu-item>
                 </el-submenu>
-                <el-menu-item v-for="item in items"
-                              :index="item.url"
-                              v-if="item.rolesAccess.includes('ROLE_ADMIN') && !item.children">
-                    <span slot="title">{{item.name.for_tutor ? item.name.for_tutor : item.name}}</span>
+                <el-menu-item v-for="item in tutorRoutes" :index="item.url" v-if="!item.children">
+                    <span slot="title">{{item.name}}</span>
                 </el-menu-item>
             </el-submenu>
+            <el-menu-item index="notifications">
+                <i class="el-icon-location"></i>
+                <span slot="title">Уведомления</span>
+            </el-menu-item>
+            <el-menu-item index="settings">
+                <i class="el-icon-location"></i>
+                <span slot="title">Настройки</span>
+            </el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -58,106 +54,54 @@
 <script>
     import {SidebarNav} from '@coreui/vue'
 
-    let pathPrefix = '/adm/';
+
+    import {adminRoutes, tutorRoutes} from '@/components/admin/SidebarRoutes'
 
     export default {
         components: {SidebarNav},
         data() {
-            return {
-                items: [
-                    {
-                        name: 'Главная',
-                        url: pathPrefix + 'dashboard',
-                        icon: 'icon-home',
-                        rolesAccess: []
-                    },
-                    {
-                        name: {
-                            for_admin: 'Задания',
-                            for_tutor: 'Мои задания'
-                        },
-                        url: pathPrefix + 'tasks',
-                        icon: 'icon-calculator',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-                    },
-                    {
-                        name: 'Справочники',
-                        icon: 'icon-layers',
-                        url: pathPrefix + 'refs',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT'],
-                        children: [
-                            {
-                                name: 'Языки',
-                                url: pathPrefix + 'refs/langs',
-                                icon: 'icon-puzzle',
-                            },
-                            {
-                                name: 'Классы',
-                                url: pathPrefix + 'refs/grades',
-                                icon: 'icon-puzzle',
-                            },
-                            {
-                                name: 'Предметы',
-                                url: pathPrefix + 'refs/subjects',
-                                icon: 'icon-puzzle',
-                            },
-                            {
-                                name: 'Темы',
-                                url: pathPrefix + 'refs/topics',
-                                icon: 'icon-puzzle',
-                            },
-                            {
-                                name: 'Подтемы',
-                                url: pathPrefix + 'refs/sub_topics',
-                                icon: 'icon-puzzle',
-                            },
-                        ],
-                    },
-                    {
-                        name: 'Настройки',
-                        icon: 'icon-settings',
-                        url: pathPrefix + 'settings',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-                    },
-                    {
-                        name: 'Уведомления',
-                        icon: 'icon-info',
-                        url: pathPrefix + 'notifications',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-                    },
-                    {
-                        name: 'Роли и полномочия',
-                        icon: 'icon-info',
-                        url: pathPrefix + 'roles',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-                    },
-                    {
-                        name: 'Пользователи',
-                        icon: 'icon-info',
-                        url: pathPrefix + 'users',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-
-                    },
-                    {
-                        name: {
-                            for_admin: 'Группы',
-                            for_tutor: 'Мои группы'
-                        },
-                        icon: 'icon-info',
-                        url: pathPrefix + 'groups',
-                        rolesAccess: ['ROLE_ADMIN', 'ROLE_TEACHER', 'ROLE_STUDENT']
-                    }
-                ],
-            };
+            return {};
         },
         computed: {
+            adminRoutes() {
+                return adminRoutes.filter(this.filterMethod)
+            },
+            tutorRoutes() {
+                return tutorRoutes.filter(this.filterMethod)
+            },
             collapsed() {
                 return this.$store.state.isCollapsed
             },
-            isAdmin () {
-                return this.$store.state.profile.perms.includes('*')
-            }
-        }
+            userPerms() {
+                return this.$store.state.profile.perms
+            },
+        },
+        methods: {
+            filterMethod(route) {
+                if (!route.perms) return true
+                if (this.userPerms.includes('*')) return true
+                return this.userPerms.some(perms => route.perms.includes(perms))
+            },
+            // mapMethod(item) {
+            //     let route = JSON.parse(JSON.stringify(item))
+            //
+            //     if (route.children && !this.userPerms.includes('*')) {
+            //
+            //         route.children = route.children.filter(child => {
+            //             if (!child.perms) return true
+            //             this.userPerms.some(perms => child.perms.includes(perms))
+            //         })
+            //
+            //         if (!route.children.length) route.children = null
+            //     }
+            //
+            //     if (typeof route.name === 'object') {
+            //         route.name = 'for_admin / for_tutor'
+            //     }
+            //
+            //     return route
+            // }
+        },
     }
 </script>
 

@@ -20,6 +20,7 @@ const Users = () => import('@/components/admin/users/Table');
 const UsersCE = () => import('@/components/admin/users/CE');
 const Groups = () => import('@/components/admin/groups/Table');
 const GroupsCE = () => import('@/components/admin/groups/CE');
+const MyStudents = () => import('@/components/admin/MyStudents')
 
 
 
@@ -186,6 +187,11 @@ export default {
                     component: GroupsCE,
                 },
             ],
+        },
+        {
+            path: 'my-students',
+            name: 'MyStudents',
+            component: MyStudents,
         },
     ],
 };
