@@ -164,12 +164,16 @@
                 let body = {
                     name: this.group.name,
                     note: this.group.note,
-                    tutor_id: this.group.tutor_id ? this.group.tutor_id : 0
+                    tutor_id: this.group.tutor_id ? this.group.tutor_id : 0,
+                    usr_ids: [...this.groupUsers]
                 }
                 if (!this.id) {
                     await postGroup(body)
                         .then(response => {
+                            this.state.loading = false
                             this.state.group_id = response.data.id
+                            this.$router.push({name: 'groups'})
+                            this.$message.success('Группа успешно создана')
                         })
                         .catch(response => {
                             this.state.loading = false;

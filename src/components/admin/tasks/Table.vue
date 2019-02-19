@@ -87,7 +87,9 @@
                                     >
                                         На модерацию
                                     </el-button>
-                                    <el-button v-if="scope.row.state_id === 3" type="primary" @click="show(scope.row)">Назначить задание</el-button>
+                                    <el-button v-if="scope.row.state_id === 3" type="primary" @click="show(scope.row)">
+                                        Назначить задание
+                                    </el-button>
                                 </template>
                             </el-table-column>
                             <el-table-column
@@ -163,7 +165,7 @@
     import ajax from "@/ajax";
     import utils from "@/utils";
     import FilterModal from "./FilterModal";
-    import {getTasks, assignTask, moderateTask} from './api'
+    import {assignTask, getTasks, moderateTask} from './api'
     import taskStates from '@/taskStates'
 
     export default {
@@ -201,7 +203,7 @@
             this.itemsProvider()
         },
         computed: {
-            myPerms(){
+            myPerms() {
                 return this.$store.state.profile.perms
             },
             isFiltered() {
@@ -229,19 +231,34 @@
             },
         },
         methods: {
-            onModerate(row){
+            onModerate(row) {
+                this.state.loading = true
                 let id = row.id
-                moderateTask(id).then(response => {
-                    console.log('rspns', response);
-                })
+                moderateTask(id)
+                    .then(response => {
+                        this.state.loading = false
+                        this.$message.success('Задание отправлено на можерацию')
+                    })
+                    .catch(response => {
+                        this.state.loading = false
+                        this.$message.error(response.data.error_dsc)
+                    })
             },
-            assignTask(){
+            assignTask() {
+                this.state.loading = true
+                let id = this.state.task_id
                 let data = {
-                    group_id: this.state.selectedGroups
+                    group_ids: [...this.state.selectedGroups]
                 }
-                assignTask().then(response => {
-
-                })
+                assignTask(id, data)
+                    .then(response => {
+                        this.state.loading = false
+                        this.$message.success('Задание успешно назначено группе')
+                    })
+                    .catch(response => {
+                        this.state.loading = false
+                        this.$message.error(response.data.error_dsc)
+                    })
             },
             show(task) {
                 this.state.task_id = task.id
