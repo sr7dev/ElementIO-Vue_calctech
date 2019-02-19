@@ -15,18 +15,41 @@
             <el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                     <el-collapse-item v-for="group in myGroups" :title="group.name" :name="group.id">
-                        <div class="students-list">
-                            <div v-for="student in group.students" class="students-list__item">
-                                <div class="students-list__item__avatar">
-                                    <img :src="utils.fmtMediaImageFit(student.avatar, 300, 300) || 'img/default_avatar.jpg'"
-                                         class="img-avatar" :alt="student.first_name"/>
-                                </div>
-                                <span class="students-list__item__fio">
-                                    <div>{{student.first_name}}</div>
-                                    <div>{{student.last_name}}</div>
-                                </span>
-                            </div>
-                        </div>
+                        <el-row class="students-list">
+                            <el-col :span="6">
+                                <el-row v-for="student in group.students" class="students-list__item">
+                                    <el-col class="students-list__item__info">
+                                        <el-card>
+                                            <img :src="utils.fmtMediaImageFit(student.avatar, 300, 300) || 'img/default_avatar.jpg'"
+                                                 class="img-avatar" :alt="student.first_name"/>
+                                            <div>{{student.first_name}}</div>
+                                            <div>{{student.last_name}}</div>
+                                        </el-card>
+                                        <hr>
+                                    </el-col>
+                                </el-row>
+                            </el-col>
+                            <el-col :span="16" :offset="2">
+                                <el-card>
+                                    <div slot="header">
+                                        Назначенные задания
+                                    </div>
+                                    <el-table :data="group.tasks">
+                                        <el-table-column
+                                                label=""
+                                                prop="id"
+                                        >
+                                        </el-table-column>
+                                        <el-table-column
+                                                label="Название"
+                                                prop="title"
+                                        >
+                                        </el-table-column>
+                                    </el-table>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+
                     </el-collapse-item>
                 </el-collapse>
             </el-row>
@@ -50,7 +73,7 @@
         computed: {
             myGroups() {
                 return this.$store.state.profile.students.groups
-            }
+            },
         },
         methods: {
             onSave() {
@@ -65,15 +88,11 @@
     .students-list {
         &__item {
             width: 100%;
-            display: inline-flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin: 20px;
-            &__avatar {
-                width: 150px;
-                height: 150px;
+            &__info {
+                text-align: center;
                 img {
-                    height: 100%;
+                    height: 150px;
+                    width: 150px;
                 }
             }
             &__fio {
