@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 // import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/element-variables.scss'
 import locale from 'element-ui/lib/locale/lang/ru-RU'
+import VModal from 'vue-js-modal'
 
 
 
@@ -25,6 +26,8 @@ Vue.use(VueCharts);
 Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
 Vue.use(ElementUI, { locale })
+Vue.use(VModal)
+
 
 
 

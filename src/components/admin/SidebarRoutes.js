@@ -167,8 +167,12 @@ export const tutorRoutes = [
     {
         name: 'Задания',
         url: pathPrefix + 'tasks',
-        icon: 'icon-calculator',
         perms: ['task-ce', 'not_own_task-e', 'task-moderate', 'not_own_task-v']
+    },
+    {
+        name: 'Модерация заданий',
+        url: pathPrefix + 'moderate',
+        perms: ["not_own_task-e", "not_own_task-v", "task-moderate"]
     },
     {
         name: 'Мои студенты',

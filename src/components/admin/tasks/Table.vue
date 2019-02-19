@@ -4,6 +4,25 @@
             <el-card no-body class="animated fadeIn">
                 <div slot="header" v-if="!state.loading">
                     <el-container>
+                        <modal :height="200" name="groupsModal">
+                            <el-row>
+                                <el-col :offset="1">
+                                    <el-form label-position="top">
+                                        <el-form-item label="Выберите группы:">
+                                            <el-select v-model="state.selectedGroups"
+                                                       multiple
+                                                       style="width: 91%">
+                                                <el-option v-for="group in myGroups"
+                                                           :label="group.name"
+                                                           :value="group.id"
+                                                ></el-option>
+                                            </el-select>
+                                        </el-form-item>
+                                        <el-button type="primary" @click="assignTask">Назначить</el-button>
+                                    </el-form>
+                                </el-col>
+                            </el-row>
+                        </modal>
                         <el-row style="width: 100%">
                             <el-col :span="8">
                                 <h3 class="text-black-50 m-0">Задания</h3>
@@ -55,12 +74,31 @@
                             >
                             </el-table-column>
                             <el-table-column
+                                    align="center"
+                                    prop=""
+                                    label="Прикрепить к группе">
+                                <template slot-scope="scope">
+                                    <el-button
+                                            style="margin-bottom: 5px"
+                                            v-if="scope.row.state_id === 1"
+                                            size="mini"
+                                            type="warning"
+                                            @click="onModerate(scope.row)"
+                                    >
+                                        На модерацию
+                                    </el-button>
+                                    <el-button v-if="scope.row.state_id === 3" type="primary" @click="show(scope.row)">Назначить задание</el-button>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
                                     prop=""
                                     label=""
-                                    width="150"
+                                    width="200"
+                                    align="center"
                             >
                                 <template slot="header" slot-scope="scope">
                                     <el-button
+                                            v-if="myPerms.includes('task-ce')"
                                             type="success"
                                             @click="onAddClick"
                                     >
@@ -69,43 +107,45 @@
                                 </template>
                                 <template slot-scope="scope">
                                     <el-button
+                                            style="margin: 0"
                                             size="mini"
                                             type="danger"
                                             icon="el-icon-delete"
-                                            @click="onItemDeleteClick(scope.row)">Удалить</el-button>
+                                            @click="onItemDeleteClick(scope.row)">Удалить
+                                    </el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
                         <!--<b-table responsive="sm"-->
-                                 <!--:fields="fields"-->
-                                 <!--:items="itemsProvider"-->
-                                 <!--:current-page="page"-->
-                                 <!--:per-page="pageSize"-->
-                                 <!--:busy.sync="fetching"-->
-                                 <!--thead-class="bg-gray-100"-->
-                                 <!--thead-tr-class="align-middle"-->
-                                 <!--tbody-class="cursor-pointer"-->
-                                 <!--ref="table"-->
-                                 <!--@row-clicked="onItemClick"-->
-                                 <!--:hover="!fetching && !failFB"-->
-                                 <!--bordered show-empty>-->
-                            <!--<template slot="HEAD_actions" slot-scope="data">-->
-                                <!--<b-button variant="success" size="sm" @click.stop="onAddClick">-->
-                                    <!--<i class="icon-plus mr-2"></i>Создать-->
-                                <!--</b-button>-->
-                            <!--</template>-->
-                            <!--<template slot="actions" slot-scope="data">-->
-                                <!--<b-button variant="danger" size="sm" @click.stop="onItemDeleteClick(data.item)">-->
-                                    <!--<i class="fa fa-trash mr-2"></i>удалить-->
-                                <!--</b-button>-->
-                            <!--</template>-->
-                            <!--<div slot="empty">-->
-                                <!--<div v-if="fetching" class="text-center"><i class="spnr"></i></div>-->
-                                <!--<b-alert v-else-if="failFB" variant="danger" class="mb-0" show>-->
-                                    <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
-                                <!--</b-alert>-->
-                                <!--<div v-else="" class="py-2 text-center text-black-50">Записи не найдены</div>-->
-                            <!--</div>-->
+                        <!--:fields="fields"-->
+                        <!--:items="itemsProvider"-->
+                        <!--:current-page="page"-->
+                        <!--:per-page="pageSize"-->
+                        <!--:busy.sync="fetching"-->
+                        <!--thead-class="bg-gray-100"-->
+                        <!--thead-tr-class="align-middle"-->
+                        <!--tbody-class="cursor-pointer"-->
+                        <!--ref="table"-->
+                        <!--@row-clicked="onItemClick"-->
+                        <!--:hover="!fetching && !failFB"-->
+                        <!--bordered show-empty>-->
+                        <!--<template slot="HEAD_actions" slot-scope="data">-->
+                        <!--<b-button variant="success" size="sm" @click.stop="onAddClick">-->
+                        <!--<i class="icon-plus mr-2"></i>Создать-->
+                        <!--</b-button>-->
+                        <!--</template>-->
+                        <!--<template slot="actions" slot-scope="data">-->
+                        <!--<b-button variant="danger" size="sm" @click.stop="onItemDeleteClick(data.item)">-->
+                        <!--<i class="fa fa-trash mr-2"></i>удалить-->
+                        <!--</b-button>-->
+                        <!--</template>-->
+                        <!--<div slot="empty">-->
+                        <!--<div v-if="fetching" class="text-center"><i class="spnr"></i></div>-->
+                        <!--<b-alert v-else-if="failFB" variant="danger" class="mb-0" show>-->
+                        <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
+                        <!--</b-alert>-->
+                        <!--<div v-else="" class="py-2 text-center text-black-50">Записи не найдены</div>-->
+                        <!--</div>-->
                         <!--</b-table>-->
                     </template>
                 </div>
@@ -123,7 +163,7 @@
     import ajax from "@/ajax";
     import utils from "@/utils";
     import FilterModal from "./FilterModal";
-    import {getTasks} from './api'
+    import {getTasks, assignTask, moderateTask} from './api'
     import taskStates from '@/taskStates'
 
     export default {
@@ -134,6 +174,8 @@
                 utils, constants,
                 state: {
                     loading: true,
+                    task_id: null,
+                    selectedGroups: [],
                 },
                 taskStates,
                 fetching: false,
@@ -151,7 +193,7 @@
                 filterPars: {},
                 search: '',
                 sort: '',
-                tableData: []
+                tableData: [],
             };
         },
         mounted() {
@@ -159,9 +201,15 @@
             this.itemsProvider()
         },
         computed: {
+            myPerms(){
+                return this.$store.state.profile.perms
+            },
             isFiltered() {
                 return !_.isEmpty(this.filterPars);
             },
+            myGroups() {
+                return this.$store.state.profile.students.groups
+            }
         },
         watch: {
             search() {
@@ -181,6 +229,24 @@
             },
         },
         methods: {
+            onModerate(row){
+                let id = row.id
+                moderateTask(id).then(response => {
+                    console.log('rspns', response);
+                })
+            },
+            assignTask(){
+                let data = {
+                    group_id: this.state.selectedGroups
+                }
+                assignTask().then(response => {
+
+                })
+            },
+            show(task) {
+                this.state.task_id = task.id
+                this.$modal.show('groupsModal');
+            },
             formatter(row) {
                 return (_.find(this.taskStates, {id: row.state_id}) || {name: ''}).name;
             },
@@ -195,7 +261,7 @@
                     page: this.page,
                     search: this.search,
                     page_size: this.pageSize,
-                    // own: true
+                    own: true
                 });
                 getTasks(pars).then(response => {
                     let data = response.data;

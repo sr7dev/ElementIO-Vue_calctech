@@ -1,5 +1,5 @@
 <template>
-    <div class="animated fadeIn" style="padding-bottom: 80vh">
+    <div v-loading="state.loading" class="animated fadeIn" style="padding-bottom: 80vh">
         <el-container>
             <el-row>
                 <el-col>
@@ -13,7 +13,7 @@
             <div slot="header">
                 <h3 class="text-black-50 m-0">{{headerText}}</h3>
             </div>
-            <el-form label-position="top">
+            <el-form :disabled="userPerms.includes('task-moderate')" label-position="top">
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="Вид задания">
@@ -122,7 +122,7 @@
                     </el-row>
                 </section>
             </el-form>
-            <el-button @click.prevent="onSubmit" type="success">
+            <el-button v-if="!userPerms.includes('task-moderate')" @click.prevent="onSubmit" type="success">
                 {{id ? 'Изменить' : 'Создать'}}
             </el-button>
             <!--<b-form @submit.prevent="onSubmit">-->
@@ -260,7 +260,7 @@
             <AttachmentCECard v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
                               @updated="onAttachmentUpdated(att, $event)"
                               @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
-            <el-container fluid class="pb-3">
+            <el-container v-if="!userPerms.includes('task-moderate')" fluid class="pb-3">
                 <el-row style="width: 100%" type="flex" justify="center">
                     <el-col style="text-align: center;" :span="10">
                         <el-button type="success" @click="onAddAttachmentClick">
@@ -281,7 +281,7 @@
             <AnswerCECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
                           @updated="onAnswerUpdated(ans, $event)"
                           @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
-            <el-container fluid class="pb-3">
+            <el-container v-if="!userPerms.includes('task-moderate')" fluid class="pb-3">
                 <el-row class="justify-content-center">
                     <el-col>
                         <el-button type="success" @click="onAddAnswerClick">
@@ -295,6 +295,8 @@
             <ChildrenE :children="data.children" @update:children="onChildrenUpdated"
                        :saving="childrenSaving"></ChildrenE>
         </template>
+        <el-button v-if="userPerms.includes('task-moderate', '*')" type="primary" @click="onTaskAccept">Подтвердить
+        </el-button>
     </div>
 </template>
 
@@ -307,16 +309,19 @@
     import AttachmentCECard from './attachments/CECard'
     import AnswerCECard from './answers/CECard'
     import ChildrenE from './ChildrenE'
+    import {acceptTask} from './api'
 
     export default {
         props: ['routeName'],
         components: {MathJaxVue, AttachmentCECard, AnswerCECard, ChildrenE},
         data() {
             return {
+                state: {
+                    loading: false,
+                },
                 ld: _, utils, constants,
-                loading: false,
                 failFB: '',
-                data: null,
+                data: {},
                 notSelectedOption: {id: null, name: '-- не выбрано --'},
                 notSelectedChoice: {id: null, name: 'не выбрано'},
                 childrenSaving: false,
@@ -364,6 +369,9 @@
             subTopics() {
                 return _.concat([this.notSelectedOption], _.filter(this.$store.state.sub_topics, {topic_id: this.data.topic_id}));
             },
+            userPerms() {
+                return this.$store.state.profile.perms
+            },
         },
         watch: {
             'data.subject_id'() {
@@ -384,6 +392,19 @@
             },
         },
         methods: {
+            onTaskAccept() {
+                this.state.loading = true
+                let id = this.id
+                acceptTask(id)
+                    .then(response => {
+                        this.state.loading = false
+                        this.$message.success('Задание успешно подтверждено')
+                    })
+                    .catch(response => {
+                        this.state.loading = false
+                        this.$message.error(response.data.error_dsc)
+                    })
+            },
             emptyData() {
                 return {
                     kind_id: constants.TaskKindQuestion,

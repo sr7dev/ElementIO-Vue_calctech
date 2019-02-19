@@ -1,6 +1,6 @@
 <template>
     <el-card class="animated fadeIn mb-5">
-        <el-form>
+        <el-form :disabled="userPerms.includes('task-moderate')">
             <div class="px-0 pb-2">
                 <el-row style="width: 100%">
                     <el-col :span="8">
@@ -82,6 +82,11 @@
         //     this.data.v = '';
         //   },
         // },
+        computed: {
+            userPerms() {
+                return this.$store.state.profile.perms
+            },
+        },
         methods: {
             emptyData() {
                 return {
