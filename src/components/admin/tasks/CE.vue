@@ -10,10 +10,18 @@
             </el-row>
         </el-container>
         <el-card>
-            <div slot="header">
-                <h3 class="text-black-50 m-0">{{headerText}}</h3>
+            <div style="display: inline-flex; justify-content: space-between; width: 100%">
+                <h3 v-if="!moderator" class="text-black-50 m-0">{{headerText}}</h3>
+                <h3 v-else class="text-black-50 m-0">Модерация задания</h3>
+                <el-button v-if="state.disabled && !moderator && data.state_id !== 2" type="primary" @click="state.disabled = !state.disabled">Изменить</el-button>
             </div>
-            <el-form :disabled="userPerms.includes('task-moderate')" label-position="top">
+            <el-alert
+                    v-if="data.reject_reason"
+                    title="Комментарий модератора:"
+                    type="warning"
+                    :description="data.reject_reason">
+            </el-alert>
+            <el-form :disabled="moderator || state.disabled" label-position="top">
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="Вид задания">
@@ -117,12 +125,12 @@
                     </el-row>
                     <el-row v-if="data.txt">
                         <el-col :span="10">
-                            <MathJaxVue :formula="data.txt"></MathJaxVue>
+                            <vue-mathjax :formula="data.txt"></vue-mathjax>
                         </el-col>
                     </el-row>
                 </section>
             </el-form>
-            <el-button v-if="!userPerms.includes('task-moderate')" @click.prevent="onSubmit" type="success">
+            <el-button v-if="!moderator" @click.prevent="onSubmit" type="success">
                 {{id ? 'Изменить' : 'Создать'}}
             </el-button>
             <!--<b-form @submit.prevent="onSubmit">-->
@@ -249,7 +257,7 @@
             <!--</b-card-footer>-->
             <!--</b-form>-->
         </el-card>
-        <template v-if="!loading && showAttachments">
+        <template v-if="!state.loading && showAttachments">
             <el-container class="mt-5 mb-4">
                 <el-row>
                     <el-col>
@@ -260,7 +268,7 @@
             <AttachmentCECard v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
                               @updated="onAttachmentUpdated(att, $event)"
                               @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
-            <el-container v-if="!userPerms.includes('task-moderate')" fluid class="pb-3">
+            <el-container v-if="!moderator && data.state_id !== 2" fluid class="pb-3">
                 <el-row style="width: 100%" type="flex" justify="center">
                     <el-col style="text-align: center;" :span="10">
                         <el-button type="success" @click="onAddAttachmentClick">
@@ -270,7 +278,7 @@
                 </el-row>
             </el-container>
         </template>
-        <template v-if="!loading && showAnswers">
+        <template v-if="!state.loading && showAnswers">
             <el-container class="mt-5 mb-4">
                 <el-row>
                     <el-col>
@@ -281,7 +289,7 @@
             <AnswerCECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
                           @updated="onAnswerUpdated(ans, $event)"
                           @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
-            <el-container v-if="!userPerms.includes('task-moderate')" fluid class="pb-3">
+            <el-container v-if="!moderator && data.state_id !== 2" fluid class="pb-3">
                 <el-row class="justify-content-center">
                     <el-col>
                         <el-button type="success" @click="onAddAnswerClick">
@@ -291,12 +299,23 @@
                 </el-row>
             </el-container>
         </template>
-        <template v-if="!loading && showChildren">
+        <template v-if="!state.loading && showChildren">
             <ChildrenE :children="data.children" @update:children="onChildrenUpdated"
                        :saving="childrenSaving"></ChildrenE>
         </template>
-        <el-button v-if="userPerms.includes('task-moderate', '*')" type="primary" @click="onTaskAccept">Подтвердить
-        </el-button>
+
+        <el-card style="margin-top: 20px" v-if="moderator">
+            <el-form label-position="top">
+                <el-form-item label="Статус модерации:">
+                    <el-radio v-model="moderation.decision" label="true">Подтвердить</el-radio>
+                    <el-radio v-model="moderation.decision" label="false">Отклонить</el-radio>
+                </el-form-item>
+                <el-form-item v-if="moderation.decision === 'false'" label="Комментарий:">
+                    <el-input type="textarea" v-model="moderation.reason" :autosize="{minRows:5}"></el-input>
+                </el-form-item>
+                <el-button type="primary" @click="onTaskAccept">Отправить</el-button>
+            </el-form>
+        </el-card>
     </div>
 </template>
 
@@ -305,30 +324,44 @@
     import constants from "@/constants";
     import utils from "@/utils";
     import ajax from "@/ajax";
-    import MathJaxVue from '@/components/common/MathJaxVue'
+    import {VueMathjax} from 'vue-mathjax'
     import AttachmentCECard from './attachments/CECard'
     import AnswerCECard from './answers/CECard'
     import ChildrenE from './ChildrenE'
-    import {acceptTask} from './api'
+    import {acceptTask, rejectTask} from './api'
 
     export default {
         props: ['routeName'],
-        components: {MathJaxVue, AttachmentCECard, AnswerCECard, ChildrenE},
+        components: {'vue-mathjax': VueMathjax, AttachmentCECard, AnswerCECard, ChildrenE},
         data() {
             return {
                 state: {
                     loading: false,
+                    disabled: true,
+                    own: false
                 },
                 ld: _, utils, constants,
                 failFB: '',
                 data: {},
+                moderation: {
+                    decision: 'true',
+                    reason: ''
+                },
                 notSelectedOption: {id: null, name: '-- не выбрано --'},
                 notSelectedChoice: {id: null, name: 'не выбрано'},
                 childrenSaving: false,
                 childrenNeedResave: false,
             };
         },
+        created() {
+            this.fetch();
+            if(this.id === 0) this.state.disabled = false
+            if(this.data.usr_id === this.$store.state.profile.id) this.state.own = true
+        },
         computed: {
+            moderator() {
+                return this.userPerms.includes('task-moderate') && !this.state.own || this.userPerms.includes('*') && this.id !== 0
+            },
             difficulties() {
                 return this.ld.concat([this.notSelectedChoice], this.$store.state.difficulties)
             },
@@ -394,15 +427,22 @@
         methods: {
             onTaskAccept() {
                 this.state.loading = true
-                let id = this.id
-                acceptTask(id)
+                let id = this.data.id
+                let req
+                let body = {
+                    reason: this.moderation.reason
+                }
+                if (this.moderation.decision === 'true') req = acceptTask(id)
+                else req = rejectTask(id, body)
+                req
                     .then(response => {
                         this.state.loading = false
-                        this.$message.success('Задание успешно подтверждено')
+                        this.$message.success('Модерация завершена')
+                        this.$router.replace({name: 'Moderate'})
                     })
-                    .catch(response => {
+                    .catch(error => {
                         this.state.loading = false
-                        this.$message.error(response.data.error_dsc)
+                        this.$message.error(error.data.error_dsc)
                     })
             },
             emptyData() {
@@ -468,17 +508,23 @@
                 }
                 req.then(response => {
                     if (this.id) {
+                        this.$message.success('Задание успешно изменено')
                         this.fetch();
                     } else {
-                        this.$router.replace({name: this.routeName, params: {task_id: response.data.id}});
+                        this.$message.success('Задание успешно изменено')
+                        // this.$router.replace({name: this.routeName, params: {task_id: response.data.id}});
                         this.fetch();
                     }
+                    this.$router.replace({name: 'a-tasks'})
                 }).catch(error => {
                     if (error.status === 401) {
+                        this.state.loading = false;
                         this.$store.commit('setProfile', null);
                         this.$router.push({name: 'auth'});
+
                     } else {
-                        this.loading = false;
+                        this.state.loading = false;
+                        this.$message.error(error.data.error_dsc)
                         this.failFB = utils.retrieveApiErrorDsc(error);
                     }
                 });
@@ -524,9 +570,6 @@
                     }
                 });
             },
-        },
-        created() {
-            this.fetch();
         },
     }
 </script>

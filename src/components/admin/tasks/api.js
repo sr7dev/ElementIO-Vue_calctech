@@ -40,3 +40,13 @@ export function acceptTask(id, body) {
         }
     )
 }
+
+export function rejectTask(id, body) {
+    return ajax.reqAPI(
+        `tasks/${id}/reject`,
+        {
+            method: 'PUT',
+            body
+        }
+    )
+}

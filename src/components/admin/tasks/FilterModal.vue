@@ -88,6 +88,13 @@
                     </el-form-item>
                 </el-col>
             </el-row>
+            <el-row>
+                <el-col>
+                    <el-form-item>
+                        <el-checkbox v-model="data.own">Показать только мои задания</el-checkbox>
+                    </el-form-item>
+                </el-col>
+            </el-row>
         </el-form>
         <div slot="modal-footer">
             <el-button type="success" @click="onSubmit">Применить</el-button>

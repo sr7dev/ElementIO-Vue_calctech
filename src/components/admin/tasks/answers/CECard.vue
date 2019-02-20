@@ -1,6 +1,6 @@
 <template>
     <el-card class="animated fadeIn mb-3">
-        <el-form :disabled="userPerms.includes('task-moderate')">
+        <el-form :disabled="moderator">
             <div class="px-0 pb-2">
                 <el-container>
                     <el-row style="width: 100%" type="flex" justify="start">
@@ -74,6 +74,9 @@
             userPerms() {
                 return this.$store.state.profile.perms
             },
+            moderator() {
+                return this.userPerms.includes('task-moderate') || this.userPerms.includes('*')
+            }
         },
         methods: {
             emptyData() {

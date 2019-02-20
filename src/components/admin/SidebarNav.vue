@@ -5,7 +5,7 @@
                  class="el-menu-vertical-demo"
                  style="height: 100%;"
                  :collapse="collapsed">
-            <el-menu-item index="dashboard">
+            <el-menu-item :route="{path: '/adm/dashboard'}" index="dashboard">
                 <i class="el-icon-location"></i>
                 <span slot="title">Главная</span>
             </el-menu-item>
@@ -39,13 +39,13 @@
                     <span slot="title">{{item.name}}</span>
                 </el-menu-item>
             </el-submenu>
-            <el-menu-item index="notifications">
+            <el-menu-item :route="{path: '/adm/notifications'}"  index="notifications">
                 <i class="el-icon-location"></i>
                 <span slot="title">Уведомления</span>
             </el-menu-item>
-            <el-menu-item index="settings">
+            <el-menu-item :route="{path: '/adm/settings'}" index="settings">
                 <i class="el-icon-location"></i>
-                <span slot="title">Настройки</span>
+                <span  slot="title">Настройки</span>
             </el-menu-item>
         </el-menu>
     </div>

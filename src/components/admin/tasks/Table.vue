@@ -52,9 +52,8 @@
                     <template>
                         <div class="text-black-50 mb-2">Показано: {{Math.min(pageSize, totalCount)}} из {{totalCount}}
                         </div>
-                        <el-table
-                                @row-click="onItemClick"
-                                :data="tableData"
+                        <el-table @row-click="onItemClick"
+                                  :data="tableData"
                         >
                             <el-table-column
                                     prop="kind_name"
@@ -87,7 +86,9 @@
                                     >
                                         На модерацию
                                     </el-button>
-                                    <el-button v-if="scope.row.state_id === 3" type="primary" @click="show(scope.row)">
+
+                                    <el-button v-if="scope.row.state_id === 3" size="small" type="primary"
+                                               @click="show(scope.row)">
                                         Назначить задание
                                     </el-button>
                                 </template>
@@ -100,7 +101,7 @@
                             >
                                 <template slot="header" slot-scope="scope">
                                     <el-button
-                                            v-if="myPerms.includes('task-ce')"
+                                            v-if="myPerms.includes('task-ce') || myPerms.includes('*')"
                                             type="success"
                                             @click="onAddClick"
                                     >
@@ -229,6 +230,7 @@
                     });
                 }
             },
+            '$route': 'itemsProvider'
         },
         methods: {
             onModerate(row) {
@@ -236,12 +238,13 @@
                 let id = row.id
                 moderateTask(id)
                     .then(response => {
+                        this.itemsProvider()
                         this.state.loading = false
-                        this.$message.success('Задание отправлено на можерацию')
+                        this.$message.success('Задание отправлено на модерацию')
                     })
-                    .catch(response => {
+                    .catch(error => {
                         this.state.loading = false
-                        this.$message.error(response.data.error_dsc)
+                        this.$message.error(error.data.error_dsc)
                     })
             },
             assignTask() {
@@ -260,6 +263,7 @@
                         this.$message.error(response.data.error_dsc)
                     })
             },
+
             show(task) {
                 this.state.task_id = task.id
                 this.$modal.show('groupsModal');
@@ -269,7 +273,7 @@
             },
             refresh() {
                 this.page = 1;
-                this.$refs.table.refresh();
+                this.itemsProvider()
             },
             itemsProvider(ctx) {
                 this.state.loading = true
@@ -278,7 +282,7 @@
                     page: this.page,
                     search: this.search,
                     page_size: this.pageSize,
-                    own: true
+                    own: !this.filterPars.own ? !this.myPerms.includes('not_own_task-v') : this.filterPars.own
                 });
                 getTasks(pars).then(response => {
                     let data = response.data;
@@ -313,22 +317,23 @@
                 }
             },
             onItemDeleteClick(item) {
-                this.$store.commit('confirm', {
-                    msg: 'Вы уверены что хотите удалить эту запись?',
-                    okCb: () => {
-                        this.loading = true;
+                this.$confirm('Вы уверены что хотите удалить эту запись?',)
+                    .then(_ => {
+                        this.state.loading = true;
                         ajax.reqAPI(`tasks/${item.id}`, {method: 'DELETE'}).then(() => {
-                            this.loading = false;
+                            this.state.loading = false;
+                            this.$message.success('Задание успешно удалено')
+                            this.itemsProvider()
                         }).catch(error => {
                             if (error.status === 401) {
                                 this.$store.commit('setProfile', null);
                                 this.$router.push({name: 'auth'});
                             } else {
-                                this.loading = false;
+                                this.state.loading = false;
+                                this.$message.error(error.data.error_dsc)
                             }
                         });
-                    },
-                });
+                    })
             },
         },
     }

@@ -10,13 +10,15 @@
             </el-row>
         </el-container>
         <el-card class="mb-5">
-            <h3 class="text-black-50 m-0">{{'Мои студенты'}}</h3>
+            <h3 class="text-black-50 m-0">{{'Мои группы'}}</h3>
             <hr>
             <el-row>
                 <el-collapse v-model="activeNames" @change="handleChange">
                     <el-collapse-item v-for="group in myGroups" :title="group.name" :name="group.id">
                         <el-row class="students-list">
-                            <el-col :span="6">
+                            <el-col v-if="group.students.length" style="text-align: center" :span="4">
+                                <h3 class="text-black-50 m-0">Студенты</h3>
+                                <br>
                                 <el-row v-for="student in group.students" class="students-list__item">
                                     <el-col class="students-list__item__info">
                                         <el-card>
@@ -29,14 +31,14 @@
                                     </el-col>
                                 </el-row>
                             </el-col>
-                            <el-col :span="16" :offset="2">
+                            <el-col style="text-align: center" :span="17" :offset="3">
+                                <h3 class="text-black-50 m-0">Назначенные задания</h3>
+                                <br>
                                 <el-card>
-                                    <div slot="header">
-                                        Назначенные задания
-                                    </div>
                                     <el-table :data="group.tasks">
                                         <el-table-column
-                                                label=""
+                                                label="#"
+                                                type="index"
                                                 prop="id"
                                         >
                                         </el-table-column>
@@ -99,5 +101,9 @@
                 margin-left: 20px;
             }
         }
+    }
+
+    .el-collapse-item__header:hover {
+        color: #72c02c;
     }
 </style>

@@ -8,6 +8,8 @@ import router from './router'
 import {VueCharts} from "vue-chartjs";
 import VueTyperPlugin from 'vue-typer'
 import ElementUI from 'element-ui';
+import VueMathjax from 'vue-mathjax'
+
 // import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/element-variables.scss'
 import locale from 'element-ui/lib/locale/lang/ru-RU'
@@ -27,6 +29,8 @@ Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
 Vue.use(ElementUI, { locale })
 Vue.use(VModal)
+Vue.use(VueMathjax)
+
 
 
 

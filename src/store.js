@@ -10,7 +10,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         appError: false,
-        isCollapsed: true,
+        isCollapsed: false,
         // dic
         perms: [],
         langs: [],
