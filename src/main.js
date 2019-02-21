@@ -8,14 +8,12 @@ import router from './router'
 import {VueCharts} from "vue-chartjs";
 import VueTyperPlugin from 'vue-typer'
 import ElementUI from 'element-ui';
-import VueMathjax from 'vue-mathjax'
+// import VueMathjax from 'vue-mathjax'
 
 // import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/element-variables.scss'
 import locale from 'element-ui/lib/locale/lang/ru-RU'
 import VModal from 'vue-js-modal'
-
-
 
 
 // require('es6-promise/auto');
@@ -29,10 +27,18 @@ Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
 Vue.use(ElementUI, { locale })
 Vue.use(VModal)
-Vue.use(VueMathjax)
+// Vue.use(VueMathjax)
 
 
+// import '@/libraries/MathJax-2.7.5/MathJax.js'
 
+
+// MathJax.Ajax.config.path["mhchem"] = "https://cdnjs.cloudflare.com/ajax/libs/mathjax-mhchem/3.3.2";
+// MathJax.Hub.Config({
+//     TeX: {
+//         extensions: ["[mhchem]/mhchem.js"]
+//     }
+// });
 
 
 function init() {

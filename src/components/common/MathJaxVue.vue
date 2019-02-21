@@ -1,48 +1,41 @@
 <template>
-  <span ref="mathJaxEl">{{formula}}</span>
+    <span ref="mathJaxEl">{{formula}}</span>
 </template>
 
 <script>
-  export default {
-    props: ['formula'],
-    watch: {
-      formula () {
-        this.renderMathJax()
-      }
-    },
-    mounted () {
-      this.renderMathJax()
-    },
-    methods: {
-      renderContent () {
-        this.$refs.mathJaxEl.textContent = this.formula
-      },
-
-      renderMathJax () {
-        this.renderContent()
-        if (window.MathJax) {
-          window.MathJax.Hub.Config({
-            tex2jax: {
-              inlineMath: [['$', '$'], ['(', ')']],
-              displayMath: [['$$', '$$'], ['[', ']']],
-              processEscapes: true,
-              processEnvironments: true
-            },
-            // Center justify equations in code and markdown cells. Elsewhere
-            // we use CSS to left justify single line equations in code cells.
-            displayAlign: 'center',
-            'HTML-CSS': {
-              styles: { '.MathJax_Display': { margin: 0 } },
-              linebreaks: { automatic: true }
+    export default {
+        props: ['formula'],
+        watch: {
+            formula() {
+                this.renderMathJax()
             }
-          })
-          window.MathJax.Hub.Queue([
-            'Typeset',
-            window.MathJax.Hub,
-            this.$refs.mathJaxEl
-          ])
+        },
+        mounted() {
+            // MathJax.Ajax.config.path["mhchem"] =
+            //     "https://cdnjs.cloudflare.com/ajax/libs/mathjax-mhchem/3.3.2";
+            // MathJax.Hub.Config({
+            //     TeX: {
+            //         extensions: ["[mhchem]/mhchem.js"]
+            //     }
+            // });
+            this.renderMathJax()
+        },
+        methods: {
+            renderContent() {
+                this.$refs.mathJaxEl.textContent = this.formula
+            },
+
+            renderMathJax() {
+                this.renderContent()
+                if (window.MathJax) {
+                    console.log(MathJax);
+                    window.MathJax.Hub.Queue([
+                        'Typeset',
+                        window.MathJax.Hub,
+                        this.$refs.mathJaxEl
+                    ])
+                }
+            }
         }
-      }
     }
-  }
 </script>

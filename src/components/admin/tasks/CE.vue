@@ -13,7 +13,7 @@
             <div style="display: inline-flex; justify-content: space-between; width: 100%">
                 <h3 v-if="!moderator" class="text-black-50 m-0">{{headerText}}</h3>
                 <h3 v-else class="text-black-50 m-0">Модерация задания</h3>
-                <el-button v-if="state.disabled && !moderator && data.state_id !== 2" type="primary" @click="state.disabled = !state.disabled">Изменить</el-button>
+                <el-button @click="changeState" v-if="state.disabled && !moderator && data.state_id !== 2 || isAdmin" type="primary">Изменить</el-button>
             </div>
             <el-alert
                     v-if="data.reject_reason"
@@ -21,7 +21,7 @@
                     type="warning"
                     :description="data.reject_reason">
             </el-alert>
-            <el-form :disabled="moderator || state.disabled" label-position="top">
+            <el-form :disabled="moderator && state.disabled" label-position="top">
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="Вид задания">
@@ -125,7 +125,8 @@
                     </el-row>
                     <el-row v-if="data.txt">
                         <el-col :span="10">
-                            <vue-mathjax :formula="data.txt"></vue-mathjax>
+                            <!--<vue-mathjax :formula="data.txt"></vue-mathjax>-->
+                            <MathJaxVue :formula="data.txt"></MathJaxVue>
                         </el-col>
                     </el-row>
                 </section>
@@ -304,7 +305,7 @@
                        :saving="childrenSaving"></ChildrenE>
         </template>
 
-        <el-card style="margin-top: 20px" v-if="moderator">
+        <el-card style="margin-top: 20px" v-if="moderator && data.state_id === 2">
             <el-form label-position="top">
                 <el-form-item label="Статус модерации:">
                     <el-radio v-model="moderation.decision" label="true">Подтвердить</el-radio>
@@ -324,7 +325,8 @@
     import constants from "@/constants";
     import utils from "@/utils";
     import ajax from "@/ajax";
-    import {VueMathjax} from 'vue-mathjax'
+    import MathJaxVue from '@/components/common/MathJaxVue'
+    // import {VueMathjax} from 'vue-mathjax'
     import AttachmentCECard from './attachments/CECard'
     import AnswerCECard from './answers/CECard'
     import ChildrenE from './ChildrenE'
@@ -332,7 +334,7 @@
 
     export default {
         props: ['routeName'],
-        components: {'vue-mathjax': VueMathjax, AttachmentCECard, AnswerCECard, ChildrenE},
+        components: {MathJaxVue, AttachmentCECard, AnswerCECard, ChildrenE},
         data() {
             return {
                 state: {
@@ -359,6 +361,9 @@
             if(this.data.usr_id === this.$store.state.profile.id) this.state.own = true
         },
         computed: {
+            isAdmin() {
+              return this.userPerms.includes('*')
+            },
             moderator() {
                 return this.userPerms.includes('task-moderate') && !this.state.own || this.userPerms.includes('*') && this.id !== 0
             },
@@ -425,6 +430,10 @@
             },
         },
         methods: {
+            changeState(){
+                this.state.disabled = !this.state.disabled
+                console.log(this.state.disabled);
+            },
             onTaskAccept() {
                 this.state.loading = true
                 let id = this.data.id
