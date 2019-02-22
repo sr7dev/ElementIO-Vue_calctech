@@ -13,7 +13,7 @@
             <div style="display: inline-flex; justify-content: space-between; width: 100%">
                 <h3 v-if="!isModerator" class="text-black-50 m-0">{{headerText}}</h3>
                 <h3 v-else class="text-black-50 m-0">Модерация задания</h3>
-                <el-button @click="changeState" v-if="showChangeStateButton" type="primary">Изменить</el-button>
+                <el-button @click="changeState" v-if="showChangeStateButton && hasPermsToChange" type="primary">Изменить</el-button>
             </div>
             <el-alert
                     style="margin-top: 10px"
@@ -238,6 +238,9 @@
             if(this.data.usr_id === this.$store.state.profile.id) this.state.own = true
         },
         computed: {
+            hasPermsToChange() {
+              return this.userPerms.includes('*') || this.userPerms.includes('task-ce')
+            },
             showModerate() {
                 return this.isModerator || this.isAdmin && this.id && this.data.state_id === 2
             },
