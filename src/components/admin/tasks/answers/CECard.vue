@@ -1,6 +1,6 @@
 <template>
     <el-card class="animated fadeIn mb-3">
-        <el-form :disabled="moderator">
+        <el-form :disabled="disabled">
             <div class="px-0 pb-2">
                 <el-container>
                     <el-row style="width: 100%" type="flex" justify="start">
@@ -60,7 +60,7 @@
     import ImgInput from '@/components/common/ImgInput'
 
     export default {
-        props: ['taskId', 'sd'],
+        props: ['taskId', 'sd', 'disabled'],
         components: {cSwitch, ImgInput},
         data() {
             return {

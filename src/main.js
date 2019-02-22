@@ -27,19 +27,6 @@ Vue.use(BootstrapVue);
 Vue.use(VueTyperPlugin)
 Vue.use(ElementUI, { locale })
 Vue.use(VModal)
-// Vue.use(VueMathjax)
-
-
-// import '@/libraries/MathJax-2.7.5/MathJax.js'
-
-
-// MathJax.Ajax.config.path["mhchem"] = "https://cdnjs.cloudflare.com/ajax/libs/mathjax-mhchem/3.3.2";
-// MathJax.Hub.Config({
-//     TeX: {
-//         extensions: ["[mhchem]/mhchem.js"]
-//     }
-// });
-
 
 function init() {
   store.dispatch('reloadDic').then(() => store.dispatch('refreshProfile')).catch(error => {

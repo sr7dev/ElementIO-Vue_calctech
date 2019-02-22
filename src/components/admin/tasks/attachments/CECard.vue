@@ -1,6 +1,6 @@
 <template>
     <el-card class="animated fadeIn mb-5">
-        <el-form :disabled="moderator">
+        <el-form :disabled="disabled">
             <div class="px-0 pb-2">
                 <el-row style="width: 100%">
                     <el-col :span="8">
@@ -67,7 +67,7 @@
     import ImgInput from '@/components/common/ImgInput'
 
     export default {
-        props: ['taskId', 'sd'],
+        props: ['taskId', 'sd', 'disabled'],
         components: {ImgInput},
         data() {
             return {
@@ -86,9 +86,7 @@
             userPerms() {
                 return this.$store.state.profile.perms
             },
-            moderator() {
-                return this.userPerms.includes('task-moderate') || this.userPerms.includes('*')
-            }
+
         },
         methods: {
             emptyData() {

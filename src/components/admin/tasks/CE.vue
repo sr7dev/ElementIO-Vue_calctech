@@ -11,17 +11,18 @@
         </el-container>
         <el-card>
             <div style="display: inline-flex; justify-content: space-between; width: 100%">
-                <h3 v-if="!moderator" class="text-black-50 m-0">{{headerText}}</h3>
+                <h3 v-if="!isModerator" class="text-black-50 m-0">{{headerText}}</h3>
                 <h3 v-else class="text-black-50 m-0">Модерация задания</h3>
-                <el-button @click="changeState" v-if="state.disabled && !moderator && data.state_id !== 2 || isAdmin" type="primary">Изменить</el-button>
+                <el-button @click="changeState" v-if="showChangeStateButton" type="primary">Изменить</el-button>
             </div>
             <el-alert
+                    style="margin-top: 10px"
                     v-if="data.reject_reason"
                     title="Комментарий модератора:"
                     type="warning"
                     :description="data.reject_reason">
             </el-alert>
-            <el-form :disabled="moderator && state.disabled" label-position="top">
+            <el-form :disabled="state.disabled" label-position="top">
                 <el-row>
                     <el-col :span="8">
                         <el-form-item label="Вид задания">
@@ -131,132 +132,9 @@
                     </el-row>
                 </section>
             </el-form>
-            <el-button v-if="!moderator" @click.prevent="onSubmit" type="success">
+            <el-button v-if="!isModerator && !state.disabled " @click.prevent="onSubmit" type="success">
                 {{id ? 'Изменить' : 'Создать'}}
             </el-button>
-            <!--<b-form @submit.prevent="onSubmit">-->
-            <!--<b-card-body class="px-0 pb-2">-->
-            <!--<b-container fluid>-->
-            <!--<b-row v-if="loading">-->
-            <!--<b-col class="text-center">-->
-            <!--<i class="spnr"></i>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<template v-else="">-->
-            <!--<b-row v-if="failFB">-->
-            <!--<b-col>-->
-            <!--<b-alert variant="danger" show>-->
-            <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
-            <!--</b-alert>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Вид задания">-->
-            <!--<b-form-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
-            <!--<b-form-radio-group v-else="" buttons-->
-            <!--button-variant="outline-primary"-->
-            <!--v-model.number="data.kind_id"-->
-            <!--:options="$store.state.task_kinds"-->
-            <!--value-field="id"-->
-            <!--text-field="name"></b-form-radio-group>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Язык">-->
-            <!--<b-form-radio-group buttons-->
-            <!--button-variant="outline-primary"-->
-            <!--v-model.number="data.lang_id"-->
-            <!--:options="$store.state.langs"-->
-            <!--value-field="id"-->
-            <!--text-field="name"></b-form-radio-group>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Сложность">-->
-            <!--<b-form-radio-group buttons-->
-            <!--button-variant="outline-primary"-->
-            <!--v-model.number="data.difficulty_id"-->
-            <!--:options="ld.concat([notSelectedChoice], $store.state.difficulties)"-->
-            <!--value-field="id"-->
-            <!--text-field="name"></b-form-radio-group>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Класс">-->
-            <!--<b-select v-model.number="data.grade_id"-->
-            <!--:options="ld.concat([notSelectedOption], $store.state.grades)"-->
-            <!--value-field="id" text-field="name"></b-select>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Предмет">-->
-            <!--<b-select v-model.number="data.subject_id"-->
-            <!--:options="ld.concat([notSelectedOption], $store.state.subjects)"-->
-            <!--value-field="id" text-field="name"></b-select>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Тема">-->
-            <!--<b-select v-model.number="data.topic_id" :options="topics"-->
-            <!--value-field="id" text-field="name"></b-select>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--<b-col lg="4">-->
-            <!--<b-form-group label="Подтема">-->
-            <!--<b-select v-model.number="data.sub_topic_id" :options="subTopics"-->
-            <!--value-field="id" text-field="name"></b-select>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col md="8" lg="6">-->
-            <!--<b-form-group v-if="isQuestion" label="Тип вопроса">-->
-            <!--<b-select v-model.number="data.type_id" :options="$store.state.task_types"-->
-            <!--value-field="id" text-field="name"></b-select>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row>-->
-            <!--<b-col md="10" lg="8">-->
-            <!--<b-form-group label="Заголовок">-->
-            <!--<b-form-input type="text" v-model.trim="data.title"/>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row v-if="isGroup">-->
-            <!--<b-col md="10" lg="8">-->
-            <!--<b-form-group label="Описание">-->
-            <!--<b-form-textarea v-model="data.note" :rows="5" no-resize/>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<template v-if="isQuestion">-->
-            <!--<b-row>-->
-            <!--<b-col md="10" lg="8">-->
-            <!--<b-form-group label="Текст вопроса">-->
-            <!--<b-form-textarea v-model="data.txt" :rows="5" no-resize/>-->
-            <!--</b-form-group>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--<b-row v-if="data.txt">-->
-            <!--<b-col md="10" lg="8">-->
-            <!--<MathJaxVue :formula="data.txt"></MathJaxVue>-->
-            <!--</b-col>-->
-            <!--</b-row>-->
-            <!--</template>-->
-            <!--</template>-->
-            <!--</b-container>-->
-            <!--</b-card-body>-->
-            <!--<b-card-footer v-if="!loading">-->
-            <!--</b-card-footer>-->
-            <!--</b-form>-->
         </el-card>
         <template v-if="!state.loading && showAttachments">
             <el-container class="mt-5 mb-4">
@@ -266,10 +144,10 @@
                     </el-col>
                 </el-row>
             </el-container>
-            <AttachmentCECard v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
+            <AttachmentCECard :disabled="state.disabled" v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
                               @updated="onAttachmentUpdated(att, $event)"
                               @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
-            <el-container v-if="!moderator && data.state_id !== 2" fluid class="pb-3">
+            <el-container v-if="!state.disabled" fluid class="pb-3">
                 <el-row style="width: 100%" type="flex" justify="center">
                     <el-col style="text-align: center;" :span="10">
                         <el-button type="success" @click="onAddAttachmentClick">
@@ -287,10 +165,10 @@
                     </el-col>
                 </el-row>
             </el-container>
-            <AnswerCECard v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
+            <AnswerCECard :disabled="state.disabled" v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
                           @updated="onAnswerUpdated(ans, $event)"
                           @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
-            <el-container v-if="!moderator && data.state_id !== 2" fluid class="pb-3">
+            <el-container v-if="!state.disabled" fluid class="pb-3">
                 <el-row class="justify-content-center">
                     <el-col>
                         <el-button type="success" @click="onAddAnswerClick">
@@ -305,7 +183,7 @@
                        :saving="childrenSaving"></ChildrenE>
         </template>
 
-        <el-card style="margin-top: 20px" v-if="moderator && data.state_id === 2">
+        <el-card style="margin-top: 20px" v-if="showModerate">
             <el-form label-position="top">
                 <el-form-item label="Статус модерации:">
                     <el-radio v-model="moderation.decision" label="true">Подтвердить</el-radio>
@@ -326,7 +204,6 @@
     import utils from "@/utils";
     import ajax from "@/ajax";
     import MathJaxVue from '@/components/common/MathJaxVue'
-    // import {VueMathjax} from 'vue-mathjax'
     import AttachmentCECard from './attachments/CECard'
     import AnswerCECard from './answers/CECard'
     import ChildrenE from './ChildrenE'
@@ -355,17 +232,23 @@
                 childrenNeedResave: false,
             };
         },
-        created() {
-            this.fetch();
+        async created() {
+            await this.fetch();
             if(this.id === 0) this.state.disabled = false
             if(this.data.usr_id === this.$store.state.profile.id) this.state.own = true
         },
         computed: {
+            showModerate() {
+                return this.isModerator || this.isAdmin && this.id && this.data.state_id === 2
+            },
+            showChangeStateButton() {
+              return this.id !== 0 && !this.isModerator && !this.state.own && this.data.state_id !== 2
+            },
             isAdmin() {
               return this.userPerms.includes('*')
             },
-            moderator() {
-                return this.userPerms.includes('task-moderate') && !this.state.own || this.userPerms.includes('*') && this.id !== 0
+            isModerator() {
+                return this.userPerms.includes('task-moderate')
             },
             difficulties() {
                 return this.ld.concat([this.notSelectedChoice], this.$store.state.difficulties)
@@ -432,7 +315,6 @@
         methods: {
             changeState(){
                 this.state.disabled = !this.state.disabled
-                console.log(this.state.disabled);
             },
             onTaskAccept() {
                 this.state.loading = true
