@@ -79,7 +79,7 @@
                                 <template slot-scope="scope">
                                     <el-button
                                             style="margin-bottom: 5px"
-                                            v-if="scope.row.state_id === 1"
+                                            v-if="scope.row.state_id === 1 || scope.row.state_id === 4"
                                             size="mini"
                                             type="warning"
                                             @click="onModerate(scope.row)"
@@ -87,7 +87,7 @@
                                         На модерацию
                                     </el-button>
 
-                                    <el-button v-if="scope.row.state_id === 3" size="small" type="primary"
+                                    <el-button v-if="scope.row.state_id === 3 && scope.row.kind_id === 2" size="small" type="primary"
                                                @click="show(scope.row)">
                                         Назначить задание
                                     </el-button>
@@ -110,6 +110,7 @@
                                 </template>
                                 <template slot-scope="scope">
                                     <el-button
+                                            v-if="!isAdmin && scope.row.state_id !== 3"
                                             style="margin: 0"
                                             size="mini"
                                             type="danger"
@@ -253,9 +254,15 @@
                 let data = {
                     group_ids: [...this.state.selectedGroups]
                 }
+                if (data.group_ids.length === 0) {
+                    this.state.loading = false
+                    this.$message.error('Вы не выбрали группы для назначения')
+                    return
+                }
                 assignTask(id, data)
                     .then(response => {
                         this.state.loading = false
+                        this.$store.dispatch('refreshProfile')
                         this.$message.success('Задание успешно назначено группе')
                     })
                     .catch(response => {

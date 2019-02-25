@@ -36,7 +36,7 @@
             <!--<b-card-footer>-->
             <div class="d-flex align-items-center">
                 <el-button type="success" @click.prevent="onSubmit" :disabled="loading">
-                    {{data.id ? 'Изменить' : 'Создать'}}
+                    {{data.id ? 'Изменить' : 'Сохранить'}}
                 </el-button>
                 <el-button :type="data.id ? 'warning' : 'primary'" :disabled="loading" class="ml-2"
                            @click.prevent="onDeleteClick">

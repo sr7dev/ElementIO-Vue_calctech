@@ -149,6 +149,22 @@ button:focus {
   }
 }
 
+.el-input.is-disabled .el-input__inner {
+  color: #7b7e82!important;
+}
+
+.el-textarea.is-disabled .el-textarea__inner {
+  color: #7b7e82!important;
+}
+
+.el-radio-button__orig-radio:disabled + .el-radio-button__inner {
+  color: #7b7e82!important;
+}
+
+.el-textarea.is-disabled .el-textarea__inner {
+  font-size: 17px;
+}
+
 .card-body {
     padding: 0;
 }

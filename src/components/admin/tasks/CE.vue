@@ -133,7 +133,7 @@
                 </section>
             </el-form>
             <el-button v-if="!isModerator && !state.disabled " @click.prevent="onSubmit" type="success">
-                {{id ? 'Изменить' : 'Создать'}}
+                {{id ? 'Сохранить' : 'Создать'}}
             </el-button>
         </el-card>
         <template v-if="!state.loading && showAttachments">
@@ -245,7 +245,7 @@
                 return this.isModerator || this.isAdmin && this.id && this.data.state_id === 2
             },
             showChangeStateButton() {
-              return this.id !== 0 && !this.isModerator && !this.state.own && this.data.state_id !== 2
+              return this.id !== 0 && !this.isModerator && !this.state.own && this.data.state_id !== 2 && this.data.state_id !== 3
             },
             isAdmin() {
               return this.userPerms.includes('*')
@@ -266,7 +266,7 @@
                 return parseInt(this.$route.params.task_id) || 0;
             },
             headerText() {
-                return this.id ? 'Измененить задание' : 'Создать задание';
+                return this.id ? 'Просмотр задания' : 'Создать задание';
             },
             isQuestion() {
                 return this.data.kind_id === constants.TaskKindQuestion;
@@ -377,6 +377,7 @@
                 });
             },
             onSubmit(e) {
+                console.log(this.data);
                 this.loading = true;
                 this.failFB = '';
                 let req = null;
@@ -395,6 +396,7 @@
                     this.data.sub_topic_id && {sub_topic_id: this.data.sub_topic_id},
                     this.data.difficulty_id && {difficulty_id: this.data.difficulty_id},
                 );
+                console.log(this.data,body);
                 if (this.id) {
                     req = ajax.reqAPI(`tasks/${this.id}`, {method: 'PUT', body});
                 } else {
@@ -467,3 +469,17 @@
         },
     }
 </script>
+
+<style lang="scss">
+    .el-alert__title {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .el-alert .el-alert__description {
+        font-size: 15px;
+        margin: 5px 0 0 0;
+    }
+
+
+</style>
