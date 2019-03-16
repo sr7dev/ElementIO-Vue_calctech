@@ -1,8 +1,8 @@
 substitutions:
   _PROJECT_NAME: calctech
   _APP_NAME: site
-  _REPO_NAME: gcr.io/dauren-pr/calctech_site
-  _SERVER_URI: user@35.224.168.117
+  _REPO_NAME: gcr.io/calctechc/calctech_site
+  _SERVER_URI: user@35.198.156.152
 
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
