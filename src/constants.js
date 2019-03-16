@@ -1,8 +1,8 @@
 let constants = (() => {
   let res = {
     AppName: 'CalcTech',
-    ApiUrl: 'http://35.224.168.117/api/',
-    MediaUrl: 'http://35.224.168.117/media/',
+    ApiUrl: 'http://35.198.156.152/api/',
+    MediaUrl: 'http://35.198.156.152/media/',
     SystemErrMsg: 'Извините, произошла системная ошибка',
 
     AttachmentTypeText: 1,

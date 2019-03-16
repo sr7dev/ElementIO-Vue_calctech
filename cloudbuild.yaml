@@ -1,16 +1,16 @@
 substitutions:
   _PROJECT_NAME: calctech
   _APP_NAME: site
-  _REPO_NAME: gcr.io/dauren-pr/calctech_site
-  _SERVER_URI: user@35.224.168.117
+  _REPO_NAME: gcr.io/ivory-infinity-233809/calctech_site
+  _SERVER_URI: user@35.198.156.152
 
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - kms
       - decrypt
-      - --ciphertext-file=ct_user.enc
-      - --plaintext-file=ct_user
+      - --ciphertext-file=server_ssh_key.enc
+      - --plaintext-file=server_ssh_key
       - --location=global
       - --keyring=calctech
       - --key=key1
@@ -35,8 +35,8 @@ steps:
     args:
       - '-c'
       - |
-        chmod 0700 ct_user
-        ssh -o StrictHostKeyChecking=no -i ct_user $_SERVER_URI "/home/user/refresh.sh"
+        chmod 0700 server_ssh_key
+        ssh -o StrictHostKeyChecking=no -i server_ssh_key $_SERVER_URI "/home/user/refresh.sh"
   - name: 'gcr.io/cloud-builders/curl'
     args:
       - -X
