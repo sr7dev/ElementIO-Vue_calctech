@@ -1,7 +1,7 @@
 substitutions:
   _PROJECT_NAME: calctech
   _APP_NAME: site
-  _REPO_NAME: gcr.io/calctechc/calctech_site
+  _REPO_NAME: gcr.io/ivory-infinity-233809/calctech_site
   _SERVER_URI: user@35.198.156.152
 
 steps:
