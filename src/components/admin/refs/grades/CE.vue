@@ -1,6 +1,6 @@
 <template>
     <div v-loading="state.loading" class="animated fadeIn">
-        <el-container>
+        <!-- <el-container>
             <el-row>
                 <el-col>
                     <el-button class="mb-3" type="primary" @click="$router.back()">
@@ -8,32 +8,47 @@
                     </el-button>
                 </el-col>
             </el-row>
-        </el-container>
-        <el-card>
+        </el-container> -->
+
+            <b-button class="mb-3" variant="success"  @click="$router.back()">
+                <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
+            </b-button>
+
+
+         <b-card  header-tag="header">
+             <h4 slot="header">
+                 {{headerText}}
+             </h4>
+            <b-form>
+            <b-form-group
+                label="Наименование:"
+            >
+                <b-form-input
+                type="email"
+                v-model="data.name"
+                required
+                />
+            </b-form-group>
+            <b-form-group
+                label="Порядковый номер (в списке):"
+            >
+                <b-form-input
+                type="email"
+                v-model="data.ord"
+                required
+                />
+            </b-form-group>
+
+            <b-button @click="onSubmit" variant="success" size="lg">
+                {{id ? 'Изменить' : 'Создать'}}
+            </b-button>
+
+            </b-form>
+        </b-card>
+        <!-- <el-card>
             <div slot="header">
                 <h3 class="text-black-50 m-0">{{headerText}}</h3>
             </div>
-            <!--<b-form @submit="onSubmit">-->
-                <!--<b-card-body>-->
-                    <!--<div v-if="loading" class="text-center"><i class="spnr"></i></div>-->
-                    <!--<template v-else="">-->
-                        <!--<b-alert v-if="failFB" variant="danger" show>-->
-                            <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
-                        <!--</b-alert>-->
-                        <!--<b-form-group label="Наименование">-->
-                            <!--<b-form-input type="text" v-model.trim="data.name"/>-->
-                        <!--</b-form-group>-->
-                        <!--<b-form-group label="Порядковый номер (в списке)">-->
-                            <!--<b-form-input type="number" pattern="\d*" v-model.number="data.ord"/>-->
-                        <!--</b-form-group>-->
-                    <!--</template>-->
-                <!--</b-card-body>-->
-                <!--<b-card-footer v-if="!loading">-->
-                    <!--<b-button type="submit" variant="success">-->
-                        <!--{{id ? 'Изменить' : 'Создать'}}-->
-                    <!--</b-button>-->
-                <!--</b-card-footer>-->
-            <!--</b-form>-->
             <el-form label-position="top">
                 <el-form-item label="Наименование:">
                     <el-input v-model="data.name"></el-input>
@@ -41,11 +56,11 @@
                 <el-form-item label="Порядковый номер (в списке):">
                     <el-input pattern="\d*" type="number" v-model="data.ord"></el-input>
                 </el-form-item>
-                <el-button type="success" @click="onSubmit"> <!-- submit -->
+                <el-button type="success" @click="onSubmit"> 
                     {{id ? 'Изменить' : 'Создать'}}
                 </el-button>
             </el-form>
-        </el-card>
+        </el-card> -->
     </div>
 </template>
 

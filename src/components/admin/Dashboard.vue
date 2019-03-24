@@ -1,6 +1,28 @@
 <template>
     <div>
-        <el-row>
+        <hr>
+
+        <b-row>
+            <b-col md="4">
+                <b-card :img-src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'">
+                     <div class="user-card__content__info">
+                        <div class="user-card__content__info__item">
+                            {{profile.first_name}}
+                        </div>
+                        <div class="user-card__content__info__item">
+                            {{profile.last_name}}
+                        </div>
+                        <div class="user-card__content__info__item">
+                            {{profile.username}}
+                        </div>
+                    </div>
+                </b-card>
+            </b-col>
+            <b-col md="8">
+                 <notifications></notifications>
+            </b-col>
+        </b-row>
+        <!-- <el-row>
             <el-col :span="6">
                 <el-form label-position="top">
                     <el-card>
@@ -27,7 +49,7 @@
             <el-col :span="16" :offset="2">
                 <notifications></notifications>
             </el-col>
-        </el-row>
+        </el-row> -->
     </div>
 </template>
 
@@ -59,7 +81,10 @@
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+    .card{
+        border: 0;  
+    }
     .user-card {
 
         box-shadow: 0 20px 25px -12px rgba(0, 0, 0, 0.09);

@@ -1,8 +1,28 @@
 <template>
     <div v-loading="state.loading">
-        <el-row>
-            <el-col :span="8">
-                <el-card style="position: relative">
+        <b-row>
+            <b-col md="3">
+                <div class="profilePicture">
+                    <img :src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'" alt="">
+                    <div class="changeIcon bg-success" v-if="state.disabled" @click="editUserInfo">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <div class="changeIcon bg-danger" v-else @click="cancelChanges">
+                        <i class="fa fa-close "></i>
+                    </div>
+                     <my-upload field="file"
+                    langType="ru"
+                    v-model="show"
+                    :width="300"
+                    :height="300"
+                    @crop-upload-success="putProfileImage"
+                    :params="params"
+                    :url="constants.MediaUrl + 'temp'"
+                    img-format="png"></my-upload>
+                    <b-button variant="success" block  @click="toggleShow">Загрузитьаватар</b-button>
+                </div>
+
+                <!-- <el-card style="position: relative">
                     <el-button v-if="state.disabled" @click="editUserInfo" style="position: absolute; right: 20px"
                                type="primary"
                                icon="el-icon-edit" circle></el-button>
@@ -25,7 +45,7 @@
                         <el-button style="margin: 10px" type="primary" size="small" @click="toggleShow">Загрузить
                             аватар
                         </el-button>
-                    </div>
+                    </div> -->
 
                     <!--<el-upload-->
                     <!--class="avatar-uploader"-->
@@ -37,7 +57,7 @@
                     <!--:src="utils.fmtMediaImageFit(profile.avatar, 300, 300)" >-->
                     <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
                     <!--</el-upload>-->
-                    <el-form
+                    <!-- <el-form
                             :disabled="state.disabled"
                             label-position="top"
                             ref="form"
@@ -61,9 +81,130 @@
                         </el-form-item>
                         <el-button @click="checkValid" v-if="!state.disabled" type="primary">Сохранить</el-button>
                     </el-form>
-                </el-card>
-            </el-col>
-        </el-row>
+                </el-card> -->
+            </b-col>
+            <b-col md="9">
+                <b-tabs>
+                    <b-tab title="some title here" active>
+                        <!-- <el-form
+                            :disabled="state.disabled"
+                            label-position="top"
+                            ref="form"
+                            :model="profile"
+                            :rules="rules"
+                        >
+                            <el-form-item prop="last_name" label="Фамилия:">
+                                <el-input v-model="profile.last_name"></el-input>
+                            </el-form-item>
+                            <el-form-item prop="first_name" label="Имя:">
+                                <el-input v-model="profile.first_name"></el-input>
+                            </el-form-item>
+                            <el-form-item prop="username" label="Email:">
+                                <el-input v-model="profile.username"></el-input>
+                            </el-form-item>
+                            <el-form-item prop="newPassword" label="Новый пароль:">
+                                <el-input v-model="profile.newPassword"></el-input>
+                            </el-form-item>
+                            <el-form-item prop="repeatPassword" label="Повторите пароль:">
+                                <el-input v-model="profile.repeatPassword"></el-input>
+                            </el-form-item>
+                            <el-button @click="checkValid" v-if="!state.disabled" type="primary">Сохранить</el-button>
+                        </el-form> -->
+                        <b-form
+                            ref="form"                       
+                        >
+                           <b-container>
+                               <b-row>
+                                   <b-col md="6">
+                                        <b-form-group
+                                            label="Фамилия:"
+                                            
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.last_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+                                   <b-col md="6">
+                                        <b-form-group
+                                            label="Фамилия:"
+                                            
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.last_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+                                    <b-col md="6">
+                                        <b-form-group
+                                            label="Фамилия:"
+                                            
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.last_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+                                    <b-col md="6">
+                                        <b-form-group
+                                            label="Фамилия:"
+                                            
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.last_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+                                    <b-col md="6">
+                                        <b-form-group
+                                            label="Фамилия:"
+                                            
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.last_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+
+                                   <b-col md="6">
+                                        <b-form-group
+                                            label="Имя:"
+
+                                        >
+                                            <b-form-input
+                                            :disabled="state.disabled"
+                                            type="email"
+                                            v-model="profile.first_name"
+                                            required
+                                            placeholder="Enter email" />
+                                        </b-form-group>
+                                   </b-col>
+                                   <b-col v-if="!state.disabled">
+                                           <b-button variant="primary m-1"  >Сохранить</b-button>
+                                           <b-button class="m-1">cancel </b-button>
+                                    </b-col>
+                               </b-row>
+                           </b-container>
+                        </b-form>
+                    </b-tab>
+                </b-tabs>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
@@ -194,6 +335,33 @@
 </script>
 
 <style lang="scss">
+.profilePicture{
+    position:relative;
+    margin-bottom: 20px;
+    img{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .changeIcon{
+        cursor: pointer;
+        position:absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 40px;
+        transition: .3s;
+        &:hover{
+            opacity: .7;
+        }
+        i{
+            color: #fff;
+            font-size: 18px;
+        }
+    }
+}
     .vue-image-crop-upload .vicp-wrap .vicp-operate a {
         color: $app-color-green1;
     }

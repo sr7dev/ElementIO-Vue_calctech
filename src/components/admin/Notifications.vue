@@ -1,6 +1,26 @@
 <template>
     <div class="notifications">
-        <el-container>
+            <h4>
+                Notifications
+            </h4>
+            <div class="notifications__list">
+                <b-card class="notifications__list__item"  v-for="(item, index) in notifications" :key="index">
+                    <b-container>
+                        <b-row>
+                            <div class="notState">
+                                <i class="fa fa-check-circle notifications__list__item__icon"></i> 
+                            </div>
+                            <b-col sm="10">
+                                <h4>{{item.title}}</h4>
+                                <p>{{item.description}}</p>
+                            </b-col>
+                        </b-row>
+                    </b-container>
+                </b-card>
+            </div>
+
+
+        <!-- <el-container>
             <el-card class="notifications__list">
                 <div slot="header" class="notifications__list__title">
                     <h3>Ваши уведомления</h3>
@@ -23,7 +43,7 @@
                     </el-row>
                 </el-card>
             </el-card>
-        </el-container>
+        </el-container> -->
     </div>
 </template>
 
@@ -87,7 +107,9 @@
 <style lang="scss" scoped>
 
     .notifications {
-
+        &>h4{
+            margin-bottom: 20px;
+        }
         &__list {
             width: 100%;
             &__title {
@@ -96,8 +118,10 @@
                 align-items: center;
             }
             &__item {
-                margin: 20px;
+
                 position: relative;
+                box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+                padding: 15px;
                 &__close-icon {
                     position: absolute;
                     top: 10px;

@@ -1,15 +1,47 @@
 <template>
   <div v-loading="loading" class="animated fadeIn">
-    <el-container>
-      <el-row>
+          <!-- <el-row>
         <el-col>
           <el-button class="mb-3" type="primary" @click="$router.back()">
             <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
           </el-button>
         </el-col>
-      </el-row>
-    </el-container>
-    <el-card>
+      </el-row> -->
+        <b-button class="mb-3" variant="success"  @click="$router.back()">
+          <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
+        </b-button>
+      
+      <b-card header-tag="header">
+        <h4 slot="header">
+          Создать язык
+        </h4>
+        <b-form>
+          <b-form-group
+            label="Наименование:"
+          >
+            <b-form-input
+              type="email"
+              v-model="data.name"
+              required
+               />
+          </b-form-group>
+           <b-form-group
+            label="Порядковый номер (в списке):"
+          >
+            <b-form-input
+              type="email"
+              v-model="data.ord"
+              required
+               />
+          </b-form-group>
+
+          <b-button @click="onSubmit" variant="success" size="lg">
+            {{id ? 'Изменить' : 'Создать'}}
+          </b-button>
+
+        </b-form>
+      </b-card>
+    <!-- <el-card>
       <div slot="header">
         <h3 class="text-black-50 m-0">{{headerText}}</h3>
       </div>
@@ -20,11 +52,11 @@
         <el-form-item label="Порядковый номер (в списке):">
           <el-input pattern="\d*" type="number" v-model="data.ord"></el-input>
         </el-form-item>
-        <el-button type="success" @click="onSubmit"> <!-- submit -->
+        <el-button type="success" @click="onSubmit">
           {{id ? 'Изменить' : 'Создать'}}
         </el-button>
       </el-form>
-    </el-card>
+    </el-card> -->
   </div>
 </template>
 
