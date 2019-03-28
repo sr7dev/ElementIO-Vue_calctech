@@ -5,8 +5,8 @@
                 <div slot="header" v-if="!state.loading">
                     <el-container>
                         <modal :height="200" name="groupsModal">
-                            <b-row>
-                                <b-col :offset="1">
+                            <el-row>
+                                <el-col :offset="1">
                                     <el-form label-position="top">
                                         <el-form-item label="Выберите группы:">
                                             <el-select v-model="state.selectedGroups"
@@ -20,22 +20,22 @@
                                         </el-form-item>
                                         <el-button type="primary" @click="assignTask">Назначить</el-button>
                                     </el-form>
-                                </b-col>
-                            </b-row>
+                                </el-col>
+                            </el-row>
                         </modal>
-                        <b-row style="width: 100%">
-                            <b-col :span="8">
+                        <el-row style="width: 100%">
+                            <el-col :span="8">
                                 <h3 class="text-black-50 m-0">Задания</h3>
-                            </b-col>
-                            <b-col :span="2">
+                            </el-col>
+                            <el-col :span="2">
                                 <el-button :type="isFiltered ? 'primary' : 'secondary'" @click="showFilter=true">
                                     <i class="fa fa-filter px-1"></i>
                                 </el-button>
-                            </b-col>
-                            <b-col :span="5">
+                            </el-col>
+                            <el-col :span="5">
                                 <el-input type="text" v-model.trim="search" placeholder="поиск..."/>
-                            </b-col>
-                            <b-col :span="5">
+                            </el-col>
+                            <el-col :span="5">
                                 <el-pagination :current-page.sync="page"
                                                @current-change="itemsProvider"
                                                background
@@ -44,8 +44,8 @@
                                                :limit="1"
                                                layout="prev, pager, next"
                                 ></el-pagination>
-                            </b-col>
-                        </b-row>
+                            </el-col>
+                        </el-row>
                     </el-container>
                 </div>
                 <div class="pb-1">

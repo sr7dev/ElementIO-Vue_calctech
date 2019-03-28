@@ -1,6 +1,6 @@
 <template>
-    <b-row class="about">
-        <b-row align="center" class="about__header">
+    <el-row class="about">
+        <el-row align="center" class="about__header">
             <div class="title">
                 <h3>Для нас важен каждый ученик</h3>
                 <h1>МЫ ЗА ИНДИВИДУАЛЬНЫЙ ПОДХОД В ОБУЧЕНИИ</h1>
@@ -8,8 +8,8 @@
             <parallax class="parallax" :speed-factor="0.3" breakpoint="(min-width: 80px)">
                 <img src="/img/about.jpg">
             </parallax>
-        </b-row>
-        <b-row class="about__content">
+        </el-row>
+        <el-row class="about__content">
             <div class="text-center">
                 <h2 class="d-inline-block pb-3 border-bottom border-success">
                     КТО МЫ?
@@ -18,10 +18,10 @@
             <div class="font-xl font-weight-light text-black-50 text-center mb-5">
                 CalcTech -это сотрудничество двух "болашакеров" и нескольких преподавателей вузов.
             </div>
-            <b-col :span="9" :offset="3">
+            <el-col :span="9" :offset="3">
                 <img style="width: 100%" src="/img/about_content.jpg">
-            </b-col>
-            <b-col :span="9" :offset="1">
+            </el-col>
+            <el-col :span="9" :offset="1">
                 <div class="font-l font-weight-light text-black-50 text-left mb-4">
                     CalcTech был основан в феврале 2017 года двумя выпускниками Болашак (страна обучения - США).
                     Первоначальной целью нашей компании была разработка проектов по электроснабжению и пока не было
@@ -34,8 +34,8 @@
                     обучающихся одновременно в марте 2018 года. За год существования мы обучили более 350 учеников. Наши
                     преимущества включают в себя
                 </div>
-                <b-row>
-                    <b-col :span="10">
+                <el-row>
+                    <el-col :span="10">
                         <ul class="list-unstyled mb-0">
                             <li class="font-l font-weight-light text-black-50 text-left d-flex mb-3">
                                 <i class="icon-check"></i>
@@ -54,8 +54,8 @@
                                 Хорошую обратную связь
                             </li>
                         </ul>
-                    </b-col>
-                    <b-col :span="10" :offset="2">
+                    </el-col>
+                    <el-col :span="10" :offset="2">
                         <ul class="list-unstyled g-font-size-13 mb-0">
                             <li class="font-l font-weight-light text-black-50 text-left d-flex mb-3">
                                 <i class="g-color-primary g-mt-5 g-mr-10 icon-check"></i>
@@ -74,11 +74,11 @@
                                 Бесплатные учебные материалы
                             </li>
                         </ul>
-                    </b-col>
-                </b-row>
-            </b-col>
-        </b-row>
-        <b-row class="about__team">
+                    </el-col>
+                </el-row>
+            </el-col>
+        </el-row>
+        <el-row class="about__team">
                 <h2 class="d-inline-block pb-3 border-bottom border-success">
                     Наша команда
                 </h2>
@@ -98,8 +98,8 @@
                     </div>
                 </div>
             </el-container>
-        </b-row>
-    </b-row>
+        </el-row>
+    </el-row>
 </template>
 
 <script>

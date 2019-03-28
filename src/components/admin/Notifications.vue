@@ -6,15 +6,15 @@
             <div class="notifications__list">
                 <b-card class="notifications__list__item"  v-for="(item, index) in notifications" :key="index">
                     <b-container>
-                        <b-row>
+                        <el-row>
                             <div class="notState">
                                 <i class="fa fa-check-circle notifications__list__item__icon"></i> 
                             </div>
-                            <b-col sm="10">
+                            <el-col sm="10">
                                 <h4>{{item.title}}</h4>
                                 <p>{{item.description}}</p>
-                            </b-col>
-                        </b-row>
+                            </el-col>
+                        </el-row>
                     </b-container>
                 </b-card>
             </div>
@@ -30,17 +30,17 @@
                     <i class="el-icon-close notifications__list__item__close-icon"
                        @click="deleteItem(index)"
                     ></i>
-                    <b-row>
-                        <b-col :span="2">
+                    <el-row>
+                        <el-col :span="2">
                             <i class="el-icon-info notifications__list__item__icon"></i>
-                        </b-col>
-                        <b-col :span="20" :offset="1">
+                        </el-col>
+                        <el-col :span="20" :offset="1">
                             <section>
                                 <h4>{{item.title}}</h4>
                                 <p>{{item.description}}</p>
                             </section>
-                        </b-col>
-                    </b-row>
+                        </el-col>
+                    </el-row>
                 </el-card>
             </el-card>
         </el-container> -->

@@ -1,7 +1,7 @@
 <template>
     <div v-loading="state.loading">
-        <b-row>
-            <b-col md="3">
+        <el-row>
+            <el-col md="3">
                 <div class="profilePicture">
                     <img :src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'" alt="">
                     <div class="changeIcon bg-success" v-if="state.disabled" @click="editUserInfo">
@@ -82,8 +82,8 @@
                         <el-button @click="checkValid" v-if="!state.disabled" type="primary">Сохранить</el-button>
                     </el-form>
                 </el-card> -->
-            </b-col>
-            <b-col md="9">
+            </el-col>
+            <el-col md="9">
                 <b-tabs>
                     <b-tab title="some title here" active>
                         <!-- <el-form
@@ -114,8 +114,8 @@
                             ref="form"                       
                         >
                            <b-container>
-                               <b-row>
-                                   <b-col md="6">
+                               <el-row>
+                                   <el-col md="6">
                                         <b-form-group
                                             label="Фамилия:"
                                             
@@ -127,8 +127,8 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
-                                   <b-col md="6">
+                                   </el-col>
+                                   <el-col md="6">
                                         <b-form-group
                                             label="Фамилия:"
                                             
@@ -140,8 +140,8 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
-                                    <b-col md="6">
+                                   </el-col>
+                                    <el-col md="6">
                                         <b-form-group
                                             label="Фамилия:"
                                             
@@ -153,8 +153,8 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
-                                    <b-col md="6">
+                                   </el-col>
+                                    <el-col md="6">
                                         <b-form-group
                                             label="Фамилия:"
                                             
@@ -166,8 +166,8 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
-                                    <b-col md="6">
+                                   </el-col>
+                                    <el-col md="6">
                                         <b-form-group
                                             label="Фамилия:"
                                             
@@ -179,9 +179,9 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
+                                   </el-col>
 
-                                   <b-col md="6">
+                                   <el-col md="6">
                                         <b-form-group
                                             label="Имя:"
 
@@ -193,18 +193,18 @@
                                             required
                                             placeholder="Enter email" />
                                         </b-form-group>
-                                   </b-col>
-                                   <b-col v-if="!state.disabled">
+                                   </el-col>
+                                   <el-col v-if="!state.disabled">
                                            <b-button variant="primary m-1"  >Сохранить</b-button>
                                            <b-button class="m-1">cancel </b-button>
-                                    </b-col>
-                               </b-row>
+                                    </el-col>
+                               </el-row>
                            </b-container>
                         </b-form>
                     </b-tab>
                 </b-tabs>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

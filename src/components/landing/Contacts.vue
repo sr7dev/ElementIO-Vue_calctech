@@ -1,38 +1,38 @@
 <template>
     <div class="container contacts">
-        <b-row class="mt-5">
-            <b-col>
+        <el-row class="mt-5">
+            <el-col>
                 <div>
                     <div class="hdr">Контакты</div>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col :span="12">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col :span="12">
                 <el-form label-position="top">
-                    <b-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="Имя:">
                             <el-input></el-input>
                         </el-form-item>
                         <el-form-item label="Предмет:">
                             <el-input></el-input>
                         </el-form-item>
-                    </b-col>
-                    <b-col :span="11" :offset="2">
+                    </el-col>
+                    <el-col :span="11" :offset="2">
                         <el-form-item label="Email:">
                             <el-input type="email"></el-input>
                         </el-form-item>
                         <el-form-item label="Телефон:">
                             <el-input></el-input>
                         </el-form-item>
-                    </b-col>
+                    </el-col>
                     <el-form-item label="Сообщение:">
                         <el-input type="textarea" :rows="6"></el-input>
                     </el-form-item>
                 </el-form>
                 <el-button type="success">Оставить вопрос</el-button>
-            </b-col>
-            <b-col :span="8" :offset="4">
+            </el-col>
+            <el-col :span="8" :offset="4">
                 <div class="dsc">
                     <h3>ТОО CalcTech</h3>
                     <div class="mt-3">
@@ -61,14 +61,14 @@
                         </div>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
         <!--</b-form>-->
-        <!--</b-col>-->
-        <b-col lg="6">
+        <!--</el-col>-->
+        <el-col lg="6">
 
-        </b-col>
-        <!--</b-row>-->
+        </el-col>
+        <!--</el-row>-->
         <!--<div class="app-section b1">-->
         <!--<div class="app-section-cont">-->
         <!--<div class="hdr">Контакты</div>-->

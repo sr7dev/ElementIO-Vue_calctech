@@ -22,8 +22,8 @@
             </h1>
             <div class="btn mt-4">ЗАПИСАТЬСЯ</div>
         </div>
-        <b-row class="border-bottom border-light b2">
-            <b-col lg="4" class="text-center pt-5 pb-lg-5 border-right border-light">
+        <el-row class="border-bottom border-light b2">
+            <el-col lg="4" class="text-center pt-5 pb-lg-5 border-right border-light">
                 <div class="py-5">
                     <div class="icon"><i class="fa fa-graduation-cap"></i></div>
                     <h3 class="mt-4 font-weight-normal">Качественное образование</h3>
@@ -32,8 +32,8 @@
                         В CalcTech вы можете рассчитывать на первоклассный уровень преподавания.
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="4" class="text-center py-lg-5 border-right border-light">
+            </el-col>
+            <el-col lg="4" class="text-center py-lg-5 border-right border-light">
                 <div class="py-5">
                     <div class="icon"><i class="fa fa-users"></i></div>
                     <h3 class="mt-4 font-weight-normal">Индивидуальный подход</h3>
@@ -42,8 +42,8 @@
                         за индивидуальный подход к каждому. Мы гордимся тем, что знаем имя каждого!
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="4" class="text-center pb-5 pt-lg-5">
+            </el-col>
+            <el-col lg="4" class="text-center pb-5 pt-lg-5">
                 <div class="py-5">
                     <div class="icon"><i class="fa fa-usd"></i></div>
                     <h3 class="mt-4 font-weight-normal">Доступные цены</h3>
@@ -52,10 +52,10 @@
                         стараемся делать цены доступными для всех.
                     </div>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row align-h="center">
-            <b-col cols="10">
+            </el-col>
+        </el-row>
+        <el-row align-h="center">
+            <el-col cols="10">
                 <div>
                     <b-carousel controls
                                 :interval="4000"
@@ -70,52 +70,52 @@
                         </b-carousel-slide>
                     </b-carousel>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
         <b-container class="pt-2 b4">
             <div class="pt-8">
-                <b-row>
-                    <b-col md="3" class="mb-4">
+                <el-row>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/wall.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/english.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/ent.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/nislastday.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/nisstudents.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/englishexam2.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/englishexam.jpg"/>
                         </div>
-                    </b-col>
-                    <b-col md="3" class="mb-4">
+                    </el-col>
+                    <el-col md="3" class="mb-4">
                         <div class="img-cont">
                             <img src="img/gallery/nisstudy.jpg"/>
                         </div>
-                    </b-col>
-                </b-row>
+                    </el-col>
+                </el-row>
             </div>
         </b-container>
         <b-container class="pt-8 b5">
@@ -123,8 +123,8 @@
                 <div class="d-inline-block pb-4">
                     <h2 class="font-weight-normal pb-3 border-bottom border-dark">Курсы</h2>
                 </div>
-                <b-row>
-                    <b-col md="4">
+                <el-row>
+                    <el-col md="4">
                         <b-media no-body class="py-3">
                             <div class="icon mr-4" style="background-color: #72c02c"><i
                                     class="fa fa-folder-open-o font-lg"></i></div>
@@ -172,8 +172,8 @@
                                 </div>
                             </b-media-body>
                         </b-media>
-                    </b-col>
-                    <b-col md="4">
+                    </el-col>
+                    <el-col md="4">
                         <b-media no-body class="py-3">
                             <div class="icon mr-4" style="background-color: #585f69"><i
                                     class="fa fa-sort-alpha-asc font-lg"></i>
@@ -236,8 +236,8 @@
                                 </div>
                             </b-media-body>
                         </b-media>
-                    </b-col>
-                    <b-col md-4>
+                    </el-col>
+                    <el-col md-4>
                         <b-card tag="article"
                                 class="mb-2 progress-card"
                         >
@@ -270,8 +270,8 @@
                                 <hr>
                             </div>
                         </b-card>
-                    </b-col>
-                </b-row>
+                    </el-col>
+                </el-row>
             </div>
         </b-container>
         <b-container class="pt-8 b6">
@@ -288,8 +288,8 @@
                         Подробнее...
                     </router-link>
                 </div>
-                <b-row>
-                    <b-col lg="3" sm="6" class="pb-5">
+                <el-row>
+                    <el-col lg="3" sm="6" class="pb-5">
                         <img class="ava" src="img/team/yerlan.jpg"/>
                         <div class="info">
                             <div class="name">Иран Ерлан</div>
@@ -298,8 +298,8 @@
                                 Верю, что наш центр приносит пользу нашему родному городу.
                             </div>
                         </div>
-                    </b-col>
-                    <b-col lg="3" sm="6" class="pb-5">
+                    </el-col>
+                    <el-col lg="3" sm="6" class="pb-5">
                         <img class="ava" src="img/team/aziza.jpg"/>
                         <div class="info">
                             <div class="name">Азиза Сатхожина</div>
@@ -308,8 +308,8 @@
                                 Путь к знаниям - это самое интересное приключение в нашей жизни.
                             </div>
                         </div>
-                    </b-col>
-                    <b-col lg="3" sm="6" class="pb-5">
+                    </el-col>
+                    <el-col lg="3" sm="6" class="pb-5">
                         <img class="ava" src="img/team/ruslan.jpg"/>
                         <div class="info">
                             <div class="name">Руслан Козыбаев</div>
@@ -319,8 +319,8 @@
                                 universe.
                             </div>
                         </div>
-                    </b-col>
-                    <b-col lg="3" sm="6" class="pb-md-5">
+                    </el-col>
+                    <el-col lg="3" sm="6" class="pb-md-5">
                         <img class="ava" src="img/team/anast.jpg"/>
                         <div class="info">
                             <div class="name">Анастасия Гилязутдинова</div>
@@ -330,8 +330,8 @@
                                 so I’m eager to not only teach but make students want to learn.
                             </div>
                         </div>
-                    </b-col>
-                </b-row>
+                    </el-col>
+                </el-row>
             </div>
         </b-container>
     </div>

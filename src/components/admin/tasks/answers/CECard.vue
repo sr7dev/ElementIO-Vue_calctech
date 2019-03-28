@@ -3,34 +3,34 @@
         <el-form :disabled="disabled">
             <div class="px-0 pb-2">
                 <el-container>
-                    <b-row style="width: 100%" type="flex" justify="start">
-                        <b-col :span="6" class="d-flex align-items-center pb-3 pb-lg-0">
+                    <el-row style="width: 100%" type="flex" justify="start">
+                        <el-col :span="6" class="d-flex align-items-center pb-3 pb-lg-0">
                             <el-switch v-model="data.is_correct"
                                        active-text="Верный"
                                        inactive-text="Не верный"
                                        active-color="#72c02c"
                                        inactive-color="#ff4949"
                                        :disabled="loading"/>
-                        </b-col>
-                        <b-col :span="10">
+                        </el-col>
+                        <el-col :span="10">
                             <el-form-item label="Текст ответа">
                                 <el-input type="textarea" :autosize="{minRows: 3}" v-model="data.txt"
                                           :disabled="loading" no-resize/>
                             </el-form-item>
-                        </b-col>
-                        <b-col :span="8" :offset="2">
+                        </el-col>
+                        <el-col :span="8" :offset="2">
                             <el-form-item label="Картинка">
                                 <ImgInput v-model="data.img"></ImgInput>
                             </el-form-item>
-                        </b-col>
-                    </b-row>
-                    <!--<b-row v-if="failFB">-->
-                    <!--<b-col>-->
+                        </el-col>
+                    </el-row>
+                    <!--<el-row v-if="failFB">-->
+                    <!--<el-col>-->
                     <!--<b-alert variant="danger" show>-->
                     <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
                     <!--</b-alert>-->
-                    <!--</b-col>-->
-                    <!--</b-row>-->
+                    <!--</el-col>-->
+                    <!--</el-row>-->
                 </el-container>
             </div>
             <!--<b-card-footer>-->

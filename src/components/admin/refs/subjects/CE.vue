@@ -1,13 +1,13 @@
 <template>
     <div v-loading="state.loading" class="animated fadeIn">
         <!-- <el-container>
-            <b-row>
-                <b-col>
+            <el-row>
+                <el-col>
                     <el-button class="mb-3" type="primary" @click="$router.back()">
                         <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
                     </el-button>
-                </b-col>
-            </b-row>
+                </el-col>
+            </el-row>
         </el-container> -->
 
          <b-button class="mb-3" variant="success"  @click="$router.back()">

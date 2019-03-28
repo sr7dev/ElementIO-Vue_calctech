@@ -2,8 +2,8 @@
     <div>
         <hr>
 
-        <b-row>
-            <b-col md="4">
+        <el-row>
+            <el-col md="4">
                 <b-card :img-src="utils.fmtMediaImageFit(profile.avatar, 300, 300) || 'img/default_avatar.jpg'">
                      <div class="user-card__content__info">
                         <div class="user-card__content__info__item">
@@ -17,13 +17,13 @@
                         </div>
                     </div>
                 </b-card>
-            </b-col>
-            <b-col md="8">
+            </el-col>
+            <el-col md="8">
                  <notifications></notifications>
-            </b-col>
-        </b-row>
-        <!-- <b-row>
-            <b-col :span="6">
+            </el-col>
+        </el-row>
+        <!-- <el-row>
+            <el-col :span="6">
                 <el-form label-position="top">
                     <el-card>
                         <div class="card-text user-card__content">
@@ -45,11 +45,11 @@
                         </div>
                     </el-card>
                 </el-form>
-            </b-col>
-            <b-col :span="16" :offset="2">
+            </el-col>
+            <el-col :span="16" :offset="2">
                 <notifications></notifications>
-            </b-col>
-        </b-row> -->
+            </el-col>
+        </el-row> -->
     </div>
 </template>
 

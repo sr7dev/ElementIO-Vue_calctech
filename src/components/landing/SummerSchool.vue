@@ -1,7 +1,7 @@
 <template>
     <div class="summer-school">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <el-card class="summer-school__card">
                     <h4 class="text-black-50">Для записи на отдельные курсы (ЕНТ, НИШ, IELTS, НУ, робототехника и.т.д.),
                         пройдите
@@ -28,25 +28,25 @@
                         </div>
                     </section>
                 </el-card>
-            </b-col>
-        </b-row>
-        <b-row class="summer-school__subjects">
-            <b-col :span="6">
+            </el-col>
+        </el-row>
+        <el-row class="summer-school__subjects">
+            <el-col :span="6">
                 <img src="/img/about.jpg">
-            </b-col>
-            <b-col :span="13">
+            </el-col>
+            <el-col :span="13">
                 <h4 class="summer-school__subjects__title">ДОПОЛНИТЕЛЬНЫЕ ПРЕДМЕТЫ</h4>
                 <div class="summer-school__subjects__description">Книжный клуб, робототехника (4-9 классы), физика,
                     химия, биология, подготовка в НИШ (5 классы), подготовка к поступлению в Назарбаев Университет
                     (10-11 классы), IELTS.
                 </div>
-            </b-col>
-            <b-col :span="2">
+            </el-col>
+            <el-col :span="2">
                 <a href="tel:+77478552148">
                     <el-button class="summer-school__subjects__button">8 747 855 2148</el-button>
                 </a>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

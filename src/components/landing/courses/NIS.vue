@@ -1,15 +1,15 @@
 <template>
     <div class="container course">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <div class="text-center g-mb-50">
                     <h2 class="course__title">Подготовка к вступительным экзаменам в Назарбаев Интеллектуальную
                         Школу</h2>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col lg="6">
                 <b-card class="course__content-card">
                     <p class="mb-4"> На протяжении двух лет мы готовим детей в НИШ и очень довольны своими результатами.
                         В 2017-2018 году 22% наших учеников попали в топ­-20 лучших результатов, 56% набрали необходимые
@@ -27,18 +27,18 @@
                         выявления пробелов в знаниях учащихся.
                     </p>
                 </b-card>
-            </b-col>
-            <b-col>
+            </el-col>
+            <el-col>
                 <b-card class="course__img-card">
                     <img src="/img/courses/NIS_1.jpg">
                 </b-card>
                 <b-card class="course__img-card">
                     <BarChart style="width: 50%;"></BarChart>
                 </b-card>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>24000₸</strong>
@@ -56,8 +56,8 @@
                         </p>
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="6">
+            </el-col>
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1800₸</strong>
@@ -72,8 +72,8 @@
                         <p> По любому из предметов: математика, логика, английский, казахский, русский.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

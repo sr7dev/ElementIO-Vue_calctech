@@ -2,15 +2,15 @@
     <div class="vendor-footer">
         <div class="row1 py-4 text-white-80 font-lg">
             <b-container>
-                <b-row>
-                    <b-col lg="3" md="6" class="py-4">
+                <el-row>
+                    <el-col lg="3" md="6" class="py-4">
                         <img src="img/logo.png" style="width: 134px; height: 31px"/>
                         <div class="mt-4 lh1_6">
                             Наша цель - дать детям возможность получения качественного и доступного образования.
                         </div>
-                    </b-col>
-                    <b-col lg="3" md="6" class="py-4"></b-col>
-                    <b-col lg="3" md="6" class="py-4">
+                    </el-col>
+                    <el-col lg="3" md="6" class="py-4"></el-col>
+                    <el-col lg="3" md="6" class="py-4">
                         <div class="hdr">ПОЛЕЗНЫЕ ССЫЛКИ</div>
                         <ul class="menu">
                             <li><span>О нас</span> <i class="fa fa-angle-right"></i></li>
@@ -19,8 +19,8 @@
                             <li><span>Вакансии</span> <i class="fa fa-angle-right"></i></li>
                             <li><span>Наши контакты</span> <i class="fa fa-angle-right"></i></li>
                         </ul>
-                    </b-col>
-                    <b-col lg="3" md="6" class="py-4">
+                    </el-col>
+                    <el-col lg="3" md="6" class="py-4">
                         <div class="hdr">НАШИ КОНТАКТЫ</div>
                         <div class="address">
                             Кокшетау, Акмолинская область<br/>
@@ -28,8 +28,8 @@
                             Телефон: <a href="tel:+77478552148">+7 747 855 2148</a><br/>
                             Email: <a href="mailto:calctech.kokshe@gmail.com">calctech.kokshe@gmail.com</a>
                         </div>
-                    </b-col>
-                </b-row>
+                    </el-col>
+                </el-row>
             </b-container>
         </div>
         <div class="row2 font-lg text-white-80 py-4">

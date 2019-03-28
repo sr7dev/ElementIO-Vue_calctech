@@ -1,14 +1,14 @@
 <template>
     <div class="container course">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <div class="text-center g-mb-50">
                     <h2 class="course__title">Курсы Английского Языка</h2>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col lg="6">
                 <b-card class="course__content-card">
                     <p class="mb-4"> Мы готовим к тестам по английскому языку: IELTS, TOEFL, APTIS. Преподаватель с 20
                         летним стажем преподавания английского и семилетним стажем преподавания IELTS. По нашей
@@ -21,15 +21,15 @@
                     </p>
                     <p class="mb-0"> В группах по пять человек.</p>
                 </b-card>
-            </b-col>
-            <b-col>
+            </el-col>
+            <el-col>
                 <b-card class="course__img-card">
                     <img src="/img/courses/english.jpg">
                 </b-card>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1200₸</strong>
@@ -44,8 +44,8 @@
                         <p> Ориентировочно 14400 в месяц.</p>
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="6">
+            </el-col>
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>2000₸</strong>
@@ -60,10 +60,10 @@
                         <p> Количество часов в неделю определяется на индивидуальной основе.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>8000₸</strong>
@@ -79,8 +79,8 @@
                         <p>Цена действует до сентября 2018 г.</p>
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="6">
+            </el-col>
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1800₸</strong>
@@ -95,8 +95,8 @@
                         <p> Количество часов в неделю определяется на индивидуальной основе.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

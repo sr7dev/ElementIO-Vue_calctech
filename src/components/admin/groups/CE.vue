@@ -1,20 +1,20 @@
 <template>
     <div v-loading="state.loading">
         <el-container>
-            <b-row>
-                <b-col>
+            <el-row>
+                <el-col>
                     <el-button class="mb-3" type="primary" @click="$router.back()">
                         <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
                     </el-button>
-                </b-col>
-            </b-row>
+                </el-col>
+            </el-row>
         </el-container>
         <el-card class="mb-5">
             <h3 class="text-black-50 m-0">{{headerText}}</h3>
             <hr>
-            <b-row>
+            <el-row>
                 <el-form label-position="top">
-                    <b-col :span="11">
+                    <el-col :span="11">
                         <el-form-item label="Название группы:">
                             <el-input v-model="group.name"></el-input>
                         </el-form-item>
@@ -38,8 +38,8 @@
                         <el-form-item label="Описание:">
                             <el-input type="textarea" :autosize="{ minRows: 3 }" v-model="group.note"></el-input>
                         </el-form-item>
-                    </b-col>
-                    <b-col :span="12" :offset="1">
+                    </el-col>
+                    <el-col :span="12" :offset="1">
                         <el-form-item label="Студенты:">
                             <el-select v-model="groupUsers"
                                        multiple
@@ -59,9 +59,9 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                    </b-col>
+                    </el-col>
                 </el-form>
-            </b-row>
+            </el-row>
             <el-button type="success" @click="onSave">
                 Сохранить
             </el-button>

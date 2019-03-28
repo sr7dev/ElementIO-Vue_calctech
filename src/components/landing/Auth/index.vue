@@ -1,7 +1,7 @@
 <template>
     <b-container class="pt-5 animated fadeIn auth">
-        <b-row class="justify-content-center py-8">
-            <b-col md="8" lg="6">
+        <el-row class="justify-content-center py-8">
+            <el-col md="8" lg="6">
                 <b-card no-body class="p-4">
                     <b-card-body>
                         <div class="auth__modes">
@@ -14,8 +14,8 @@
                         <registration-form v-if="state.mode === 'registration'"></registration-form>
                     </b-card-body>
                 </b-card>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </b-container>
 </template>
 

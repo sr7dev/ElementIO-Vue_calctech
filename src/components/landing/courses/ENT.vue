@@ -1,14 +1,14 @@
 <template>
     <div class="container course">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <div class="text-center g-mb-50">
                     <h2 class="course__title">Подготовка к ЕНТ</h2>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col lg="6">
                 <b-card class="course__content-card">
                     <p class="mb-4"> Ведем подготовку по предметам математическая грамотность, математика, физика,
                         химия, биология, английский на казахском и русском языках. Пока мы не проводим пробные
@@ -21,15 +21,15 @@
                         (хотя, мы очень опечалимся, если вы уйдете).
                     </p>
                 </b-card>
-            </b-col>
-            <b-col>
+            </el-col>
+            <el-col>
                 <b-card class="course__img-card">
                     <img src="/img/courses/ENT.jpg">
                 </b-card>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1000₸</strong>
@@ -44,8 +44,8 @@
                         <p> В месяц выходит 8000-9000.</p>
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="6">
+            </el-col>
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1000₸</strong>
@@ -60,8 +60,8 @@
                         <p> В месяц выходит 12000-13000 за два предмета и 18000-19000 за три предмета.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

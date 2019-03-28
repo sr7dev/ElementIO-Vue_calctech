@@ -1,14 +1,14 @@
 <template>
     <div class="container course">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <div class="text-center g-mb-50">
                     <h2 class="course__title">Книжный Клуб</h2>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col lg="6">
                 <b-card class="course__content-card">
                     <p class="mb-4"> По данным статистики 25 % казахстанцев не читают книг. Этот печальный факт был
                         замечен нами в ходе подготовки учеников к стандартизированным тестам по языкам, когда для
@@ -30,15 +30,15 @@
                         Встречи один раз в две недели по полтора часа.
                     </p>
                 </b-card>
-            </b-col>
-            <b-col>
+            </el-col>
+            <el-col>
                 <b-card class="course__img-card">
                     <img src="/img/courses/readingClub.jpg">
                 </b-card>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1000₸</strong>
@@ -53,8 +53,8 @@
                         <p> 3000-4500 в месяц.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

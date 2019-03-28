@@ -26,17 +26,17 @@
                 <b-form-input id="repeatPassword" type="password" v-model.trim="repeatPassword" :disabled="loading"
                               placeholder="Пароль" autocomplete="current-password"/>
             </b-input-group>
-            <b-row v-if="!loading && errorFB" class="mt-4 justify-content-center text-danger">{{errorFB}}</b-row>
-            <b-row class="mt-4">
-                <b-col cols="3">
+            <el-row v-if="!loading && errorFB" class="mt-4 justify-content-center text-danger">{{errorFB}}</el-row>
+            <el-row class="mt-4">
+                <el-col cols="3">
                     <b-button variant="success" class="px-4" :disabled="loading">
                         Зарегистрироваться
                     </b-button>
-                </b-col>
-                <b-col v-if="loading" cols="3">
+                </el-col>
+                <el-col v-if="loading" cols="3">
                     <i class="spnr"></i>
-                </b-col>
-            </b-row>
+                </el-col>
+            </el-row>
         </b-form>
         <b-alert variant="danger"
                  :show="showError"

@@ -1,15 +1,15 @@
 <template>
     <div class="container course">
-        <b-row>
-            <b-col>
+        <el-row>
+            <el-col>
                 <div class="text-center g-mb-50">
                     <h2 class="course__title">Подготовка к вступительным экзаменам в Назарбаев Университет и в
                         зарубежные вузы</h2>
                 </div>
-            </b-col>
-        </b-row>
-        <b-row>
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row>
+            <el-col lg="6">
                 <b-card class="course__content-card">
                     <p class="mb-4"> Ведем подготовку к SAT, SAT Math, SAT Physics, NUFYPET Math, NUFYPET Physics,
                         NUFYPET Critical Thinking. Эти тесты необходимы для поступления в Назарбаев Университет, а также
@@ -19,15 +19,15 @@
                     <p class="mb-0">  Если вас интересуют IELTS или TOEFL, пройдите <router-link :to="{name: 'english'}">сюда.</router-link>
                     </p>
                 </b-card>
-            </b-col>
-            <b-col>
+            </el-col>
+            <el-col>
                 <b-card class="course__img-card">
                     <img src="/img/courses/NU.jpg">
                 </b-card>
-            </b-col>
-        </b-row>
-        <b-row class="course__costs">
-            <b-col lg="6">
+            </el-col>
+        </el-row>
+        <el-row class="course__costs">
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>1500₸</strong>
@@ -42,8 +42,8 @@
                         <p> 17000-18000 в месяц за один предмет.</p>
                     </div>
                 </div>
-            </b-col>
-            <b-col lg="6">
+            </el-col>
+            <el-col lg="6">
                 <div class="course__costs__item">
                     <div class="course__costs__item__sum">
                         <strong>2500₸</strong>
@@ -58,8 +58,8 @@
                         <p> Количество часов в неделю определяется на индивидуальной основе.</p>
                     </div>
                 </div>
-            </b-col>
-        </b-row>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
