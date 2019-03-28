@@ -1,13 +1,13 @@
 <template>
     <div v-loading="state.loading" class="animated fadeIn" style="padding-bottom: 80vh">
         <el-container>
-            <el-row>
-                <el-col>
+            <b-row>
+                <b-col>
                     <el-button class="mb-3" type="primary" @click="$router.back()">
                         <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
                     </el-button>
-                </el-col>
-            </el-row>
+                </b-col>
+            </b-row>
         </el-container>
         <el-card>
             <div style="display: inline-flex; justify-content: space-between; width: 100%">
@@ -23,8 +23,8 @@
                     :description="data.reject_reason">
             </el-alert>
             <el-form :disabled="state.disabled" label-position="top">
-                <el-row>
-                    <el-col :span="8">
+                <b-row>
+                    <b-col :span="8">
                         <el-form-item label="Вид задания">
                             <!--<el-input v-if="id" type="text" :value="data.kind_name" disabled/>-->
                             <el-radio-group v-model="data.kind_id">
@@ -32,10 +32,10 @@
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col :span="12">
                         <el-form-item label="Язык">
                             <!--<el-input v-if="id" type="text" :value="data.lang_id" class="mb-1" disabled/>-->
                             <el-radio-group v-model="data.lang_id">
@@ -43,18 +43,18 @@
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
+                    </b-col>
+                    <b-col :span="12">
                         <el-form-item label="Сложность">
                             <el-radio-group v-model="data.difficulty_id">
                                 <el-radio-button v-for="item in difficulties" :label="item.id">{{item.name}}
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col :span="12">
                         <el-form-item label="Класс">
                             <el-select v-model="data.grade_id">
                                 <el-option v-for="item in grades"
@@ -71,8 +71,8 @@
                                 ></el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="12">
+                    </b-col>
+                    <b-col :span="12">
                         <el-form-item label="Предмет">
                             <el-select v-model="data.subject_id">
                                 <el-option v-for="item in subjects"
@@ -89,10 +89,10 @@
                                 ></el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="12">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col :span="12">
                         <el-form-item v-if="isQuestion" label="Тип вопроса">
                             <el-select v-model="data.type_id">
                                 <el-option v-for="item in $store.state.task_types"
@@ -100,36 +100,36 @@
                                            :value="item.id"></el-option>
                             </el-select>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="10">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col :span="10">
                         <el-form-item label="Заголовок">
                             <el-input v-model="data.title"/>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row v-if="isGroup">
-                    <el-col :span="10">
+                    </b-col>
+                </b-row>
+                <b-row v-if="isGroup">
+                    <b-col :span="10">
                         <el-form-item label="Описание">
                             <el-input type="textarea" :autosize="{minRows: 5}" v-model="data.note"/>
                         </el-form-item>
-                    </el-col>
-                </el-row>
+                    </b-col>
+                </b-row>
                 <section v-if="isQuestion">
-                    <el-row>
-                        <el-col :span="10">
+                    <b-row>
+                        <b-col :span="10">
                             <el-form-item label="Текст вопроса">
                                 <el-input type="textarea" v-model="data.txt" :autosize="{minRows: 5}"/>
                             </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <el-row v-if="data.txt">
-                        <el-col :span="10">
+                        </b-col>
+                    </b-row>
+                    <b-row v-if="data.txt">
+                        <b-col :span="10">
                             <!--<vue-mathjax :formula="data.txt"></vue-mathjax>-->
                             <MathJaxVue :formula="data.txt"></MathJaxVue>
-                        </el-col>
-                    </el-row>
+                        </b-col>
+                    </b-row>
                 </section>
             </el-form>
             <el-button v-if="!isModerator && !state.disabled " @click.prevent="onSubmit" type="success">
@@ -138,44 +138,44 @@
         </el-card>
         <template v-if="!state.loading && showAttachments">
             <el-container class="mt-5 mb-4">
-                <el-row>
-                    <el-col>
+                <b-row>
+                    <b-col>
                         <h3 class="text-black-50 m-0">Приложения к заданию</h3>
-                    </el-col>
-                </el-row>
+                    </b-col>
+                </b-row>
             </el-container>
             <AttachmentCECard :disabled="state.disabled" v-for="att in data.attachments" :task-id="id" :sd="att" :key="`att-${att.id}`"
                               @updated="onAttachmentUpdated(att, $event)"
                               @deleted="onAttachmentDeleted(att.id)"></AttachmentCECard>
             <el-container v-if="!state.disabled" fluid class="pb-3">
-                <el-row style="width: 100%" type="flex" justify="center">
-                    <el-col style="text-align: center;" :span="10">
+                <b-row style="width: 100%" type="flex" justify="center">
+                    <b-col style="text-align: center;" :span="10">
                         <el-button type="success" @click="onAddAttachmentClick">
                             <i class="icon-plus mr-2"></i>Добавить приложение
                         </el-button>
-                    </el-col>
-                </el-row>
+                    </b-col>
+                </b-row>
             </el-container>
         </template>
         <template v-if="!state.loading && showAnswers">
             <el-container class="mt-5 mb-4">
-                <el-row>
-                    <el-col>
+                <b-row>
+                    <b-col>
                         <h3 class="text-black-50 m-0">Варианты ответов</h3>
-                    </el-col>
-                </el-row>
+                    </b-col>
+                </b-row>
             </el-container>
             <AnswerCECard :disabled="state.disabled" v-for="ans in data.answers" :task-id="id" :sd="ans" :key="`ans-${ans.id}`"
                           @updated="onAnswerUpdated(ans, $event)"
                           @deleted="onAnswerDeleted(ans.id)"></AnswerCECard>
             <el-container v-if="!state.disabled" fluid class="pb-3">
-                <el-row class="justify-content-center">
-                    <el-col>
+                <b-row class="justify-content-center">
+                    <b-col>
                         <el-button type="success" @click="onAddAnswerClick">
                             <i class="icon-plus mr-2"></i>Добавить ответ
                         </el-button>
-                    </el-col>
-                </el-row>
+                    </b-col>
+                </b-row>
             </el-container>
         </template>
         <template v-if="!state.loading && showChildren">

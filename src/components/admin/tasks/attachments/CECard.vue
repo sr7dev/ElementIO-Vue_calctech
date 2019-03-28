@@ -2,8 +2,8 @@
     <el-card class="animated fadeIn mb-5">
         <el-form :disabled="disabled">
             <div class="px-0 pb-2">
-                <el-row style="width: 100%">
-                    <el-col :span="8">
+                <b-row style="width: 100%">
+                    <b-col :span="8">
                         <el-form-item label="Тип">
                             <el-radio-group v-model="data.type_id">
                                 <el-radio-button v-for="item in $store.state.attachment_types"
@@ -12,37 +12,37 @@
                                 </el-radio-button>
                             </el-radio-group>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="4" :offset="2">
+                    </b-col>
+                    <b-col :span="4" :offset="2">
                         <el-form-item label="Порядковый номер">
                             <el-input type="number" pattern="\d*" v-model="data.ord"/>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col v-if="data.type_id === constants.AttachmentTypeText" :span="8">
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col v-if="data.type_id === constants.AttachmentTypeText" :span="8">
                         <el-form-item label="Текст">
                             <el-input type="textarea" :autosize="{minRows: 7}" v-model="data.v" :disabled="loading"/>
                         </el-form-item>
-                    </el-col>
-                    <el-col v-if="data.type_id === constants.AttachmentTypeImage" :span="10">
+                    </b-col>
+                    <b-col v-if="data.type_id === constants.AttachmentTypeImage" :span="10">
                         <el-form-item label="Картина">
                             <ImgInput v-model="data.v" :iw="700"></ImgInput>
                         </el-form-item>
-                    </el-col>
-                    <el-col v-if="data.type_id === constants.AttachmentTypeVideo" :span="8">
+                    </b-col>
+                    <b-col v-if="data.type_id === constants.AttachmentTypeVideo" :span="8">
                         <el-form-item label="Ссылка на видео">
                             <el-input type="text" v-model="data.v"/>
                         </el-form-item>
-                    </el-col>
-                </el-row>
-                <!--<el-row v-if="failFB">-->
-                <!--<el-col>-->
+                    </b-col>
+                </b-row>
+                <!--<b-row v-if="failFB">-->
+                <!--<b-col>-->
                 <!--<b-alert variant="danger" show>-->
                 <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
                 <!--</b-alert>-->
-                <!--</el-col>-->
-                <!--</el-row>-->
+                <!--</b-col>-->
+                <!--</b-row>-->
             </div>
             <div>
                 <div class="d-flex align-items-center">

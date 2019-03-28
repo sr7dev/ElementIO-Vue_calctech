@@ -1,38 +1,38 @@
 <template>
     <div class="container contacts">
-        <el-row class="mt-5">
-            <el-col>
+        <b-row class="mt-5">
+            <b-col>
                 <div>
                     <div class="hdr">Контакты</div>
                 </div>
-            </el-col>
-        </el-row>
-        <el-row>
-            <el-col :span="12">
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col :span="12">
                 <el-form label-position="top">
-                    <el-col :span="11">
+                    <b-col :span="11">
                         <el-form-item label="Имя:">
                             <el-input></el-input>
                         </el-form-item>
                         <el-form-item label="Предмет:">
                             <el-input></el-input>
                         </el-form-item>
-                    </el-col>
-                    <el-col :span="11" :offset="2">
+                    </b-col>
+                    <b-col :span="11" :offset="2">
                         <el-form-item label="Email:">
                             <el-input type="email"></el-input>
                         </el-form-item>
                         <el-form-item label="Телефон:">
                             <el-input></el-input>
                         </el-form-item>
-                    </el-col>
+                    </b-col>
                     <el-form-item label="Сообщение:">
                         <el-input type="textarea" :rows="6"></el-input>
                     </el-form-item>
                 </el-form>
                 <el-button type="success">Оставить вопрос</el-button>
-            </el-col>
-            <el-col :span="8" :offset="4">
+            </b-col>
+            <b-col :span="8" :offset="4">
                 <div class="dsc">
                     <h3>ТОО CalcTech</h3>
                     <div class="mt-3">
@@ -61,8 +61,8 @@
                         </div>
                     </div>
                 </div>
-            </el-col>
-        </el-row>
+            </b-col>
+        </b-row>
         <!--</b-form>-->
         <!--</b-col>-->
         <b-col lg="6">

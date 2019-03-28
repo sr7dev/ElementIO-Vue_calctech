@@ -2,8 +2,8 @@
     <div class="mb-5" v-loading="state.loading">
         <h1 class="text-black-50">Пользователи</h1>
         <el-container class="mt-5">
-            <el-row style="width: 100%">
-                <el-col>
+            <b-row style="width: 100%">
+                <b-col>
                     <el-input placeholder="Писк по имени" v-model="name"  @keyup.native.enter="onSearch" class="input-with-select mb-2">
                         <el-select @change="onRoleChange"
                                    style="width: 99px;"
@@ -70,10 +70,10 @@
                             </template>
                         </el-table-column>
                     </el-table>
-                </el-col>
-            </el-row>
+                </b-col>
+            </b-row>
         </el-container>
-        <el-row class="mt-5" type="flex" justify="start">
+        <b-row class="mt-5" type="flex" justify="start">
             <el-pagination
                     :current-page.sync="params.page"
                     :total="params.total_count"
@@ -82,7 +82,7 @@
                     background
                     layout="prev, pager, next">
             </el-pagination>
-        </el-row>
+        </b-row>
     </div>
 </template>
 

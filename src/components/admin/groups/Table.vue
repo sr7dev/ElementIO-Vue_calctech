@@ -49,7 +49,7 @@
                 </el-table-column>
             </el-table>
         </el-container>
-        <el-row class="mt-5" type="flex" justify="start">
+        <b-row class="mt-5" type="flex" justify="start">
             <el-pagination
                     :current-page.sync="params.page"
                     :total="params.total_count"
@@ -58,7 +58,7 @@
                     @current-change="onPageChange"
                     layout="prev, pager, next">
             </el-pagination>
-        </el-row>
+        </b-row>
     </div>
 </template>
 

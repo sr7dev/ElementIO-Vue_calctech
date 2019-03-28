@@ -22,8 +22,8 @@
                  <notifications></notifications>
             </b-col>
         </b-row>
-        <!-- <el-row>
-            <el-col :span="6">
+        <!-- <b-row>
+            <b-col :span="6">
                 <el-form label-position="top">
                     <el-card>
                         <div class="card-text user-card__content">
@@ -45,11 +45,11 @@
                         </div>
                     </el-card>
                 </el-form>
-            </el-col>
-            <el-col :span="16" :offset="2">
+            </b-col>
+            <b-col :span="16" :offset="2">
                 <notifications></notifications>
-            </el-col>
-        </el-row> -->
+            </b-col>
+        </b-row> -->
     </div>
 </template>
 

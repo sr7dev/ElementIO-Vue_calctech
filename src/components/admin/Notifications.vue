@@ -30,17 +30,17 @@
                     <i class="el-icon-close notifications__list__item__close-icon"
                        @click="deleteItem(index)"
                     ></i>
-                    <el-row>
-                        <el-col :span="2">
+                    <b-row>
+                        <b-col :span="2">
                             <i class="el-icon-info notifications__list__item__icon"></i>
-                        </el-col>
-                        <el-col :span="20" :offset="1">
+                        </b-col>
+                        <b-col :span="20" :offset="1">
                             <section>
                                 <h4>{{item.title}}</h4>
                                 <p>{{item.description}}</p>
                             </section>
-                        </el-col>
-                    </el-row>
+                        </b-col>
+                    </b-row>
                 </el-card>
             </el-card>
         </el-container> -->

@@ -3,34 +3,34 @@
         <el-form :disabled="disabled">
             <div class="px-0 pb-2">
                 <el-container>
-                    <el-row style="width: 100%" type="flex" justify="start">
-                        <el-col :span="6" class="d-flex align-items-center pb-3 pb-lg-0">
+                    <b-row style="width: 100%" type="flex" justify="start">
+                        <b-col :span="6" class="d-flex align-items-center pb-3 pb-lg-0">
                             <el-switch v-model="data.is_correct"
                                        active-text="Верный"
                                        inactive-text="Не верный"
                                        active-color="#72c02c"
                                        inactive-color="#ff4949"
                                        :disabled="loading"/>
-                        </el-col>
-                        <el-col :span="10">
+                        </b-col>
+                        <b-col :span="10">
                             <el-form-item label="Текст ответа">
                                 <el-input type="textarea" :autosize="{minRows: 3}" v-model="data.txt"
                                           :disabled="loading" no-resize/>
                             </el-form-item>
-                        </el-col>
-                        <el-col :span="8" :offset="2">
+                        </b-col>
+                        <b-col :span="8" :offset="2">
                             <el-form-item label="Картинка">
                                 <ImgInput v-model="data.img"></ImgInput>
                             </el-form-item>
-                        </el-col>
-                    </el-row>
-                    <!--<el-row v-if="failFB">-->
+                        </b-col>
+                    </b-row>
+                    <!--<b-row v-if="failFB">-->
                     <!--<b-col>-->
                     <!--<b-alert variant="danger" show>-->
                     <!--<i class="fa fa-warning mr-3"></i>{{failFB}}-->
                     <!--</b-alert>-->
                     <!--</b-col>-->
-                    <!--</el-row>-->
+                    <!--</b-row>-->
                 </el-container>
             </div>
             <!--<b-card-footer>-->

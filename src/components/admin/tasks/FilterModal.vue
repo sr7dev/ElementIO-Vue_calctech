@@ -7,26 +7,26 @@
              visible
              @hide.prevent="onClose">
         <el-form label-position="top">
-            <el-row>
-                <el-col :span="10">
+            <b-row>
+                <b-col :span="10">
                     <el-form-item label="Вид задания">
                         <el-radio-group v-model="data.kind_id">
                             <el-radio-button size="small" v-for="item in task_kinds" :label="item.id">{{item.name}}
                             </el-radio-button>
                         </el-radio-group>
                     </el-form-item>
-                </el-col>
-                <el-col :span="14">
+                </b-col>
+                <b-col :span="14">
                     <el-form-item label="Сложность">
                         <el-radio-group v-model="data.difficulty_id">
                             <el-radio-button v-for="item in difficulties" :label="item.id">{{item.name}}
                             </el-radio-button>
                         </el-radio-group>
                     </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <el-form-item label="Язык">
                         <el-radio-group v-model="data.lang_id">
                             <el-radio-button v-for="item in langs"
@@ -36,10 +36,10 @@
                             </el-radio-button>
                         </el-radio-group>
                     </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col :span="12">
                     <el-form-item label="Класс">
                         <el-select v-model="data.grade_id">
                             <el-option v-for="item in grades"
@@ -56,8 +56,8 @@
                             ></el-option>
                         </el-select>
                     </el-form-item>
-                </el-col>
-                <el-col :span="12">
+                </b-col>
+                <b-col :span="12">
                     <el-form-item label="Предмет">
                         <el-select v-model="data.subject_id">
                             <el-option v-for="item in subjects"
@@ -74,10 +74,10 @@
                             ></el-option>
                         </el-select>
                     </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <el-form-item v-if="isQuestion" label="Тип вопроса">
                         <el-select v-model="data.sub_topic_id">
                             <el-option v-for="item in task_types"
@@ -86,15 +86,15 @@
                             ></el-option>
                         </el-select>
                     </el-form-item>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
+                </b-col>
+            </b-row>
+            <b-row>
+                <b-col>
                     <el-form-item>
                         <el-checkbox v-model="data.own">Показать только мои задания</el-checkbox>
                     </el-form-item>
-                </el-col>
-            </el-row>
+                </b-col>
+            </b-row>
         </el-form>
         <div slot="modal-footer">
             <el-button type="success" @click="onSubmit">Применить</el-button>
