@@ -1,28 +1,28 @@
 <template>
   <b-container fluid class="mt-5">
-    <b-row class="mb-4">
-      <b-col>
-        <h3 class="text-black-50 m-0">Дочерние задачи</h3>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="px-0">
+    <el-row class="mb-4">
+      <el-col>
+        <h3 class="text-black-50 m-0">Дочерние задания</h3>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col class="px-0">
         <b-card no-body class="animated fadeIn m-0">
           <b-card-header class="p-2">
             <b-container fluid>
-              <b-row class="align-items-center">
-                <b-col class="p-0">
-                  Все задачи
-                </b-col>
-                <b-col md="auto" class="p-0 ml-md-3">
+              <el-row class="align-items-center">
+                <el-col class="p-0">
+                  Все задания
+                </el-col>
+                <el-col md="auto" class="p-0 ml-md-3">
                   <b-button :variant="isSrcFiltered ? 'primary' : 'secondary'" size="sm" @click="srcShowFilter=true">
                     <i class="fa fa-filter px-1"></i>
                   </b-button>
-                </b-col>
-                <b-col md="auto" class="p-0 ml-md-3">
+                </el-col>
+                <el-col md="auto" class="p-0 ml-md-3">
                   <b-form-input type="text" v-model="srcSearch" size="sm" placeholder="поиск..."/>
-                </b-col>
-                <b-col md="auto" class="p-0 ml-md-3">
+                </el-col>
+                <el-col md="auto" class="p-0 ml-md-3">
                   <b-pagination v-model="srcPage"
                                 size="sm"
                                 :total-rows="srcTotalCount"
@@ -31,8 +31,8 @@
                                 hide-ellipsis
                                 hide-goto-end-buttons
                                 class="m-0"></b-pagination>
-                </b-col>
-              </b-row>
+                </el-col>
+              </el-row>
             </b-container>
           </b-card-header>
           <b-card-body class="p-1 pt-2">
@@ -68,22 +68,22 @@
             </template>
           </b-card-body>
         </b-card>
-      </b-col>
-      <b-col md="auto" class="px-2 d-flex align-items-center">
+      </el-col>
+      <el-col md="auto" class="px-2 d-flex align-items-center">
         <i class="icon-arrow-right"></i>
-      </b-col>
-      <b-col class="px-0 animated fadeIn">
+      </el-col>
+      <el-col class="px-0 animated fadeIn">
         <b-card no-body class="animated fadeIn m-0">
           <b-card-header class="p-2">
             <b-container fluid>
-              <b-row class="align-items-center">
-                <b-col class="p-0 d-flex align-items-center">
-                  Дочерние задачи<i v-if="saving" class="spnr ml-3"></i>
-                </b-col>
-                <b-col md="auto" class="p-0 mr-2">
+              <el-row class="align-items-center">
+                <el-col class="p-0 d-flex align-items-center">
+                  Дочерние задания<i v-if="saving" class="spnr ml-3"></i>
+                </el-col>
+                <el-col md="auto" class="p-0 mr-2">
                   <b-form-input type="text" size="sm" placeholder="поиск..."/>
-                </b-col>
-              </b-row>
+                </el-col>
+              </el-row>
             </b-container>
           </b-card-header>
           <b-card-body class="p-1 pt-2">
@@ -114,8 +114,8 @@
             </table>
           </b-card-body>
         </b-card>
-      </b-col>
-    </b-row>
+      </el-col>
+    </el-row>
     <FilterModal v-if="srcShowFilter" @close="srcShowFilter=false"
                  :pars="srcFilterPars" @update="onSrcFilterUpdated"></FilterModal>
   </b-container>

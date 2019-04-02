@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <title>CalcTech - репетиторский центр</title>
-  <style>
-    html, body {
-      font-size: 14px;
-      color: #555555;
-      background: #ffffff;
-      -webkit-text-size-adjust: 100%;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizelegibility;
-    }
-  </style>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>CalcTech - репетиторский центр</title>
+    <style>
+        html, body {
+            font-size: 14px;
+            color: #555555;
+            background: #ffffff;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizelegibility;
+        }
+    </style>
+
+
+    <script type="text/x-mathjax-config">
+        MathJax.Ajax.config.path["mhchem"] = "/MathJax-2.7.5/extensions/TeX/mhchem3";
+        MathJax.Hub.Config({
+            TeX: {
+                extensions: ["[mhchem]/mhchem.js"]
+            }
+        })
+    </script>
+    <script src="/MathJax-2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </head>
-<body>
+<body style="background-color: white;">
 <div id="scene"
      style="position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;">
-  загрузка...
+    загрузка...
 </div>
 <!-- built files will be auto injected -->
 </body>

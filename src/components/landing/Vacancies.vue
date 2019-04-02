@@ -2,15 +2,15 @@
   <div class="app-section">
     <div class="app-section-cont">
       <div class="cont">
-        <div class="fs2_5 lh1_4 app-color1">
+        <h1 class="text-black-50" style="font-weight: 300">
           Открытые вакансии
-        </div>
-        <div class="fs1_25 lh1_6 app-color2 mt-h">
+        </h1>
+        <h4 class="text-black-50" style="font-weight: 300">
           Мы ищем талантливых сотрудников, которые любят свое дело.<br/>
           Резюме отправляйте на calctech.kokshe@gmail.com
-        </div>
-        <div class="mt-3">
-          <div class="d-flex flex-nowrap align-items-start justify-content-sb">
+        </h4>
+        <div class="mt-5 container">
+          <div class="items__list">
             <div>
               <div class="block">
                 <div class="title">Администратор</div>
@@ -71,6 +71,12 @@
     padding: 7rem 0 6rem;
     text-align: center;
     font-weight: 300;
+    margin-top: 50px;
+  }
+
+  .items__list{
+    display: flex;
+    justify-content: space-between;
   }
 
   .block {
@@ -111,4 +117,6 @@
     margin-right: .2rem;
     font-size: .8rem;
   }
+
+
 </style>

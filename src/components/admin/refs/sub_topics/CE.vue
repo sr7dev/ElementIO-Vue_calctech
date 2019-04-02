@@ -1,13 +1,13 @@
 <template>
   <div class="animated fadeIn">
     <b-container fluid class="mb-3">
-      <b-row>
-        <b-col class="px-0">
+      <el-row>
+        <el-col class="px-0">
           <b-button variant="primary" @click="$router.back()">
             <i class="icon-arrow-left mr-2"></i>{{id ? 'Назад' : 'Отмена'}}
           </b-button>
-        </b-col>
-      </b-row>
+        </el-col>
+      </el-row>
     </b-container>
     <b-card no-body>
       <b-card-header>

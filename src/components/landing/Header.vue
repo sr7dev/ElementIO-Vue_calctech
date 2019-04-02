@@ -12,29 +12,29 @@
             <b-nav-item :to="{name: 'l-home'}" class="px-2">
               ГЛАВНАЯ
             </b-nav-item>
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'About'}" class="px-2">
               О НАС
             </b-nav-item>
             <b-nav-item-dropdown text="КУРСЫ" left>
-              <b-dropdown-item>Подготовка к ЕНТ</b-dropdown-item>
-              <b-dropdown-item>Подготовка в НИШ</b-dropdown-item>
-              <b-dropdown-item>Подготовка в НУ и зарубеж</b-dropdown-item>
-              <b-dropdown-item>Английский язык</b-dropdown-item>
-              <b-dropdown-item>Отдельные предметы</b-dropdown-item>
-              <b-dropdown-item>Книжный Клуб</b-dropdown-item>
-              <b-dropdown-item>Робототехника</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'ENT'}">Подготовка к ЕНТ</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'NIS'}">Подготовка в НИШ</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'NU'}">Подготовка в НУ и зарубеж</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'english'}">Английский язык</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'separateSubjects'}">Отдельные предметы</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'readingClub'}">Книжный Клуб</b-dropdown-item>
+              <b-dropdown-item :to="{name: 'robotics'}">Робототехника</b-dropdown-item>
             </b-nav-item-dropdown>
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'SummerSchool'}" class="px-2">
               ЛЕТНЯЯ ШКОЛА
             </b-nav-item>
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'contacts'}" class="px-2">
               КОНТАКТЫ
             </b-nav-item>
-            <b-nav-item class="px-2">
+            <b-nav-item :to="{name: 'vacancies'}" class="px-2">
               ВАКАНСИИ
             </b-nav-item>
             <b-nav-item :to="{name: (profile ? 'adm' : 'l-auth')}" class="px-2">
-              {{ (profile ? 'КАБИНЕТ' : 'ВОЙТИ') }}
+              {{ (profile ? 'КАБИНЕТ' : 'ВХОД / РЕГИСТРАЦИЯ') }}
             </b-nav-item>
           </b-navbar-nav>
         </b-collapse>
