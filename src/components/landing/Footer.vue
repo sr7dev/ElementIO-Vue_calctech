@@ -39,58 +39,58 @@
 </template>
 
 <style scoped lang="scss">
-    .vendor-footer .row1 {
-        background-color: rgba(0, 0, 0, .9);
-    }
+    // .vendor-footer .row1 {
+    //     background-color: rgba(0, 0, 0, .9);
+    // }
 
-    .vendor-footer .hdr {
-        padding-bottom: .5rem;
-        border-bottom: 1px solid rgba(114, 192, 44, .6);
-    }
+    // .vendor-footer .hdr {
+    //     padding-bottom: .5rem;
+    //     border-bottom: 1px solid rgba(114, 192, 44, .6);
+    // }
 
-    .vendor-footer .menu {
-        list-style: none;
-        display: block;
-        margin: .85rem 0 0;
-        padding: 0;
-    }
+    // .vendor-footer .menu {
+    //     list-style: none;
+    //     display: block;
+    //     margin: .85rem 0 0;
+    //     padding: 0;
+    // }
 
-    .vendor-footer .menu > li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: .7rem 0;
-        line-height: 1.4;
-        border-bottom: 1px solid rgba(255, 255, 255, .1);
-        cursor: pointer;
-    }
+    // .vendor-footer .menu > li {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     align-items: center;
+    //     padding: .7rem 0;
+    //     line-height: 1.4;
+    //     border-bottom: 1px solid rgba(255, 255, 255, .1);
+    //     cursor: pointer;
+    // }
 
-    .vendor-footer .menu > li:last-child {
-        border-bottom: none;
-    }
+    // .vendor-footer .menu > li:last-child {
+    //     border-bottom: none;
+    // }
 
-    .vendor-footer .menu > li:hover > span {
-        text-decoration: underline;
+    // .vendor-footer .menu > li:hover > span {
+    //     text-decoration: underline;
 
-    }
+    // }
 
-    .vendor-footer .address {
-        line-height: 2;
-        margin-top: 1.4rem;
-        background-size: cover;
-        background: url("/img/map2.png") no-repeat center;
-    }
+    // .vendor-footer .address {
+    //     line-height: 2;
+    //     margin-top: 1.4rem;
+    //     background-size: cover;
+    //     background: url("/img/map2.png") no-repeat center;
+    // }
 
-    .vendor-footer .address a {
-        color: $app-color-green1;
-        text-decoration: none;
-    }
+    // .vendor-footer .address a {
+    //     color: $app-color-green1;
+    //     text-decoration: none;
+    // }
 
-    .vendor-footer .address a:hover {
-        text-decoration: underline;
-    }
+    // .vendor-footer .address a:hover {
+    //     text-decoration: underline;
+    // }
 
-    .vendor-footer .row2 {
-        background-color: rgba(0, 0, 0, 1);
-    }
+    // .vendor-footer .row2 {
+    //     background-color: rgba(0, 0, 0, 1);
+    // }
 </style>
