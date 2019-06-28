@@ -3,7 +3,6 @@
     hello from template!
   </div>
 </template>
-
 <script>
   import constants from "../constants";
   import utils from "../utils";
@@ -16,6 +15,5 @@
     },
   }
 </script>
-
 <style scoped>
 </style>
