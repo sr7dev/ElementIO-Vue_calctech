@@ -1,23 +1,23 @@
 <template>
     <div class="notifications">
-            <h4>
-                Notifications
-            </h4>
-            <div class="notifications__list">
-                <b-card class="notifications__list__item"  v-for="(item, index) in notifications" :key="index">
-                    <b-container>
-                        <el-row>
-                            <div class="notState">
-                                <i class="fa fa-check-circle notifications__list__item__icon"></i> 
-                            </div>
-                            <el-col sm="10">
-                                <h4>{{item.title}}</h4>
-                                <p>{{item.description}}</p>
-                            </el-col>
-                        </el-row>
-                    </b-container>
-                </b-card>
-            </div>
+        <h4>
+            Notifications
+        </h4>
+        <div class="notifications__list">
+            <b-card class="notifications__list__item"  v-for="(item, index) in notifications" :key="index">
+                <b-container>
+                    <el-row>
+                        <div class="notState">
+                            <i class="fa fa-check-circle notifications__list__item__icon"></i> 
+                        </div>
+                        <el-col sm="10">
+                            <h4>{{item.title}}</h4>
+                            <p>{{item.description}}</p>
+                        </el-col>
+                    </el-row>
+                </b-container>
+            </b-card>
+        </div>
 
 
         <!-- <el-container>
