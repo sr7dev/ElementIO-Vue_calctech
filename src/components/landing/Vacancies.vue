@@ -117,6 +117,4 @@
     margin-right: .2rem;
     font-size: .8rem;
   }
-
-
 </style>
