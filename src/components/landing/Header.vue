@@ -43,15 +43,3 @@
   </Header>
 </template>
 
-<script>
-  import {Header} from '@coreui/vue'
-
-  export default {
-    components: {Header},
-    computed: {
-      profile() {
-        return this.$store.state.profile;
-      },
-    },
-  }
-</script>
