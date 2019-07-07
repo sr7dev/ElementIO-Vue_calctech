@@ -1,9 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import NProgress from 'nprogress'
-
 import store from "../store"
-
 import LandingRoutes from "./landing"
 import AdmRoutes from "./adm"
 
