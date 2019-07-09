@@ -50,13 +50,9 @@
         </el-menu>
     </div>
 </template>
-
 <script>
     import {SidebarNav} from '@coreui/vue'
-
-
     import {adminRoutes, tutorRoutes} from '@/components/admin/SidebarRoutes'
-
     export default {
         components: {SidebarNav},
         data() {
