@@ -173,3 +173,11 @@ export const tutorRoutes = [
         url: pathPrefix + 'moderate',
         perms: ["not_own_task-e", "task-moderate"]
     },
+    {
+        name: 'Мои студенты',
+        url: pathPrefix + 'my-students',
+        icon: 'icon-calculator',
+        perms: ['tutor']
+    }
+]
+export const studentRoutes = []
