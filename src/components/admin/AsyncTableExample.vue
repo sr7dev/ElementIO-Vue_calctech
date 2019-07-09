@@ -17,12 +17,10 @@
     <router-view></router-view>
   </div>
 </template>
-
 <script>
   import constants from "../../../../constants";
   import utils from "../../../../utils";
   import ajax from "../../../../ajax";
-
   export default {
     props: ['routeName'],
     data() {
