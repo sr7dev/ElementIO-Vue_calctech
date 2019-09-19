@@ -19,8 +19,8 @@
 
     export default {
         components: {Header, SidebarNav},
-        // created() {
-        //     this.$store.dispatch('reloadPerms')
-        // }
+        created() {
+           this.$store.dispatch('reloadPerms')
+        }
     }
 </script>
