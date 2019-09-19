@@ -6,7 +6,6 @@
         </b-link>
         <span class="navbar-toggler-icon" style="cursor: pointer" @click="toggleSidebar"></span>
         <!--<SidebarToggler @click="toggleSidebar" class="d-md-down-none" display="lg"/>-->
-
         <b-navbar-nav class="ml-auto mr-4">
             <!--<b-nav-item>-->
             <!--<i class="fa fa-bell-o"></i>-->
@@ -25,11 +24,9 @@
         </b-navbar-nav>
     </Header>
 </template>
-
 <script>
     import {Header, SidebarToggler} from '@coreui/vue'
     import utils from '../../utils'
-
     export default {
         components: {Header, SidebarToggler},
         data() {
